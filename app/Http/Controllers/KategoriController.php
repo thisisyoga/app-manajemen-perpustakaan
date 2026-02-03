@@ -12,7 +12,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        return view('admin.kategori.index');
+        $kategori = Kategori::all();
+        return view('admin.kategori.index', compact('kategori'));
     }
 
     /**
@@ -20,7 +21,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.kategori.create');
     }
 
     /**
@@ -28,7 +29,13 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_kategori' => 'required|string|max:255',
+        ]);
+
+        
+        Kategori::create($validatedData);
+        return redirect()->route('MDK')->with('success', 'Kategori berhasil ditambahkan.');
     }
 
     /**
@@ -44,7 +51,8 @@ class KategoriController extends Controller
      */
     public function edit(Kategori $kategori)
     {
-        //
+        $petugas = Kategori::findOrFail($kategori->id);
+        return view('admin.kategori.edit', compact('kategori'));
     }
 
     /**
@@ -52,7 +60,13 @@ class KategoriController extends Controller
      */
     public function update(Request $request, Kategori $kategori)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_kategori' => 'required|string|max:255',
+        ]);
+
+        $kategori::findOrFail($kategori->id);
+        $kategori->update($validatedData);
+        return redirect()->route('MDK')->with('success', 'Kategori berhasil diperbarui.');
     }
 
     /**
@@ -60,6 +74,8 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-        //
+        $kategori::findOrFail($kategori->id);
+        $kategori->delete();
+        return redirect()->route('MDK')->with('success', 'Kategori berhasil dihapus.');
     }
 }

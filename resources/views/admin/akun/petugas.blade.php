@@ -45,14 +45,12 @@
                             <td class="py-3 px-6 text-left">{{ $p->role }}</td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex item-center justify-center space-x-4">
-                                    <!-- Edit Button -->
                                     <a href="{{ route('edit-MDA', $p->id) }}">
                                         <button class="flex items-center w-auto bg-blue-600 text-white px-2 py-1 rounded-md hover:bg-blue-500 hover:scale-110 transition duration-300">
                                             <span>Edit</span>
                                         </button>
                                     </a>
 
-                                    <!-- Delete Button -->
                                     <form action="{{ route ('delete-MDA', $p->id) }}" method="POST"
                                         onsubmit="return confirm('Are you sure you want to delete this user?');">
                                         @csrf
@@ -62,7 +60,6 @@
                                         </button>
                                     </form>
 
-                                    <!-- Detail Button -->
                                     <a href="">
                                         <button class="flex items-center w-auto bg-green-600 text-white px-2 py-1 rounded-md hover:bg-green-500 hover:scale-110 transition duration-300">
                                             <span>Detail</span>

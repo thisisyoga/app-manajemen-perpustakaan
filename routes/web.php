@@ -54,6 +54,13 @@ Route::delete('/petugas/{id}', [AkunController::class, 'destroy'])->name('delete
 
 //Master Data Kategori
 Route::get('/kategori', [KategoriController::class, 'index'])->name('MDK');
+Route::get('/kategori/create', [KategoriController::class, 'create'])->name('create-MDK');
+Route::post('/kategori/store', [KategoriController::class, 'store'])->name('store-MDK');
+Route::get('/kategori/{kategori}/edit', [KategoriController::class, 'edit'])->name('edit-MDK');
+Route::put('/kategori/{kategori}', [KategoriController::class, 'update'])->name('update-MDK');
+Route::delete('/kategori/{kategori}', [KategoriController::class, 'destroy'])->name('delete-MDK');
+
+Route::get('/buku', [App\Http\Controllers\BukuController::class, 'index'])->name('MDB');
 });
 
 
