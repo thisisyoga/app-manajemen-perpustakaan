@@ -1,30 +1,76 @@
 <aside class="w-64 bg-white shadow-md hidden md:block relative z-10">
     <div class="p-6 font-bold text-amber-600 text-2xl">AdminPanel</div>
     <nav class="mt-8">
-        <a href="{{ route('admin-dashboard') }}" 
-           class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
-                  @if(request()->routeIs('admin-dashboard')) border-l-4 border-amber-500 font-medium @else border-l-4 border-transparent @endif">
+        <a href="{{ route('admin-dashboard') }}"
+            class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
+                 @if (request()->routeIs('admin-dashboard')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">
             Dashboard
         </a>
-        <a href="{{ route('MDA') }}" 
-           class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
-                  @if(request()->routeIs('MDA')) border-l-4 border-amber-500 font-medium @else border-l-4 border-transparent @endif">
-            Master Data Akun
-        </a>
-        <a href="#" class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors border-l-4 border-transparent hover:border-amber-500">Master Data Kategori</a>
-        <a href="#" class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors border-l-4 border-transparent hover:border-amber-500">Master Data Buku</a>
-        <a href="#" class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors border-l-4 border-transparent hover:border-amber-500">Laporan</a>
 
-        <div class="mt-auto pt-6 border-t mx-6">
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="flex items-center text-gray-600 hover:text-red-600 transition-colors w-full">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                    </svg>
-                    Logout
-                </button>
-            </form>
+        <div class="relative">
+            <button id="btn-master-akun" type="button"
+                class="w-full flex items-center justify-between py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors border-l-4 border-transparent focus:outline-none">
+                <span>Master Data Akun</span>
+                <svg id="arrow-icon"
+                    class="w-4 h-4 transition-transform duration-200 @if (request()->routeIs('MDA*')) rotate-180 @endif"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+
+            <div id="menu-master-akun" class="@if (!request()->routeIs('MDA*')) hidden @endif bg-gray-50 pb-2">
+                <a href="{{ route('MDA') }}"
+                    class="block py-2 pl-12 pr-6 text-sm text-gray-600 hover:text-amber-600 @if (request()->routeIs('MDA-petugas')) font-bold text-amber-600 @endif">
+                    Data Petugas
+                </a>
+                <a href="{{ route('data-user') }}"
+                    class="block py-2 pl-12 pr-6 text-sm text-gray-600 hover:text-amber-600 @if (request()->routeIs('MDA-user')) font-bold text-amber-600 @endif">
+                    Data User
+                </a>
+            </div>
         </div>
+
+        <a href="{{ route('MDK') }}"
+            class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
+                 @if (request()->routeIs('MDK')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">Master
+            Data Kategori</a>
+        <a href="#"
+            class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors border-l-4 border-transparent hover:border-amber-500">Master
+            Data Buku</a>
+        <a href="#"
+            class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors border-l-4 border-transparent hover:border-amber-500">Laporan</a>
+
+        <form method="POST" action="{{ route('logout') }}">
+
+            @csrf
+
+            <button type="submit" class="flex items-center text-gray-600 hover:text-red-600 transition-colors w-full">
+
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                </svg>
+
+                Logout
+
+            </button>
+
+        </form>
+
     </nav>
 </aside>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const btnAkun = document.getElementById('btn-master-akun');
+        const menuAkun = document.getElementById('menu-master-akun');
+        const arrowIcon = document.getElementById('arrow-icon');
+
+        btnAkun.addEventListener('click', function() {
+            // Toggle class hidden (buka/tutup menu)
+            menuAkun.classList.toggle('hidden');
+
+            // Toggle rotasi panah
+            arrowIcon.classList.toggle('rotate-180');
+        });
+    });
+</script>

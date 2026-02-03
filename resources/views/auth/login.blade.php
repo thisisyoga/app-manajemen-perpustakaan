@@ -1,117 +1,71 @@
 <x-guest-layout>
-    <!-- Header Section -->
-    <div class="mb-8">
-        <h2 class="text-2xl font-bold text-stone-900">Selamat Datang Kembali</h2>
-        <p class="mt-2 text-sm text-stone-500">
-            Silakan masukkan detail akun Anda untuk mulai membaca.
+    <div class="mb-6 text-center">
+        <h2 class="text-2xl font-serif font-bold text-amber-900 tracking-tight">Selamat Datang Kembali</h2>
+        <p class="mt-1 text-sm text-amber-800/60 italic">
+            Silakan masukkan detail akun anda.
         </p>
+        <div class="mt-2 h-0.5 w-10 bg-amber-200 mx-auto rounded-full"></div>
     </div>
 
-    <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}" class="space-y-6">
+    <form method="POST" action="{{ route('login') }}" class="space-y-4">
         @csrf
 
-        <!-- Email Address -->
         <div>
-            <label for="email" class="block text-sm font-medium text-stone-700">Email</label>
-            <div class="mt-1 relative rounded-md shadow-sm">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <svg class="h-5 w-5 text-stone-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+            <div class="relative group">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-amber-800">
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206" />
                     </svg>
                 </div>
-                <input 
-                    id="email" 
-                    name="email" 
-                    type="email" 
-                    autocomplete="email" 
-                    required 
-                    value="{{ old('email') }}"
-                    class="block w-full pl-10 pr-3 py-2.5 border border-stone-300 rounded-lg leading-5 bg-white placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 sm:text-sm transition duration-150 ease-in-out" 
-                    placeholder="nama@instansi.com"
-                >
+                <input id="email" name="email" type="email" required 
+                    class="block w-full pl-11 pr-4 py-2.5 border border-amber-200 rounded-xl bg-white text-amber-950 placeholder-amber-800 focus:ring-4 focus:ring-amber-500/10 focus:border-amber-400 transition-all duration-300 outline-none text-sm" 
+                    placeholder="Alamat email anda">
             </div>
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input-error :messages="$errors->get('email')" class="mt-1 text-xs" />
         </div>
 
-        <!-- Password -->
         <div>
-            <label for="password" class="block text-sm font-medium text-stone-700">Password</label>
-            <div class="mt-1 relative rounded-md shadow-sm">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <svg class="h-5 w-5 text-stone-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+            <div class="relative group">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-amber-800">
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                 </div>
-                <input 
-                    id="password" 
-                    name="password" 
-                    type="password" 
-                    autocomplete="current-password" 
-                    required 
-                    class="block w-full pl-10 pr-3 py-2.5 border border-stone-300 rounded-lg leading-5 bg-white placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 sm:text-sm transition duration-150 ease-in-out" 
-                    placeholder="••••••••"
-                >
+                <input id="password" name="password" type="password" required 
+                    class="block w-full pl-11 pr-4 py-2.5 border border-amber-200 rounded-xl bg-white text-amber-950 placeholder-amber-800 focus:ring-4 focus:ring-amber-500/10 focus:border-amber-400 transition-all duration-300 outline-none text-sm" 
+                    placeholder="Password anda">
             </div>
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <x-input-error :messages="$errors->get('password')" class="mt-1 text-xs" />
         </div>
 
-        <!-- Remember Me & Forgot Password -->
-        <div class="flex items-center justify-between">
-            <div class="flex items-center">
-                <input 
-                    id="remember_me" 
-                    name="remember" 
-                    type="checkbox" 
-                    class="h-4 w-4 text-amber-600 focus:ring-amber-500 border-stone-300 rounded cursor-pointer transition duration-150 ease-in-out"
-                >
-                <label for="remember_me" class="ml-2 block text-sm text-stone-600 cursor-pointer select-none">
-                    Ingat saya
-                </label>
-            </div>
-
-            @if (Route::has('password.request'))
-                <div class="text-sm">
-                    <a href="{{ route('password.request') }}" class="font-medium text-amber-600 hover:text-amber-500 transition duration-150 ease-in-out">
-                        Lupa password?
-                    </a>
-                </div>
-            @endif
+        <div class="flex items-center justify-between px-1">
+            <label for="remember_me" class="inline-flex items-center cursor-pointer">
+                <input id="remember_me" name="remember" type="checkbox" class="h-3.5 w-3.5 text-amber-600 border-amber-300 rounded focus:ring-amber-500">
+                <span class="ml-2 text-xs font-semibold text-amber-800/60">Ingat saya</span>
+            </label>
+            <a href="{{ route('password.request') }}" class="text-xs font-bold text-amber-700 hover:text-amber-900 transition underline underline-offset-2">Lupa password?</a>
         </div>
 
-        <!-- Submit Button -->
-        <div>
-            <button 
-                type="submit" 
-                class="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-all duration-200 ease-in-out transform hover:-translate-y-0.5"
-            >
-                Masuk ke Akun
-            </button>
-        </div>
+        <button type="submit" class="w-full py-3 px-4 rounded-xl shadow-lg shadow-amber-200 text-sm font-bold text-white bg-amber-600 hover:bg-amber-700 transition-all active:scale-[0.98]">
+            Masuk Sekarang
+        </button>
     </form>
 
-    <!-- Register Link -->
-    <div class="mt-8">
+    <div class="mt-6">
         <div class="relative">
             <div class="absolute inset-0 flex items-center">
-                <div class="w-full border-t border-stone-200"></div>
+                <div class="w-full border-t border-amber-100"></div>
             </div>
-            <div class="relative flex justify-center text-sm">
-                <span class="px-2 bg-white text-stone-500">
-                    Belum memiliki akun?
-                </span>
+            <div class="relative flex justify-center text-[10px] uppercase tracking-widest font-bold">
+                <span class="px-3 bg-white text-amber-800 italic">Belum punya akun?</span>
             </div>
         </div>
 
-        <div class="mt-6">
-            <a 
-                href="{{ route('register') }}" 
-                class="w-full flex justify-center py-2.5 px-4 border border-stone-300 rounded-lg shadow-sm bg-white text-sm font-medium text-stone-700 hover:bg-stone-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-stone-500 transition duration-150 ease-in-out"
-            >
-                Daftar Sekarang
+        <div class="mt-4">
+            <a href="{{ route('register') }}" class="w-full flex justify-center py-2.5 px-4 border-2 border-amber-100 rounded-xl bg-amber-50/30 text-sm font-bold text-amber-800 hover:bg-amber-100/50 transition-all">
+                Daftar Akun Baru
             </a>
         </div>
     </div>
