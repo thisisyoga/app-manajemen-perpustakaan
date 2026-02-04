@@ -6,12 +6,12 @@
     <title>AdminPanel</title>
     @vite('resources/css/app.css') 
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 overflow-x-hidden">
 
-    <div class="flex min-h-screen">
+    <div class="flex min-h-screen ">
         @include('layouts.sidebar')
 
-        <div class="flex flex-1 flex-col">
+        <div class="flex flex-1 flex-col md:ml-64">
            
 
             <main class="p-6 space-y-6">

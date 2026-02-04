@@ -15,7 +15,7 @@
                     <input type="text" placeholder="Search Buku..."
                         class="w-full px-4 py-2 rounded-md border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
-                <a href="{{ route('create-MDA') }}">
+                <a href="{{ route('create-MDB') }}">
                     <button class="bg-amber-600 text-white px-4 py-2 rounded-md hover:bg-amber-500 transition duration-300">
                         + Buku
                     </button>
@@ -27,33 +27,36 @@
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th class="py-3 px-6 text-center">No</th>
+                        <th class="py-3 px-6 text-left">Cover</th>
                         <th class="py-3 px-6 text-left">Judul</th>
                         <th class="py-3 px-6 text-left">Penulis</th>
-                        <th class="py-3 px-6 text-left">Penerbit</th>
                         <th class="py-3 px-6 text-left">Tahun Terbit</th>
                         <th class="py-3 px-6 text-left">Stok</th>
                         <th class="py-3 px-6 text-center">Aksi</th>
                     </tr>
                 </thead>
 
-                @foreach(range(1, 5) as $index) 
+                @foreach ($buku as $b )
+            
                     <tbody class="text-gray-600 text-sm">
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-center">{{ $index }}</td>
-                            <td class="py-3 px-6 text-left">John Doe {{ $index }}</td>
-                            <td class="py-3 px-6 text-left">johndoe{{ $index }}@example.com</td>
-                            <td class="py-3 px-6 text-left">johndoe{{ $index }}@example.com</td>
-                            <td class="py-3 px-6 text-left">admin</td>
-                            <td class="py-3 px-6 text-left">{{ $loop->iteration }}</td>
+                            <td class="py-3 px-6 text-center">{{ $loop->iteration}}</td>
+                            <td class="py-3 w-2 px-6 text-center">
+                                <img src="{{ asset('storage/' . $b->cover) }}" alt="">
+                            </td>
+                            <td class="py-3 px-6 text-left">{{ $b->judul_buku }}</td>
+                            <td class="py-3 px-6 text-left">{{ $b->penulis }}</td>
+                            <td class="py-3 px-6 text-left">{{$b->tahun_terbit}}</td>
+                            <td class="py-3 px-6 text-left">{{ $b->stok }}</td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex item-center justify-center space-x-4">
-                                    <a href="{{ route('edit-MDA', $index) }}">
+                                    <a href="{{ route('edit-MDB', $b->id) }}">
                                         <button class="flex items-center w-auto bg-blue-600 text-white px-2 py-1 rounded-md hover:bg-blue-500 hover:scale-110 transition duration-300">
                                             <span>Edit</span>
                                         </button>
                                     </a>
 
-                                    <form action="" method="POST"
+                                    <form action="{{ route('delete-MDB', $b->id) }}" method="POST"
                                         onsubmit="return confirm('Are you sure you want to delete this user?');">
                                         @csrf
                                         @method('DELETE')

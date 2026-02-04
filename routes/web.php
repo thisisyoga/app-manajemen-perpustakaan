@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\BukuController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
 
@@ -60,7 +61,13 @@ Route::get('/kategori/{kategori}/edit', [KategoriController::class, 'edit'])->na
 Route::put('/kategori/{kategori}', [KategoriController::class, 'update'])->name('update-MDK');
 Route::delete('/kategori/{kategori}', [KategoriController::class, 'destroy'])->name('delete-MDK');
 
-Route::get('/buku', [App\Http\Controllers\BukuController::class, 'index'])->name('MDB');
+//Master Data Buku
+Route::get('/buku', [BukuController::class, 'index'])->name('MDB');
+Route::get('/buku/create', [BukuController::class, 'create'])->name('create-MDB');
+Route::post('/buku/store', [BukuController::class, 'store'])->name('store-MDB');
+Route::get('/buku/{buku}/edit', [BukuController::class, 'edit'])->name('edit-MDB');
+Route::put('/buku/{buku}', [BukuController::class, 'update'])->name('update-MDB');
+Route::delete('/buku/{buku}', [BukuController::class, 'destroy'])->name('delete-MDB');
 });
 
 

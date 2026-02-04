@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('bukus', function (Blueprint $table) {
             $table->id();
+            $table->string('judul_buku');
+            $table->string('isbn')->unique();
+            $table->string('penulis');
+            $table->string('penerbit');
+            $table->year('tahun_terbit');
+            $table->integer('stok')->default(0);
+            $table->string('kategori');
+            $table->text('deskripsi')->nullable();
+            $table->string('cover')->nullable();
             $table->timestamps();
         });
     }

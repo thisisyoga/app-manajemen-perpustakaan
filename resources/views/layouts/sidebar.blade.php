@@ -1,11 +1,12 @@
-<aside class="w-64 bg-white shadow-md hidden md:block relative z-10">
-    <div class="p-6 font-bold text-amber-600 text-2xl">AdminPanel</div>
-    <nav class="mt-8">
-        <a href="{{ route('admin-dashboard') }}"
-            class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
-                 @if (request()->routeIs('admin-dashboard')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">
-            Dashboard
-        </a>
+<aside class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full md:translate-x-0 bg-white shadow-md border-r">
+    <div class="h-full px-0 py-4 overflow-y-auto">
+        <div class="p-6 font-bold text-amber-600 text-2xl">AdminPanel</div>
+        <nav class="mt-8">
+            <a href="{{ route('admin-dashboard') }}"
+                class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
+                     @if (request()->routeIs('admin-dashboard')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">
+                Dashboard
+            </a>
 
         <div class="relative">
             <button id="btn-master-akun" type="button"
@@ -34,8 +35,9 @@
             class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
                  @if (request()->routeIs('MDK')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">Master
             Data Kategori</a>
-        <a href="#"
-            class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors border-l-4 border-transparent hover:border-amber-500">Master
+        <a href="{{route('MDB')}}"
+            class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-color
+            @if (request()->routeIs('MDB')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">Master
             Data Buku</a>
         <a href="#"
             class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors border-l-4 border-transparent hover:border-amber-500">Laporan</a>
@@ -55,7 +57,6 @@
             </button>
 
         </form>
-
     </nav>
 </aside>
 

@@ -6,5 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Buku extends Model
 {
-    //
+    protected $table = 'bukus';
+
+    protected $fillable = [
+        'judul_buku',
+        'isbn',
+        'penulis',
+        'penerbit',
+        'tahun_terbit',
+        'stok',
+        'kategori',
+        'deskripsi',
+        'cover',
+    ];
 }
