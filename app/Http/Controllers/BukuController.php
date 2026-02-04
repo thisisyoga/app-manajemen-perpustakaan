@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class BukuController extends Controller
@@ -21,7 +22,8 @@ class BukuController extends Controller
      */
     public function create()
     {
-        return view('admin.buku.create');
+        $kategori = Kategori::all();
+        return view('admin.buku.create',compact('kategori'));
     }
 
     /**

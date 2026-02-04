@@ -7,7 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
 Route::get('/akses-ditolak', function () {
@@ -17,16 +17,6 @@ Route::get('/akses-ditolak', function () {
 Route::get('/member-dashboard', function () {
     return view('user.index');
 })->name('MDU');
-
-Route::get('/dashboard', function () {
-
-if (auth()->user()->role == 'admin') {
-    return redirect('/admin-dashboard');
-}elseif (auth()->user()->role == 'user') {
-    return redirect('/member-dashboard');
-}else (auth()->user()->role == 'petugas');
-    return redirect('/petugas-dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
