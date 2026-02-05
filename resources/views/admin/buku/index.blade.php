@@ -3,6 +3,7 @@
 @section('content')
     <header class="bg-white shadow-md p-4 flex justify-between items-center">
     <h1 class="text-xl font-bold text-amber-600">Master Data Buku</h1>
+
     <div class="flex items-center gap-4">
         <div class="dropdown relative">
             <button type="button" class="flex items-center gap-2 focus:outline-none group">
@@ -45,15 +46,18 @@
                 <div class="border-t border-gray-100 my-1"></div>
 
                 <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                   <button class="block px-4 py-2.5 text-gray-700 hover:bg-amber-50 hover:text-amber-600 flex items-center transition-colors duration-200">
-                    <i class="fas fa-sign-out-alt text-gray-400 mr-3 w-5 text-center"></i>
-                    Log out
-                   </button>
+                    @csrf
+                    <button type="submit"
+                        class="w-full text-left block px-4 py-2.5 text-gray-700 hover:bg-amber-50 hover:text-amber-600 flex items-center transition-colors duration-200">
+                        <i class="fas fa-sign-out-alt text-gray-400 mr-3 w-5 text-center"></i>
+                        Log out
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 </header>
+
     <div class="container mx-auto px-4 py-8">
 
         <div class="overflow-x-auto bg-white rounded-lg shadow">

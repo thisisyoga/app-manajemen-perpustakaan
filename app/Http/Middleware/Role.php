@@ -16,6 +16,7 @@ class Role
     public function handle(Request $request, Closure $next, $role): Response
     {
         $roles = explode('|', $role);
+        
         if (!auth()->check() || !auth()->user()->hasRole($roles)) {
         return redirect('akses-ditolak');
     }
