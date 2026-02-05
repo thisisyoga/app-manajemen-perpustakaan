@@ -28,7 +28,7 @@ Route::middleware('role:user')->group(function () {
 
 });
 
-Route::middleware('role:admin')->group(function () {
+Route::middleware(['role:admin|petugas'])->group(function () {
 
     Route::get('/admin-dashboard', function () {
         return view('admin.index');

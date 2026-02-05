@@ -1,15 +1,19 @@
 <aside
     class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full md:translate-x-0 bg-white shadow-md border-r">
     <div class="h-full px-0 py-4 overflow-y-auto">
-        <div class="p-6 font-bold text-amber-600 text-2xl">AdminPanel</div>
-
         @if (Auth::user()->role == 'admin')
-            <nav class="mt-8">
-                <a href="{{ route('admin-dashboard') }}"
-                    class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
-                     @if (request()->routeIs('admin-dashboard')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">
-                    Dashboard
-                </a>
+            <div class="p-6 font-bold text-amber-600 text-2xl">AdminPanel</div>
+        @elseif (Auth::user()->role == 'petugas')
+            <div class="p-6 font-bold text-amber-600 text-2xl">PetugasPanel</div>
+        @endif
+
+        <nav class="mt-8">
+            <a href="{{ route('admin-dashboard') }}"
+                class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
+            @if (request()->routeIs('admin-dashboard')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">
+                Dashboard
+            </a>
+            @if (Auth::user()->role == 'admin')
                 <div class="relative">
                     <button id="btn-master-akun" type="button"
                         class="w-full flex items-center justify-between py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors border-l-4 border-transparent focus:outline-none">
@@ -33,25 +37,7 @@
                         </a>
                     </div>
                 </div>
-
-                <a href="{{ route('MDK') }}"
-                    class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
-                 @if (request()->routeIs('MDK')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">Master
-                    Data Kategori</a>
-                <a href="{{ route('MDB') }}"
-                    class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-color
-            @if (request()->routeIs('MDB')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">Master
-                    Data Buku</a>
-                <a href="#"
-                    class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors border-l-4 border-transparent hover:border-amber-500">Laporan</a>
-        @endif
-
-        @if (Auth::user()->role == 'petugas')
-            <a href="{{ route('admin-dashboard') }}"
-                class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
-                     @if (request()->routeIs('admin-dashboard')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">
-                Dashboard
-            </a>
+            @endif
 
             <a href="{{ route('MDK') }}"
                 class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
@@ -62,8 +48,9 @@
             @if (request()->routeIs('MDB')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">Master
                 Data Buku</a>
             <a href="#"
+                class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors border-l-4 border-transparent hover:border-amber-500">Ulasan</a>
+            <a href="#"
                 class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors border-l-4 border-transparent hover:border-amber-500">Laporan</a>
-        @endif
         </nav>
 </aside>
 
