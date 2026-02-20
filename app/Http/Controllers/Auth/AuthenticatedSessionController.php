@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         if ($user->role == 'admin') {
             return redirect()->intended('/admin-dashboard');
         } elseif ($user->role == 'user') {
-            return redirect()->intended('/member-dashboard');
+            return redirect()->intended('/member-landing');
         } elseif ($user->role == 'petugas') {
             return redirect()->intended('/admin-dashboard');
         }

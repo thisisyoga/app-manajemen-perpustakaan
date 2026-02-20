@@ -14,7 +14,7 @@ Route::get('/akses-ditolak', function () {
     return view('error.akses');
 })->name('akses-ditolak');
 
-Route::get('/member-dashboard', function () {
+Route::get('/member-landing', function () {
     return view('user.index');
 })->name('MDU');
 
@@ -34,14 +34,16 @@ Route::middleware(['role:admin|petugas'])->group(function () {
         return view('admin.index');
     })->name('admin-dashboard');
 
-//Master Data Akun
-Route::get('/akun/petugas', [AkunController::class, 'index'])->name('MDA');
-Route::get('/akun/user', [AkunController::class, 'user'])->name('data-user');
-Route::get('/akun/create', [AkunController::class, 'create'])->name('create-MDA');
-Route::post('/akun/store', [AkunController::class, 'store'])->name('store-MDA');
-Route::get('/petugas/{id}/edit', [AkunController::class, 'edit'])->name('edit-MDA');
-Route::put('/petugas/{id}', [AkunController::class, 'update'])->name('update-MDA');
-Route::delete('/petugas/{id}', [AkunController::class, 'destroy'])->name('delete-MDA');
+Route::middleware(['role:admin'])->group(function () {
+        // Master Data Akun
+        Route::get('/akun/petugas', [AkunController::class, 'index'])->name('MDA');
+        Route::get('/akun/user', [AkunController::class, 'user'])->name('data-user');
+        Route::get('/akun/create', [AkunController::class, 'create'])->name('create-MDA');
+        Route::post('/akun/store', [AkunController::class, 'store'])->name('store-MDA');
+        Route::get('/petugas/{id}/edit', [AkunController::class, 'edit'])->name('edit-MDA');
+        Route::put('/petugas/{id}', [AkunController::class, 'update'])->name('update-MDA');
+        Route::delete('/petugas/{id}', [AkunController::class, 'destroy'])->name('delete-MDA');
+    });
 
 //Master Data Kategori
 Route::get('/kategori', [KategoriController::class, 'index'])->name('MDK');

@@ -1,417 +1,262 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perpustakaan</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .nav-link {
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: currentColor;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        .dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        .dropdown-menu {
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        .mobile-menu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-        .mobile-menu.open {
-            max-height: 1000px;
-            transition: max-height 0.5s ease-in;
-        }
-        .badge {
-            font-size: 0.65rem;
-            top: -0.5rem;
-            right: -0.5rem;
-        }
-        .avatar-ring {
-            box-shadow: 0 0 0 2px white, 0 0 0 4px #3B82F6;
-        }
-    </style>
-</head>
-<body class="bg-gray-50">
-    <!-- Premium Professional Navigation Bar -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <!-- Left Section - Logo/Brand -->
-                <div class="flex items-center">
-                    <a href="#" class="flex items-center group">
-                        <div class="bg-blue-600 group-hover:bg-blue-700 p-2 rounded-lg transition-colors duration-300">
-                            <i class="fas fa-cube text-white text-xl"></i>
+@extends('layouts.user')
+
+@section('content')
+    <div class="w-full">
+
+        <section class="relative min-h-screen flex items-center overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent">
+                <img src="https://images.unsplash.com/photo-1472173148041-00294f0814a2?auto=format&fit=crop&w=1350&q=80"
+                    class="w-full h-full object-cover scale-110 animate-[wiggle_20s_ease_infinite]" alt="Background">
+                <div class="absolute inset-0 bg-black/40"></div>
+            </div>
+
+            <div class="relative z-10 px-8 md:px-16 w-full">
+                <div class="max-w-2xl transition-all duration-1000">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight mb-4">
+                        Temukan Dunia di Balik <br>
+                        <span class="text-amber-500">Setiap Aksara</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-lg">
+                        Menjelajahi cakrawala tanpa batas melalui koleksi buku pilihan. Mulailah petualangan literasi Anda
+                        dari sini.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#koleksi"
+                            class="bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 px-8 rounded-lg transition">
+                            Jelajahi Buku
+                        </a>
+                        <a href="#about"
+                            class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 font-bold py-3 px-8 rounded-lg transition">
+                            Tentang Kami
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-gray-50" id="about">
+            <div class="px-8 md:px-16 container mx-auto">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="w-full md:w-1/2">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80"
+                                alt="Perpustakaan Aksara" class="rounded-2xl shadow-2xl">
+                            <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-amber-500/10 rounded-full -z-10"></div>
                         </div>
-                        <span class="ml-3 text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">AcmePro</span>
-                    </a>
+                    </div>
+
+                    <div class="w-full md:w-1/2">
+                        <h2 class="text-amber-600 font-semibold tracking-wide uppercase mb-2">Tentang Aksara</h2>
+                        <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 leading-tight">
+                            Membawa Perpustakaan Konvensional ke Era Digital
+                        </h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Aksara adalah solusi modern untuk pecinta literasi yang menghargai sensasi membaca buku fisik.
+                            Kami memahami bahwa waktu Anda berharga, itulah sebabnya kami hadir untuk menjembatani kemudahan
+                            pencarian digital dengan kenyamanan perpustakaan offline.
+                        </p>
+                        <p class="text-gray-600 mb-8 leading-relaxed">
+                            Melalui aplikasi ini, Anda dapat memantau koleksi kami secara real-time, memesan tempat baca,
+                            hingga melakukan peminjaman mandiri tanpa harus mengantre di meja petugas.
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-6 border-t border-gray-200 pt-8">
+                            <div>
+                                <span class="block text-3xl font-bold text-amber-600">1000+</span>
+                                <span class="text-sm text-gray-500 uppercase tracking-wider">Koleksi Buku</span>
+                            </div>
+                            <div>
+                                <span class="block text-3xl font-bold text-amber-600">5000+</span>
+                                <span class="text-sm text-gray-500 uppercase tracking-wider">Anggota Aktif</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white" id="keunggulan">
+            <div class="px-8 md:px-16">
+                <div class="mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800">Fitur Unggulan Kami</h2>
+                    <p class="text-gray-600 mt-2">Platform Aksara memiliki fitur unggulan yang membuat pengalaman membaca
+                        Anda berbeda</p>
                 </div>
 
-                <!-- Center Section - Main Navigation (Desktop) -->
-                <div class="hidden md:flex items-center space-x-1">
-                    <div class="dropdown relative">
-                        <button class="nav-link text-gray-700 hover:text-blue-600 px-4 py-2 flex items-center rounded-lg hover:bg-blue-50 transition-colors duration-200">
-                            <i class="fas fa-home mr-2"></i>
-                            Home
-                        </button>
-                    </div>
-
-                    <div class="dropdown relative">
-                        <button class="nav-link text-gray-700 hover:text-blue-600 px-4 py-2 flex items-center rounded-lg hover:bg-blue-50 transition-colors duration-200">
-                            <i class="fas fa-briefcase mr-2"></i>
-                            Products
-                            <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-200"></i>
-                        </button>
-                        <div class="dropdown-menu absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl py-1 z-50 opacity-0 invisible transition-all duration-300 transform -translate-y-2 border border-gray-100">
-                            <div class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Solutions</div>
-                            <a href="#" class="block px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-600 flex items-center transition-colors duration-200">
-                                <i class="fas fa-laptop text-blue-500 mr-3 w-5 text-center"></i>
-                                Software Suite
-                            </a>
-                            <a href="#" class="block px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-600 flex items-center transition-colors duration-200">
-                                <i class="fas fa-server text-blue-500 mr-3 w-5 text-center"></i>
-                                Cloud Services
-                            </a>
-                            <a href="#" class="block px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-600 flex items-center transition-colors duration-200">
-                                <i class="fas fa-mobile-screen text-blue-500 mr-3 w-5 text-center"></i>
-                                Mobile Apps
-                            </a>
-                            <div class="border-t border-gray-100 my-1"></div>
-                            <a href="#" class="block px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-600 flex items-center transition-colors duration-200">
-                                <i class="fas fa-star text-yellow-400 mr-3 w-5 text-center"></i>
-                                Featured Products
-                            </a>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="p-6 bg-gray-50 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                        <div
+                            class="w-12 h-12 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center text-xl mb-4">
+                            <i class="fas fa-search"></i>
                         </div>
+                        <h3 class="text-xl font-bold mb-2">Pencarian Cerdas</h3>
+                        <p class="text-gray-600 text-sm">Cari posisi buku di rak secara akurat melalui aplikasi sebelum Anda
+                            datang ke lokasi.
+                        </p>
                     </div>
 
-                    <a href="#" class="nav-link text-gray-700 hover:text-blue-600 px-4 py-2 flex items-center rounded-lg hover:bg-blue-50 transition-colors duration-200">
-                        <i class="fas fa-building mr-2"></i>
-                        Company
-                    </a>
-
-                    <div class="dropdown relative">
-                        <button class="nav-link text-gray-700 hover:text-blue-600 px-4 py-2 flex items-center rounded-lg hover:bg-blue-50 transition-colors duration-200">
-                            <i class="fas fa-file-alt mr-2"></i>
-                            Resources
-                            <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-200"></i>
-                        </button>
-                        <div class="dropdown-menu absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-xl py-1 z-50 opacity-0 invisible transition-all duration-300 transform -translate-y-2 border border-gray-100">
-                            <div class="grid grid-cols-2 gap-1 p-2">
-                                <a href="#" class="flex items-center p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200">
-                                    <div class="bg-blue-100 p-2 rounded-lg mr-3">
-                                        <i class="fas fa-book text-blue-600"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-medium text-gray-800">Docs</div>
-                                        <div class="text-xs text-gray-500">Technical documentation</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="flex items-center p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200">
-                                    <div class="bg-purple-100 p-2 rounded-lg mr-3">
-                                        <i class="fas fa-video text-purple-600"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-medium text-gray-800">Tutorials</div>
-                                        <div class="text-xs text-gray-500">Step-by-step guides</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="flex items-center p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200">
-                                    <div class="bg-green-100 p-2 rounded-lg mr-3">
-                                        <i class="fas fa-blog text-green-600"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-medium text-gray-800">Blog</div>
-                                        <div class="text-xs text-gray-500">Latest updates</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="flex items-center p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200">
-                                    <div class="bg-red-100 p-2 rounded-lg mr-3">
-                                        <i class="fas fa-headset text-red-600"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-medium text-gray-800">Support</div>
-                                        <div class="text-xs text-gray-500">Help center</div>
-                                    </div>
-                                </a>
-                            </div>
+                    <div class="p-6 bg-gray-50 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                        <div
+                            class="w-12 h-12 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center text-xl mb-4">
+                            <i class="fas fa-couch"></i>
                         </div>
+                        <h3 class="text-xl font-bold mb-2">Ruang Baca Nyaman</h3>
+                        <p class="text-gray-600 text-sm">Fasilitas area baca yang tenang dengan pencahayaan optimal untuk
+                            kenyamanan maksimal.
+                            fun.</p>
                     </div>
 
-                    <a href="#" class="nav-link text-gray-700 hover:text-blue-600 px-4 py-2 flex items-center rounded-lg hover:bg-blue-50 transition-colors duration-200">
-                        <i class="fas fa-envelope mr-2"></i>
-                        Contact
-                        <span class="ml-2 bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">New</span>
-                    </a>
+                    <div class="p-6 bg-gray-50 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                        <div
+                            class="w-12 h-12 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center text-xl mb-4">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Sistem Pinjam Kilat</h3>
+                        <p class="text-gray-600 text-sm">Pinjam buku tanpa antre panjang cukup dengan memindai kode buku
+                            melalui sistem kami.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="py-20 bg-gray-50" id="koleksi">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Koleksi Buku </h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Jelajahi berbagai koleksi buku digital kami yang dapat
+                        diakses kapan saja. </p>
                 </div>
 
-                <!-- Right Section - Actions -->
-                <div class="flex items-center space-x-3">
-                    <div class="hidden md:block h-6 w-px bg-gray-200"></div>
-
-                    <div class="dropdown relative">
-                        <button class="flex items-center space-x-2 focus:outline-none group">
-                            <div class="relative">
-                                <div class="h-9 w-9 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 overflow-hidden avatar-ring">
-                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="h-full w-full object-cover">
-                                </div>
-                                <span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 border-2 border-white"></span>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Product 1 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                        x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1605276277265-84f97da7d47a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                alt="Adventure Playset" class="w-full h-64 object-cover transition-all duration-500"
+                                :class="{ 'transform scale-105': hover }">
+                            <div
+                                class="absolute top-4 right-4 bg-amber-500 text-white text-sm font-bold px-3 py-1 rounded-full">
+                                Popular
                             </div>
-                            <div class="hidden lg:flex flex-col items-start">
-                                <span class="text-sm font-medium text-gray-700 group-hover:text-blue-600 transition-colors duration-200">John Doe</span>
-                                <span class="text-xs text-gray-500">Admin</span>
-                            </div>
-                            <i class="fas fa-chevron-down text-xs text-gray-500 hidden lg:inline transition-transform duration-200 group-hover:text-blue-600"></i>
-                        </button>
-                        <div class="dropdown-menu absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl py-1 z-50 opacity-0 invisible transition-all duration-300 transform -translate-y-2 border border-gray-100">
-                            <div class="px-4 py-3 border-b border-gray-100">
-                                <div class="flex items-center">
-                                    <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 overflow-hidden mr-3">
-                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="h-full w-full object-cover">
-                                    </div>
-                                    <div>
-                                        <p class="font-medium text-gray-900">John Doe</p>
-                                        <p class="text-sm text-gray-500">john@example.com</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#" class="block px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-600 flex items-center transition-colors duration-200">
-                                <i class="fas fa-user-circle text-gray-400 mr-3 w-5 text-center"></i>
-                                My Profile
-                            </a>
-                            <a href="#" class="block px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-600 flex items-center transition-colors duration-200">
-                                <i class="fas fa-cog text-gray-400 mr-3 w-5 text-center"></i>
-                                Account Settings
-                            </a>
-                            <a href="#" class="block px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-600 flex items-center transition-colors duration-200">
-                                <i class="fas fa-envelope text-gray-400 mr-3 w-5 text-center"></i>
-                                Messages
-                                <span class="ml-auto bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">3</span>
-                            </a>
-                            <div class="border-t border-gray-100 my-1"></div>
-                            <a href="#" class="block px-4 py-2.5 text-gray-700 hover:bg-blue-50 hover:text-blue-600 flex items-center transition-colors duration-200">
-                                <i class="fas fa-sign-out-alt text-gray-400 mr-3 w-5 text-center"></i>
-                                Sign out
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Adventure World</h3>
+                            <p class="text-gray-600 mb-4">Packed with fun: slides, swings, climbing wall, and monkey bars in
+                                a compact design.</p>
+                            <a href="#"
+                                class="text-amber-600 font-medium hover:text-amber-700 transition inline-flex items-center">
+                                <span>View Details</span>
+                                <i class="fas fa-arrow-right ml-2 text-sm"></i>
                             </a>
                         </div>
                     </div>
 
-                    <button id="mobile-menu-button" class="md:hidden p-2 text-gray-600 hover:text-blue-600 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                        <i class="fas fa-bars text-xl"></i>
-                        <span class="sr-only">Menu</span>
-                    </button>
+                </div>
+
+                <div class="text-center mt-12">
+                    <a href="#"
+                        class="inline-block bg-amber-500 hover:bg-amber-400 text-gray-900 font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1">
+                        View All Playsets
+                    </a>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-200">
-            <div class="px-2 pt-2 pb-4 space-y-1">
-                <a href="#" class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 flex items-center transition-colors duration-200">
-                    <i class="fas fa-home text-blue-500 mr-3 w-5 text-center"></i>
-                    Home
-                </a>
-                <div class="group">
-                    <button class="w-full flex justify-between items-center px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-200">
-                        <div class="flex items-center">
-                            <i class="fas fa-briefcase text-blue-500 mr-3 w-5 text-center"></i>
-                            Products
-                        </div>
-                        <i class="fas fa-chevron-down text-xs transition-transform duration-200 group-focus:rotate-180"></i>
-                    </button>
-                    <div class="pl-4 mt-1 space-y-1 hidden group-focus:block">
-                        <a href="#" class="block px-4 py-2 rounded-lg text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50 flex items-center transition-colors duration-200">
-                            <i class="fas fa-laptop text-blue-400 mr-3 w-5 text-center"></i>
-                            Software
+        <!-- CTA Section -->
+        <div class="py-20 bg-amber-500" id="kontak">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Siap Memulai Petualangan Literasi Anda?</h2>
+                    <p class="text-xl text-white mb-10">Hubungi kami untuk informasi keanggotaan, ketersediaan buku, atau
+                        reservasi ruang baca eksklusif.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto" >
+                        <a href="https://wa.me/628123456789" target="_blank"
+                            class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:-translate-y-1 flex items-center">
+                            <div
+                                class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-amber-500 text-xl mr-4">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="text-left">
+                                <h3 class="font-bold text-lg">WhatsApp</h3>
+                                <p class="text-gray-600">+62 812-3456-789</p>
+                            </div>
                         </a>
-                        <a href="#" class="block px-4 py-2 rounded-lg text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50 flex items-center transition-colors duration-200">
-                            <i class="fas fa-server text-blue-400 mr-3 w-5 text-center"></i>
-                            Services
-                        </a>
-                        <a href="#" class="block px-4 py-2 rounded-lg text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50 flex items-center transition-colors duration-200">
-                            <i class="fas fa-mobile-screen text-blue-400 mr-3 w-5 text-center"></i>
-                            Apps
-                        </a>
-                    </div>
-                </div>
-                <a href="#" class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 flex items-center transition-colors duration-200">
-                    <i class="fas fa-building text-blue-500 mr-3 w-5 text-center"></i>
-                    Company
-                </a>
-                <div class="group">
-                    <button class="w-full flex justify-between items-center px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-200">
-                        <div class="flex items-center">
-                            <i class="fas fa-file-alt text-blue-500 mr-3 w-5 text-center"></i>
-                            Resources
-                        </div>
-                        <i class="fas fa-chevron-down text-xs transition-transform duration-200 group-focus:rotate-180"></i>
-                    </button>
-                    <div class="pl-4 mt-1 space-y-1 hidden group-focus:block">
-                        <a href="#" class="block px-4 py-2 rounded-lg text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50 flex items-center transition-colors duration-200">
-                            <i class="fas fa-book text-blue-400 mr-3 w-5 text-center"></i>
-                            Documentation
-                        </a>
-                        <a href="#" class="block px-4 py-2 rounded-lg text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50 flex items-center transition-colors duration-200">
-                            <i class="fas fa-video text-blue-400 mr-3 w-5 text-center"></i>
-                            Tutorials
-                        </a>
-                        <a href="#" class="block px-4 py-2 rounded-lg text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50 flex items-center transition-colors duration-200">
-                            <i class="fas fa-blog text-blue-400 mr-3 w-5 text-center"></i>
-                            Blog
+
+                        <a href="mailto:halo@aksara.id" target="_blank"
+                            class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:-translate-y-1 flex items-center">
+                            <div
+                                class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-amber-500 text-xl mr-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="text-left">
+                                <h3 class="font-bold text-lg">Email Kami</h3>
+                                <p class="text-gray-600">aksara@gmail.com</p>
+                            </div>
                         </a>
                     </div>
-                </div>
-                <a href="#" class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 flex items-center transition-colors duration-200">
-                    <i class="fas fa-envelope text-blue-500 mr-3 w-5 text-center"></i>
-                    Contact
-                    <span class="ml-2 bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">New</span>
-                </a>
-                <div class="border-t border-gray-200 pt-2 mt-2">
-                    <a href="#" class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 flex items-center transition-colors duration-200">
-                        <i class="fas fa-user-circle text-blue-500 mr-3 w-5 text-center"></i>
-                        Profile
-                    </a>
-                    <a href="#" class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 flex items-center transition-colors duration-200">
-                        <i class="fas fa-cog text-blue-500 mr-3 w-5 text-center"></i>
-                        Settings
-                    </a>
-                    <a href="#" class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 flex items-center transition-colors duration-200">
-                        <i class="fas fa-sign-out-alt text-blue-500 mr-3 w-5 text-center"></i>
-                        Sign Out
-                    </a>
+
+                    <div class="mt-12">
+                        <a href="/register"
+                            class="bg-gray-900 hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1 inline-flex items-center justify-center">
+                            <span>Daftar Keanggotaan Gratis</span>
+                            <i class="fas fa-user-plus ml-2"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </nav>
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-amber-500">Aksara.</h3>
+                        <p class="text-gray-400 mb-4">Ruang baca modern yang menjembatani ilmu pengetahuan fisik dengan
+                            kemudahan teknologi digital.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-amber-500 transition"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-amber-500 transition"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-amber-500 transition"><i
+                                    class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
 
-    <!-- JavaScript for enhanced functionality -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Enhanced mobile menu toggle with animation
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', function() {
-                    const isExpanded = mobileMenu.classList.contains('open');
-                    if (isExpanded) {
-                        mobileMenu.classList.remove('open');
-                        setTimeout(() => {
-                            mobileMenu.classList.add('hidden');
-                        }, 300); // Match this with the transition duration
-                    } else {
-                        mobileMenu.classList.remove('hidden');
-                        // Trigger reflow to enable animation
-                        void mobileMenu.offsetHeight;
-                        mobileMenu.classList.add('open');
-                    }
-                    
-                    // Toggle aria-expanded attribute
-                    const expanded = this.getAttribute('aria-expanded') === 'true';
-                    this.setAttribute('aria-expanded', !expanded);
-                    
-                    // Change icon
-                    const icon = this.querySelector('i');
-                    if (icon) {
-                        icon.classList.toggle('fa-bars');
-                        icon.classList.toggle('fa-times');
-                    }
-                });
-            }
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Layanan</h3>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#" class="hover:text-white transition">Peminjaman Buku</a></li>
+                            <li><a href="#" class="hover:text-white transition">Ruang Baca Private</a></li>
+                            <li><a href="#" class="hover:text-white transition">Donasi Buku</a></li>
+                            <li><a href="#" class="hover:text-white transition">Event Literasi</a></li>
+                        </ul>
+                    </div>
 
-            // Improved dropdown handling
-            const dropdowns = document.querySelectorAll('.dropdown');
-            
-            dropdowns.forEach(dropdown => {
-                const button = dropdown.querySelector('button');
-                const menu = dropdown.querySelector('.dropdown-menu');
-                
-                if (button && menu) {
-                    // Handle click
-                    button.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const isOpen = !menu.classList.contains('opacity-0');
-                        
-                        // Close all other dropdowns first
-                        document.querySelectorAll('.dropdown-menu').forEach(m => {
-                            if (m !== menu) {
-                                m.classList.add('opacity-0', 'invisible', '-translate-y-2');
-                            }
-                        });
-                        
-                        // Toggle current dropdown
-                        if (isOpen) {
-                            menu.classList.add('opacity-0', 'invisible', '-translate-y-2');
-                        } else {
-                            menu.classList.remove('opacity-0', 'invisible', '-translate-y-2');
-                        }
-                    });
-                    
-                    // Handle hover for desktop
-                    if (window.innerWidth > 768) {
-                        dropdown.addEventListener('mouseenter', () => {
-                            menu.classList.remove('opacity-0', 'invisible', '-translate-y-2');
-                        });
-                        
-                        dropdown.addEventListener('mouseleave', () => {
-                            menu.classList.add('opacity-0', 'invisible', '-translate-y-2');
-                        });
-                    }
-                }
-            });
-            
-            // Close dropdowns when clicking outside
-            document.addEventListener('click', function() {
-                document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                    menu.classList.add('opacity-0', 'invisible', '-translate-y-2');
-                });
-            });
-            
-            // Handle window resize
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 768 && mobileMenu) {
-                    mobileMenu.classList.remove('open');
-                    mobileMenu.classList.add('hidden');
-                    const menuButton = document.getElementById('mobile-menu-button');
-                    if (menuButton) {
-                        menuButton.setAttribute('aria-expanded', 'false');
-                        const icon = menuButton.querySelector('i');
-                        if (icon) {
-                            icon.classList.add('fa-bars');
-                            icon.classList.remove('fa-times');
-                        }
-                    }
-                }
-            });
-            
-            // Add active state to current page link (example)
-            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.nav-link').forEach(link => {
-                const href = link.getAttribute('href');
-                if (href && href.includes(currentPath)) {
-                    link.classList.add('text-blue-600', 'font-medium');
-                    link.classList.remove('text-gray-700');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Jam Operasional</h3>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li class="flex justify-between"><span>Senin - Jumat:</span> <span>08:00 - 20:00</span></li>
+                            <li class="flex justify-between"><span>Sabtu:</span> <span>09:00 - 17:00</span></li>
+                            <li class="flex justify-between text-red-400"><span>Minggu:</span> <span>Tutup</span></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Lokasi Kami</h3>
+                        <p class="text-gray-400 text-sm">
+                            Jl. Barokah No.06, Wanaherang,<br>
+                            Kabupaten Bogor, Jawa Barat 16965
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-500 text-center">&copy; 2026 Aksara. Membangun Negeri Melalui Membaca.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+@endsection
