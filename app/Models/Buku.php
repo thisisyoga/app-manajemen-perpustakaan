@@ -19,4 +19,9 @@ class Buku extends Model
         'deskripsi',
         'cover',
     ];
+
+    public function RelasiKategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori', 'id');
+    }
 }

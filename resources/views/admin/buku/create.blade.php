@@ -14,7 +14,7 @@
 
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200">
                         <div class="p-6 md:p-8">
-                            <form action="{{ route('store-MDB') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('store-MDB') }}" method="POST" enctype="multipart/form-data" novalidate>
                                 @csrf
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -37,6 +37,9 @@
                                                 class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all text-sm"
                                                 placeholder="Masukkan judul buku" required>
                                         </div>
+                                        @error('judul_buku')
+                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <!-- ISBN -->
@@ -57,6 +60,9 @@
                                                 class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all text-sm"
                                                 placeholder="978-xxx-xxx-xxx-x" required>
                                         </div>
+                                        @error('isbn')
+                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <!-- Penulis -->
@@ -77,6 +83,9 @@
                                                 class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all text-sm"
                                                 placeholder="Nama penulis" required>
                                         </div>
+                                        @error('penulis')
+                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <!-- Penerbit -->
@@ -97,6 +106,9 @@
                                                 class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all text-sm"
                                                 placeholder="Nama penerbit" required>
                                         </div>
+                                        @error('penerbit')
+                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <!-- Tahun Terbit -->
@@ -117,6 +129,9 @@
                                                 class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all text-sm"
                                                 placeholder="2024" min="1900" max="2100" required>
                                         </div>
+                                        @error('tahun_terbit')
+                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <!-- Stok -->
@@ -137,6 +152,9 @@
                                                 class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all text-sm"
                                                 placeholder="0" min="0" required>
                                         </div>
+                                        @error('stok')
+                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <!-- Kategori -->
@@ -158,8 +176,7 @@
                                                 required>
                                                 <option value="" disabled selected>Pilih Kategori</option>
                                                 @foreach ($kategori as $k)
-                                                    <option value="{{ $k->id }}">{{ $k->nama_kategori }}
-                                                    </option>
+                                                   <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
                                                 @endforeach
                                             </select>
 
@@ -172,6 +189,9 @@
                                                 </svg>
                                             </div>
                                         </div>
+                                        @error('kategori')
+                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <!-- Deskripsi -->

@@ -136,13 +136,9 @@
                                         <select name="kategori" id="kategori"
                                             class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all text-sm appearance-none"
                                             required>
-                                            <option value="" disabled selected>Pilih Kategori</option>
-                                            <option value="fiksi" {{ old('kategori', $book->kategori) == 'fiksi' ? 'selected' : '' }}>Fiksi</option>
-                                            <option value="non-fiksi" {{ old('kategori', $book->kategori) == 'non-fiksi' ? 'selected' : '' }}>Non-Fiksi</option>
-                                            <option value="pendidikan" {{ old('kategori', $book->kategori) == 'pendidikan' ? 'selected' : '' }}>Pendidikan</option>
-                                            <option value="teknologi" {{ old('kategori', $book->kategori) == 'teknologi' ? 'selected' : '' }}>Teknologi</option>
-                                            <option value="sejarah" {{ old('kategori', $book->kategori) == 'sejarah' ? 'selected' : '' }}>Sejarah</option>
-                                            <option value="biografi" {{ old('kategori', $book->kategori) == 'biografi' ? 'selected' : '' }}>Biografi</option>
+                                            @foreach ($kategori as $k)
+                                                   <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
+                                                @endforeach
                                         </select>
                                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">

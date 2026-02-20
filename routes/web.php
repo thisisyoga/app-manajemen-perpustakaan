@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\BukuController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -14,9 +15,9 @@ Route::get('/akses-ditolak', function () {
     return view('error.akses');
 })->name('akses-ditolak');
 
-Route::get('/member-landing', function () {
-    return view('user.index');
-})->name('MDU');
+
+Route::get('/halaman-user', [UserController::class, 'index'])->name('MDU');
+Route::get('/detail-buku', [UserController::class, 'detail'])->name('detail-buku');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
