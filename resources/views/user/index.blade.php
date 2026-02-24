@@ -44,8 +44,8 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         @foreach ($buku as $b)
-                            <div
-                                class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full overflow-hidden">
+                            <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full overflow-hidden">
+                                <a href="{{ route('detail-buku', $b->id) }}" class="absolute inset-0 z-10">
                                 <div class="relative h-64 bg-black overflow-hidden">
                                     <img src="{{ asset('storage/' . $b->cover) }}" alt="Cover Buku"
                                         class="w-full h-full object-contain p-6 transform group-hover:scale-110 transition duration-500">
@@ -74,12 +74,13 @@
                                     <p class="text-gray-500 text-sm line-clamp-2 mb-6">
                                         {{ Str::limit($b->deskripsi, 100, '...') }}</p>
                                 </div>
+                                </a>
                             </div>
                             @endforeach
                     </div>
 
                     <div class="text-center mt-12">
-                        <a href="#"
+                        <a href="#koleksi"
                             class="inline-block bg-amber-500 hover:bg-amber-400 text-gray-900 font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1">
                             Lihat Semua Koleksi
                         </a>

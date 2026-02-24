@@ -12,7 +12,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $buku = Buku::all();
+        $buku = Buku::with('RelasiKategori')->get();
         return view('user.index',compact('buku'));
     }
 
@@ -23,9 +23,10 @@ class UserController extends Controller
     {
         //
     }
-    public function detail()
+    public function detail(string $id)
     {
-        return view('user.pinjam.detail');
+        $pinjam = Buku::with('RelasiKategori')->findOrFail($id);
+        return view('user.pinjam.detail', compact('pinjam'));
     }
 
     /**

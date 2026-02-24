@@ -166,7 +166,7 @@
                     </div>
 
                     <div class="text-center mt-12">
-                        <a href="#"
+                        <a href="{{ route('login') }}"
                             class="inline-block bg-amber-500 hover:bg-amber-400 text-gray-900 font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1">
                             Lihat Semua Koleksi
                         </a>
