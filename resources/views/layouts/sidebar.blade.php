@@ -13,6 +13,11 @@
             @if (request()->routeIs('admin-dashboard')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">
                 Dashboard
             </a>
+            <a href="{{ route('admin-pengembalian') }}"
+                class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
+            @if (request()->routeIs('admin-pengembalian')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">
+                Pengembalian
+            </a>
             @if (Auth::user()->role == 'admin')
                 <div class="relative">
                     <button id="btn-master-akun" type="button"
@@ -47,10 +52,12 @@
                 class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-color
             @if (request()->routeIs('MDB')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">Master
                 Data Buku</a>
-            <a href="#"
-                class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors border-l-4 border-transparent hover:border-amber-500">Ulasan</a>
-            <a href="#"
-                class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors border-l-4 border-transparent hover:border-amber-500">Laporan</a>
+            <a href="{{ route('ulasan') }}"
+                class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
+                @if (request()->routeIs('ulasan')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">Ulasan</a>
+            <a href="{{ route('laporan.index') }}"
+                class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
+                @if (request()->routeIs('laporan.index')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">Laporan</a>
         </nav>
 </aside>
 

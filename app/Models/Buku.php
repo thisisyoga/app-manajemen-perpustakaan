@@ -15,13 +15,12 @@ class Buku extends Model
         'penerbit',
         'tahun_terbit',
         'stok',
-        'kategori_id',
         'deskripsi',
         'cover',
     ];
 
     public function RelasiKategori()
     {
-        return $this->belongsTo(Kategori::class, 'kategori_id', 'id');
+        return $this->belongsToMany(Kategori::class, 'kategoribuku_relasi', 'buku_id', 'kategori_id');
     }
 }

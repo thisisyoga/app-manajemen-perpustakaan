@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
+use App\Models\Peminjaman;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -15,54 +17,69 @@ class DashboardController extends Controller
     {
         $user = User::all();
         $buku = Buku::all();
-        return view('admin.index', compact('user','buku'));
+        $pinjam = Peminjaman::where('status', 'menunggu')->get();
+        return view('admin.index', compact('user','buku','pinjam'));
     }
+
+    public function setuju($id)
+    {
+        Peminjaman::where('id', $id)->update(['status' => 'dipinjam']);
+        return redirect()->back()->with('success', 'Buku berhasil dipinjam!');
+    }
+
+    public function tolak($id)
+    {
+        Peminjaman::where('id', $id)->update(['status' => 'ditolak']);
+        return redirect()->back()->with('success', 'Peminjaman ditolak.');
+    }
+
+
+        public function dikembalikan($id)
+    {
+        Peminjaman::where('id', $id)->update(['status' => 'dikembalikan']);
+        return redirect()->back()->with('success', 'Buku berhasil dikembalikan.');
+    }
+
+    public function pengembalian()
+    {
+        $user = User::all();
+        $buku = Buku::all();
+        $pinjam = Peminjaman::where('status', 'dipinjam')->get();
+        return view('admin.pengembalian', compact('user','buku','pinjam'));
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+    public function exportByRole($role)
+{
+    $validRoles = ['admin', 'user', 'petugas'];
+    if (!in_array($role, $validRoles)) {
+        abort(404, 'Role tidak ditemukan');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    $data = User::where('role', $role)->get();
+    $pdf = Pdf::loadView('pdf.laporan', [
+        'users' => $data,
+        'role'  => ucfirst($role) 
+    ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+    return $pdf->download("laporan-data-{$role}.pdf");
+}
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+public function exportPeminjamanSelesai()
+{
+    $data = Peminjaman::with(['user', 'buku'])
+                ->where('status', 'dikembalikan')
+                ->get();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    $pdf = Pdf::loadView('pdf.laporan_peminjaman', [
+        'laporan' => $data,
+        'judul'   => 'Laporan Peminjaman Selesai (Dikembalikan)'
+    ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    return $pdf->download('laporan-peminjaman-selesai.pdf');
+}
 }

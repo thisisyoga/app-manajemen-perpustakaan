@@ -68,26 +68,6 @@
         </div>
     </header>
 
-
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <p class="text-sm text-gray-500">Total Users</p>
-            <h2 class="text-3xl font-bold text-purple-700 mt-2">-</h2>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <p class="text-sm text-gray-500">Total Buku</p>
-            <h2 class="text-3xl font-bold text-green-600 mt-2">-</h2>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <p class="text-sm text-gray-500">Buku Dipinjam</p>
-            <h2 class="text-3xl font-bold text-blue-600 mt-2">-</h2>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <p class="text-sm text-gray-500">gak tau di tambah apaan</p>
-            <h2 class="text-3xl font-bold text-red-500 mt-2">-</h2>
-        </div>
-    </div>
-
     <div class="bg-white rounded-lg shadow-md">
         <div class="p-4 border-b font-bold text-amber-600">Data Peminjaman Buku</div>
         <table class="w-full text-left">
@@ -122,16 +102,10 @@
                             @endif
                         </td>
                         <td class="p-4 flex gap-2">
-                            @if ($p->status == 'menunggu')
-                                <a href="{{ route('admin.peminjaman.setuju', $p->id) }}"
-                                    class="bg-green-500 text-white px-3 py-1 rounded text-xs font-bold hover:bg-green-600 transition">
-                                    Setuju
-                                </a>
-
-                                <a href="{{ route('admin.peminjaman.tolak', $p->id) }}"
-                                    onclick="return confirm('Yakin ingin menolak ini?')"
+                            @if ($p->status == 'dipinjam')
+                                <a href="{{ route('admin.peminjaman.dikembalikan', $p->id) }}"
                                     class="bg-red-500 text-white px-3 py-1 rounded text-xs font-bold hover:bg-red-600 transition">
-                                    Tolak
+                                    Pengembalian
                                 </a>
                             @else
                                 <span class="text-gray-400 text-xs italic">Sudah diproses</span>
@@ -142,4 +116,5 @@
             </tbody>
         </table>
     </div>
-@endsection
+
+    @endsection

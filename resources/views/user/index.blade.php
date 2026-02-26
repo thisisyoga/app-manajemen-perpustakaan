@@ -44,39 +44,43 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         @foreach ($buku as $b)
-                            <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full overflow-hidden">
+                            <div
+                                class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full overflow-hidden">
                                 <a href="{{ route('detail-buku', $b->id) }}" class="absolute inset-0 z-10">
-                                <div class="relative h-64 bg-black overflow-hidden">
-                                    <img src="{{ asset('storage/' . $b->cover) }}" alt="Cover Buku"
-                                        class="w-full h-full object-contain p-6 transform group-hover:scale-110 transition duration-500">
+                                    <div class="relative h-64 bg-black overflow-hidden">
+                                        <img src="{{ asset('storage/' . $b->cover) }}" alt="Cover Buku"
+                                            class="w-full h-full object-contain p-6 transform group-hover:scale-110 transition duration-500">
 
-                                    <div class="absolute top-4 left-0">
+                                        <div class="absolute top-4 left-0">
+                                            <span
+                                                class="bg-amber-600 text-white text-[10px] font-bold px-3 py-1 rounded-r-full uppercase shadow-md">
+                                                {{ $b->RelasiKategori->first()->nama_kategori ?? 'Tanpa Kategori' }}
+                                            </span>
+                                        </div>
+
+                                        <a href=""
+                                            class="absolute top-4 right-4 h-9 w-9 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition shadow-sm focus:outline-none">
+                                            <i class="fa-regular fa-bookmark text-lg"></i>
+                                        </a>
+                                    </div>
+                                    <div class="p-5 flex flex-col flex-grow">
                                         <span
-                                            class="bg-amber-600 text-white text-[10px] font-bold px-3 py-1 rounded-r-full uppercase shadow-md">{{ $b->RelasiKategori->nama_kategori ?? 'Tanpa Kategori' }}</span>
+                                            class="text-amber-700 text-[10px] font-bold tracking-widest uppercase mb-1">{{ Str::limit($b->penulis, 20, '...') }}</span>
+                                        <h3
+                                            class="text-lg font-bold text-gray-900 line-clamp-2 mb-2 group-hover:text-amber-600 transition">
+                                            {{ Str::limit($b->judul_buku, 30, '...') }}</h3>
+                                        <div class="flex items-center mb-3 text-amber-400 text-xs">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                                class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                                class="fas fa-star"></i>
+                                            <span class="text-gray-400 text-[11px] ml-2">(2.4k)</span>
+                                        </div>
+                                        <p class="text-gray-500 text-sm line-clamp-2 mb-6">
+                                            {{ Str::limit($b->deskripsi, 100, '...') }}</p>
                                     </div>
-
-                                    <a href=""
-                                        class="absolute top-4 right-4 h-9 w-9 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition shadow-sm focus:outline-none">
-                                        <i class="fa-regular fa-bookmark text-lg"></i>
-                                    </a>
-                                </div>
-                                <div class="p-5 flex flex-col flex-grow">
-                                    <span
-                                        class="text-amber-700 text-[10px] font-bold tracking-widest uppercase mb-1">{{ Str::limit($b->penulis, 20, '...') }}</span>
-                                    <h3
-                                        class="text-lg font-bold text-gray-900 line-clamp-2 mb-2 group-hover:text-amber-600 transition">
-                                        {{ Str::limit($b->judul_buku, 30, '...') }}</h3>
-                                    <div class="flex items-center mb-3 text-amber-400 text-xs">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                            class="fas fa-star"></i><i class="fas fa-star"></i>
-                                        <span class="text-gray-400 text-[11px] ml-2">(2.4k)</span>
-                                    </div>
-                                    <p class="text-gray-500 text-sm line-clamp-2 mb-6">
-                                        {{ Str::limit($b->deskripsi, 100, '...') }}</p>
-                                </div>
                                 </a>
                             </div>
-                            @endforeach
+                        @endforeach
                     </div>
 
                     <div class="text-center mt-12">
