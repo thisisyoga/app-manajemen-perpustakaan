@@ -69,7 +69,7 @@
     </header>
 
     <div class="bg-white rounded-lg shadow-md">
-        <div class="p-4 border-b font-bold text-amber-600">Data Peminjaman Buku</div>
+        <div class="p-4 border-b font-bold text-amber-600">Data Pengembalian Buku</div>
         <table class="w-full text-left">
             <thead class="bg-purple-50">
                 <tr>
@@ -99,13 +99,19 @@
                                 <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Dikembalikan</span>
                             @elseif ($p->status == 'ditolak')
                                 <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Ditolak</span>
+                            @elseif ($p->status == 'diajukan')
+                                <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">diajukan</span>
                             @endif
                         </td>
                         <td class="p-4 flex gap-2">
-                            @if ($p->status == 'dipinjam')
+                            @if ($p->status == 'diajukan')
                                 <a href="{{ route('admin.peminjaman.dikembalikan', $p->id) }}"
+                                    class="bg-green-500 text-white px-3 py-1 rounded text-xs font-bold hover:bg-green-600 transition">
+                                    Setuju
+                                </a>
+                                <a href="{{ route('admin.peminjaman.diajukan', $p->id) }}"
                                     class="bg-red-500 text-white px-3 py-1 rounded text-xs font-bold hover:bg-red-600 transition">
-                                    Pengembalian
+                                    Tolak
                                 </a>
                             @else
                                 <span class="text-gray-400 text-xs italic">Sudah diproses</span>

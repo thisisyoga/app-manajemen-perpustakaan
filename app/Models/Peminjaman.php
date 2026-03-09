@@ -15,12 +15,10 @@ class Peminjaman extends Model
         'status'
     ];
 
-    // Relasi ke User
     public function user() {
         return $this->belongsTo(User::class);
     }
 
-    // Relasi ke Buku
     public function buku() {
         return $this->belongsTo(Buku::class);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
+use App\Models\Kategori;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,10 +13,23 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $buku = Buku::with('RelasiKategori')->get();
-        return view('user.index',compact('buku'));
+        $kategori = Kategori::all();
+        $kategoriAktif = null;
+
+        $query = Buku::with('RelasiKategori');
+
+        if ($request->filled('kategori')) {
+        $kategoriAktif = Kategori::find($request->kategori);
+
+        $query->whereHas('RelasiKategori', function ($q) use ($request) {
+            $q->where('kategori_id', $request->kategori);
+        });
+        }
+
+        $buku = $query->get();
+        return view('user.index',compact('buku', 'kategori', 'kategoriAktif'));
     }
 
 
@@ -67,35 +81,57 @@ public function store(Request $request)
         return redirect()->route('MDU')->with('success', 'Berhasil mengajukan peminjaman. Silahkan cek status secara berkala.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+        public function riwayat()
     {
-        //
+        $riwayat = Peminjaman::with('buku')
+            ->where('user_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $totalBuku = $riwayat->count();
+
+        return view('user.riwayat.index', compact('riwayat', 'totalBuku'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    
+    public function kembalikan($id)
     {
-        //
+    $peminjaman = Peminjaman::findOrFail($id);
+
+    // Pastikan hanya user peminjam yang bisa melakukan ini
+    if ($peminjaman->user_id !== Auth::id()) {
+        return redirect()->back()->with('error', 'Akses ditolak.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+    // Update status
+    $peminjaman->update([
+        'status' => 'diajukan',
+        // 'tanggal_pengembalian' => now(), // Opsional jika ingin mencatat tanggal realita kembali
+    ]);
+
+    return redirect()->back()->with('success', 'Buku berhasil dikembalikan. Terima kasih!');
+}
+
+public function cetakBukti($id) {
+// Ambil data peminjaman beserta relasi user dan bukunya
+$peminjaman = Peminjaman::with(['user', 'buku'])->findOrFail($id);
+
+// Keamanan: Pastikan user hanya bisa cetak miliknya sendiri
+if ($peminjaman->user_id !== Auth::id()) {
+    abort(403, 'Akses Tidak Sah');
+}
+
+return view('user.riwayat.buktipinjam', compact('peminjaman'));
+}
+
+public function cetakBuktiKembali($id) {
+    $peminjaman = Peminjaman::with(['user', 'buku'])->findOrFail($id);
+    
+    // Keamanan: Pastikan hanya pemilik dan statusnya memang sudah kembali
+    if ($peminjaman->user_id !== Auth::id() || $peminjaman->status !== 'dikembalikan') {
+        abort(403, 'Dokumen belum tersedia.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    return view('user.riwayat.buktikembali', compact('peminjaman'));
+}
 }

@@ -39,12 +39,17 @@ class DashboardController extends Controller
         Peminjaman::where('id', $id)->update(['status' => 'dikembalikan']);
         return redirect()->back()->with('success', 'Buku berhasil dikembalikan.');
     }
+        public function diajukan($id)
+    {
+        Peminjaman::where('id', $id)->update(['status' => 'dipinjam']);
+        return redirect()->back()->with('success', 'buku dikembalika ke user.');
+    }
 
     public function pengembalian()
     {
         $user = User::all();
         $buku = Buku::all();
-        $pinjam = Peminjaman::where('status', 'dipinjam')->get();
+        $pinjam = Peminjaman::where('status', 'diajukan')->get();
         return view('admin.pengembalian', compact('user','buku','pinjam'));
     }
 

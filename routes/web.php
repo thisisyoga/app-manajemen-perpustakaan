@@ -29,6 +29,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/detail-buku/{id}', [UserController::class, 'detail'])->name('detail-buku');
         Route::get('/pinjam/create/{id}', [UserController::class, 'create'])->name('pinjam.create');
         Route::post('/pinjam-buku/store', [UserController::class, 'store'])->name('store-peminjaman');
+        Route::get('/riwayat-pinjam', [UserController::class, 'riwayat'])->name('riwayat');
+        Route::post('/riwayat/kembalikan/{id}', [UserController::class, 'kembalikan'])->name('peminjaman.kembalikan');
+        Route::get('/riwayat/cetak/{id}', [UserController::class, 'cetakBukti'])->name('cetak.bukti');
+        Route::get('/riwayat/cetak-kembali/{id}', [UserController::class, 'cetakBuktiKembali'])->name('cetak.bukti.kembali');
 });
 
 Route::middleware(['role:admin|petugas'])->group(function () {
@@ -38,6 +42,7 @@ Route::middleware(['role:admin|petugas'])->group(function () {
     Route::get('/admin/peminjaman/{id}/tolak', [DashboardController::class, 'tolak'])->name('admin.peminjaman.tolak');
     Route::get('/admin-pengembalian', [DashboardController::class, 'pengembalian'])->name('admin-pengembalian');
     Route::get('/admin/peminjaman/{id}/dikembalikan', [DashboardController::class, 'dikembalikan'])->name('admin.peminjaman.dikembalikan');
+    Route::get('/admin/peminjaman/{id}/diajukan', [DashboardController::class, 'diajukan'])->name('admin.peminjaman.diajukan');
 
 Route::middleware(['role:admin'])->group(function () {
     // Master Data Akun

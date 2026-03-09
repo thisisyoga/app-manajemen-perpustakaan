@@ -41,10 +41,10 @@
                 </div>
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-                    <div class="p-4 bg-white border border-gray-200 rounded-xl text-center shadow-sm">
+                    {{-- <div class="p-4 bg-white border border-gray-200 rounded-xl text-center shadow-sm">
                         <p class="text-[10px] text-gray-400 font-bold uppercase">Halaman</p>
                         <p class="text-lg font-bold">188</p>
-                    </div>
+                    </div> --}}
                     <div class="p-4 bg-white border border-gray-200 rounded-xl text-center shadow-sm">
                         <p class="text-[10px] text-gray-400 font-bold uppercase">Terbit</p>
                         <p class="text-lg font-bold">{{ $pinjam->tahun_terbit }}</p>
