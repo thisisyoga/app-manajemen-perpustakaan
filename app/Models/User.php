@@ -57,4 +57,9 @@ public function hasRole($roles)
     
     return $this->role === $roles;
 }
+
+    public function koleksiPribadi()
+    {
+        return $this->hasMany(KoleksiPribadi::class, 'user_id');
+    }
 }

@@ -1,32 +1,124 @@
-@extends('layouts.user')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-    <div class="w-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ asset('favicon.png') }}">
+    <title>Aksara - Perpustakaan Digital</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom Smooth Transitions */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
 
-        <section class="relative min-h-screen flex items-center overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent">
-                <img src="https://images.unsplash.com/photo-1472173148041-00294f0814a2?auto=format&fit=crop&w=1350&q=80"
-                    class="w-full h-full object-cover scale-110 animate-[wiggle_20s_ease_infinite]" alt="Background">
-                <div class="absolute inset-0 bg-black/40"></div>
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #C99B66;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        @keyframes wiggle {
+
+            0%,
+            100% {
+                transform: scale(1.1) translate(0, 0);
+            }
+
+            50% {
+                transform: scale(1.15) translate(-10px, -10px);
+            }
+        }
+
+        .animate-slow-zoom {
+            animation: wiggle 20s ease infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-beige text-DarkChocolate font-sans">
+
+    <nav class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-Caramel/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center group">
+                        <img src="{{ asset('image/logo.png') }}" alt="Aksara Logo"
+                            class="h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
+                    </a>
+                </div>
+
+                <!-- Menu -->
+                <div class="flex items-center space-x-2">
+                    <a href="#"
+                        class="nav-link text-Chocolate hover:text-MediumBrown px-4 py-2 rounded-lg transition-colors">
+                        Beranda
+                    </a>
+                    <a href="#about"
+                        class="nav-link text-Chocolate hover:text-MediumBrown px-4 py-2 rounded-lg transition-colors">
+                        Tentang
+                    </a>
+                    <a href="#keunggulan"
+                        class="nav-link text-Chocolate hover:text-MediumBrown px-4 py-2 rounded-lg transition-colors">
+                        Keunggulan
+                    </a>
+                    <a href="#koleksi"
+                        class="nav-link text-Chocolate hover:text-MediumBrown px-4 py-2 rounded-lg transition-colors">
+                        Koleksi
+                    </a>
+                </div>
+
+                <!-- Button -->
+                <div class="flex items-center">
+                    <a href="{{ route('login') }}"
+                        class="flex items-center bg-Chocolate hover:bg-MediumBrown text-beige px-6 py-2.5 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-lg active:scale-95">
+                        <i class="fas fa-sign-in-alt mr-2"></i> Login
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex flex-col">
+        <section class="relative min-h-[90vh] flex items-center overflow-hidden">
+            <div class="absolute inset-0">
+                <img src="{{ asset('image/background.jpg') }}" class="w-full h-full object-cover animate-slow-zoom"
+                    alt="Background">
+                <div class="absolute inset-0 bg-DarkChocolate/30 backdrop-blur-[2px]"></div>
             </div>
 
-            <div class="relative z-10 px-8 md:px-16 w-full">
-                <div class="max-w-2xl transition-all duration-1000">
-                    <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight mb-4">
+            <div class="relative z-10 px-8 md:px-16 w-full max-w-7xl mx-auto">
+                <div class="max-w-3xl">
+                    <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
                         Temukan Dunia di Balik <br>
-                        <span class="text-amber-500">Setiap Aksara</span>
+                        <span class="text-Caramel">Setiap Aksara</span>
                     </h1>
-                    <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-lg">
-                        Menjelajahi cakrawala tanpa batas melalui koleksi buku pilihan. Mulailah petualangan literasi Anda
-                        dari sini.
+                    <p class="text-lg md:text-xl text-beige/90 mb-10 leading-relaxed max-w-xl">
+                        Menjelajahi cakrawala tanpa batas melalui koleksi buku pilihan. Mulailah petualangan literasi
+                        Anda dengan kenyamanan teknologi modern.
                     </p>
-                    <div class="flex flex-wrap gap-4">
+                    <div class="flex flex-wrap gap-5">
                         <a href="#koleksi"
-                            class="bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 px-8 rounded-lg transition">
+                            class="bg-Caramel hover:bg-MediumBrown text-white font-bold py-4 px-10 rounded-full transition-all shadow-lg hover:-translate-y-1">
                             Jelajahi Buku
                         </a>
                         <a href="#about"
-                            class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 font-bold py-3 px-8 rounded-lg transition">
+                            class="bg-transparent border-2 border-beige text-beige hover:bg-beige hover:text-Chocolate font-bold py-4 px-10 rounded-full transition-all shadow-lg">
                             Tentang Kami
                         </a>
                     </div>
@@ -34,40 +126,38 @@
             </div>
         </section>
 
-        <section class="py-20 bg-gray-50" id="about">
-            <div class="px-8 md:px-16 container mx-auto">
-                <div class="flex flex-col md:flex-row items-center gap-12">
-                    <div class="w-full md:w-1/2">
-                        <div class="relative">
+        <section class="py-24 bg-beige" id="about">
+            <div class="px-8 md:px-16 max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center gap-16">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="relative z-10">
                             <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80"
-                                alt="Perpustakaan Aksara" class="rounded-2xl shadow-2xl">
-                            <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-amber-500/10 rounded-full -z-10"></div>
+                                alt="Perpustakaan Aksara" class="rounded-3xl shadow-2xl border-4 border-white">
                         </div>
+                        <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-Caramel/20 rounded-full blur-2xl"></div>
+                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-Chocolate/10 rounded-full blur-2xl"></div>
                     </div>
 
                     <div class="w-full md:w-1/2">
-                        <h2 class="text-amber-600 font-semibold tracking-wide uppercase mb-2">Tentang Aksara</h2>
-                        <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 leading-tight">
+                        <h2 class="text-Caramel font-bold tracking-widest uppercase mb-3">Tentang Aksara</h2>
+                        <h3 class="text-4xl font-bold text-Chocolate mb-6 leading-tight">
                             Membawa Perpustakaan Konvensional ke Era Digital
                         </h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">
-                            Aksara adalah solusi modern untuk pecinta literasi yang menghargai sensasi membaca buku fisik.
-                            Kami memahami bahwa waktu Anda berharga, itulah sebabnya kami hadir untuk menjembatani kemudahan
-                            pencarian digital dengan kenyamanan perpustakaan offline.
-                        </p>
-                        <p class="text-gray-600 mb-8 leading-relaxed">
-                            Melalui aplikasi ini, Anda dapat memantau koleksi kami secara real-time, memesan tempat baca,
-                            hingga melakukan peminjaman mandiri tanpa harus mengantre di meja petugas.
+                        <p class="text-DarkChocolate/80 mb-6 text-lg leading-relaxed">
+                            Aksara adalah solusi modern untuk pecinta literasi yang menghargai sensasi membaca buku
+                            fisik namun mendambakan kemudahan akses digital.
                         </p>
 
-                        <div class="grid grid-cols-2 gap-6 border-t border-gray-200 pt-8">
+                        <div class="grid grid-cols-2 gap-8 border-t border-Chocolate/10 pt-8">
                             <div>
-                                <span class="block text-3xl font-bold text-amber-600">1000+</span>
-                                <span class="text-sm text-gray-500 uppercase tracking-wider">Koleksi Buku</span>
+                                <span class="block text-4xl font-black text-Chocolate">1000+</span>
+                                <span class="text-sm text-MediumBrown font-bold uppercase tracking-widest">Koleksi
+                                    Buku</span>
                             </div>
                             <div>
-                                <span class="block text-3xl font-bold text-amber-600">5000+</span>
-                                <span class="text-sm text-gray-500 uppercase tracking-wider">Anggota Aktif</span>
+                                <span class="block text-4xl font-black text-Chocolate">5000+</span>
+                                <span
+                                    class="text-sm text-MediumBrown font-bold uppercase tracking-widest">Anggota</span>
                             </div>
                         </div>
                     </div>
@@ -75,200 +165,217 @@
             </div>
         </section>
 
-        <section class="py-20 bg-white" id="keunggulan">
-            <div class="px-8 md:px-16">
-                <div class="mb-12">
-                    <h2 class="text-3xl font-bold text-gray-800">Fitur Unggulan Kami</h2>
-                    <p class="text-gray-600 mt-2">Platform Aksara memiliki fitur unggulan yang membuat pengalaman membaca
-                        anda berbeda</p>
+        <section class="py-24 bg-white" id="keunggulan">
+            <div class="px-8 md:px-16 max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-Chocolate mb-4">Fitur Unggulan</h2>
+                    <div class="w-24 h-1 bg-Caramel mx-auto"></div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="p-6 bg-gray-50 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div
+                        class="p-8 bg-beige/30 rounded-3xl border border-Caramel/10 hover:border-Caramel transition-all duration-300 group">
                         <div
-                            class="w-12 h-12 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center text-xl mb-4">
+                            class="w-16 h-16 bg-Chocolate text-beige rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
                             <i class="fas fa-search"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-2">Pencarian Cerdas</h3>
-                        <p class="text-gray-600 text-sm">Cari posisi buku di rak secara akurat melalui aplikasi sebelum Anda
-                            datang ke lokasi.
-                        </p>
+                        <h3 class="text-2xl font-bold text-Chocolate mb-3">Pencarian Cerdas</h3>
+                        <p class="text-DarkChocolate/70">Temukan lokasi buku tepat di raknya melalui navigasi digital
+                            kami.</p>
                     </div>
 
-                    <div class="p-6 bg-gray-50 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                    <div
+                        class="p-8 bg-beige/30 rounded-3xl border border-Caramel/10 hover:border-Caramel transition-all duration-300 group">
                         <div
-                            class="w-12 h-12 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center text-xl mb-4">
+                            class="w-16 h-16 bg-Chocolate text-beige rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
                             <i class="fas fa-couch"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-2">Ruang Baca Nyaman</h3>
-                        <p class="text-gray-600 text-sm">Fasilitas area baca yang tenang dengan pencahayaan optimal untuk
-                            kenyamanan maksimal.
-                            fun.</p>
+                        <h3 class="text-2xl font-bold text-Chocolate mb-3">Ruang Nyaman</h3>
+                        <p class="text-DarkChocolate/70">Area baca eksklusif dengan atmosfer tenang dan pencahayaan
+                            hangat.</p>
                     </div>
 
-                    <div class="p-6 bg-gray-50 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                    <div
+                        class="p-8 bg-beige/30 rounded-3xl border border-Caramel/10 hover:border-Caramel transition-all duration-300 group">
                         <div
-                            class="w-12 h-12 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center text-xl mb-4">
+                            class="w-16 h-16 bg-Chocolate text-beige rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
                             <i class="fas fa-qrcode"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-2">Sistem Pinjam Kilat</h3>
-                        <p class="text-gray-600 text-sm">Pinjam buku tanpa antre panjang cukup dengan memindai kode buku
-                            melalui sistem kami.</p>
+                        <h3 class="text-2xl font-bold text-Chocolate mb-3">Pinjam Kilat</h3>
+                        <p class="text-DarkChocolate/70">Sistem peminjaman mandiri hanya dengan memindai kode QR buku.
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section>
-            <div class="py-20 bg-gray-50" id="koleksi">
-                <div class="container mx-auto px-6">
-                    <div class="text-center mb-16">
-                        <h2 class="text-3xl md:text-4xl font-bold mb-4">Koleksi Buku </h2>
-                        <p class="text-gray-600 max-w-2xl mx-auto">Jelajahi berbagai koleksi buku digital kami yang dapat
-                            diakses kapan saja. </p>
-                    </div>
+        <section id="koleksi" class="py-24 bg-[#FFF8F0]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-Chocolate mb-4">
+                        Koleksi Terpopuler
+                    </h2>
+                    <p class="text-MediumBrown font-medium max-w-2xl mx-auto">
+                        Temukan buku pilihan dengan tampilan yang lebih rapi, elegan, dan nyaman dijelajahi.
+                    </p>
+                </div>
 
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    @foreach ($buku as $b)
                         <div
-                            class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full overflow-hidden">
-                            <div class="relative h-64 bg-amber-50 overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=600"
-                                    alt="Filosofi Teras"
-                                    class="w-full h-full object-contain p-6 transform group-hover:scale-110 transition duration-500">
+                            class="group bg-white rounded-3xl border border-[#EADBC8] shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+                            <a href="#" class="block h-full">
 
-                                <div class="absolute top-4 left-0">
-                                    <span
-                                        class="bg-amber-600 text-white text-[10px] font-bold px-3 py-1 rounded-r-full uppercase shadow-md">Best
-                                        Seller</span>
+                                <div
+                                    class="relative h-72 bg-gradient-to-b from-[#FAF3EA] to-[#F5EBE0] flex items-center justify-center overflow-hidden">
+                                    <img src="{{ asset('storage/' . $b->cover) }}" alt="Cover Buku"
+                                        class="max-h-[85%] max-w-[80%] object-contain drop-shadow-lg transform group-hover:scale-105 transition duration-500">
+
+                                    <div class="absolute top-4 left-0">
+                                        <span
+                                            class="bg-Chocolate text-beige text-[10px] font-bold px-4 py-1.5 rounded-r-full uppercase">{{ $b->RelasiKategori->first()->nama_kategori ?? 'Tanpa Kategori' }}</span>
+                                    </div>
                                 </div>
 
-                                <a href="{{ route('login') }}"
-                                    class="absolute top-4 right-4 h-9 w-9 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition shadow-sm focus:outline-none">
-                                    <i class="fa-regular fa-bookmark text-lg"></i>
-                                </a>
+                                <div class="p-5 flex flex-col min-h-[220px]">
+                                    <p
+                                        class="text-[#B07D4F] text-[11px] font-semibold tracking-[0.18em] uppercase mb-2">
+                                        {{ Str::limit($b->penulis, 24, '...') }}
+                                    </p>
+
+                                    <h3
+                                        class="text-lg font-bold text-[#3C2A21] leading-snug line-clamp-2 mb-3 group-hover:text-[#8B5E3C] transition">
+                                        {{ Str::limit($b->judul_buku, 45, '...') }}
+                                    </h3>
+
+                                    <div class="flex items-center gap-1 mb-3 text-[#D4A373] text-xs">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="text-[#5C4033]/50 text-[11px] ml-2">(2.4k)</span>
+                                    </div>
+
+                                    <p class="text-[#5C4033]/75 text-sm leading-relaxed line-clamp-3 mb-5">
+                                        {{ Str::limit($b->deskripsi, 110, '...') }}
+                                    </p>
+                                    <div
+                                        class="mt-auto pt-4 border-t border-[#F1E4D5] flex items-center justify-between">
+                                        <span
+                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#FAF3EA] text-[#8B5E3C]">
+                                            Stok: {{ $b->stok }}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+
+            </div>
+        </section>
+
+        <section class="py-20 bg-Chocolate relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-Caramel/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-MediumBrown/20 rounded-full -ml-32 -mb-32 blur-3xl">
+            </div>
+
+            <div class="container mx-auto px-8 relative z-10">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-8 text-beige">Siap Memulai Petualangan?</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                        <div
+                            class="bg-white/10 backdrop-blur-md p-6 rounded-2xl flex items-center text-left border border-white/10">
+                            <div
+                                class="w-12 h-12 bg-Caramel rounded-full flex items-center justify-center text-white mr-4">
+                                <i class="fab fa-whatsapp"></i>
                             </div>
-                            <div class="p-5 flex flex-col flex-grow">
-                                <span class="text-amber-700 text-[10px] font-bold tracking-widest uppercase mb-1">Henry
-                                    Manampiring</span>
-                                <h3
-                                    class="text-lg font-bold text-gray-900 line-clamp-2 mb-2 group-hover:text-amber-600 transition">
-                                    Filosofi Teras</h3>
-                                <div class="flex items-center mb-3 text-amber-400 text-xs">
-                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    <span class="text-gray-400 text-[11px] ml-2">(2.4k)</span>
-                                </div>
-                                <p class="text-gray-500 text-sm line-clamp-2 mb-6">Panduan praktis filosofi Stoikisme untuk
-                                    hidup yang lebih tenang.</p>
+                            <div>
+                                <p class="text-beige/60 text-sm">WhatsApp</p>
+                                <p class="text-beige font-bold">+62 812-3456-789</p>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white/10 backdrop-blur-md p-6 rounded-2xl flex items-center text-left border border-white/10">
+                            <div
+                                class="w-12 h-12 bg-Caramel rounded-full flex items-center justify-center text-white mr-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-beige/60 text-sm">Email</p>
+                                <p class="text-beige font-bold">halo@aksara.id</p>
                             </div>
                         </div>
                     </div>
-
-                    <div class="text-center mt-12">
-                        <a href="{{ route('login') }}"
-                            class="inline-block bg-amber-500 hover:bg-amber-400 text-gray-900 font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1">
-                            Lihat Semua Koleksi
-                        </a>
-                    </div>
+                    <a href="/register"
+                        class="bg-beige text-Chocolate hover:bg-Caramel hover:text-white font-black py-5 px-12 rounded-full text-lg transition-all shadow-2xl inline-block">
+                        DAFTAR KEANGGOTAAN GRATIS
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- CTA Section -->
-        <div class="py-20 bg-amber-500" id="kontak">
-            <div class="container mx-auto px-6">
-                <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Siap Memulai Petualangan Literasi Anda?</h2>
-                    <p class="text-xl text-white mb-10">Hubungi kami untuk informasi keanggotaan, ketersediaan buku, atau
-                        reservasi ruang baca eksklusif.</p>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-                        <a href="https://wa.me/628123456789" target="_blank"
-                            class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:-translate-y-1 flex items-center">
-                            <div
-                                class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-amber-500 text-xl mr-4">
-                                <i class="fab fa-whatsapp"></i>
-                            </div>
-                            <div class="text-left">
-                                <h3 class="font-bold text-lg">WhatsApp</h3>
-                                <p class="text-gray-600">+62 812-3456-789</p>
-                            </div>
-                        </a>
-
-                        <a href="mailto:halo@aksara.id" target="_blank"
-                            class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:-translate-y-1 flex items-center">
-                            <div
-                                class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-amber-500 text-xl mr-4">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="text-left">
-                                <h3 class="font-bold text-lg">Email Kami</h3>
-                                <p class="text-gray-600">aksara@gmail.com</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="mt-12">
-                        <a href="/register"
-                            class="bg-gray-900 hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-lg transition transform hover:-translate-y-1 inline-flex items-center justify-center">
-                            <span>Daftar Keanggotaan Gratis</span>
-                            <i class="fas fa-user-plus ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer -->
-        <footer class="bg-gray-900 text-white py-12">
-            <div class="container mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-                    <div>
-                        <h3 class="text-xl font-bold mb-4 text-amber-500">Aksara.</h3>
-                        <p class="text-gray-400 mb-4">Ruang baca modern yang menjembatani ilmu pengetahuan fisik dengan
-                            kemudahan teknologi digital.</p>
+        <footer class="bg-DarkChocolate text-beige/80 py-16 border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                    <div class="col-span-1 md:col-span-1">
+                        <h3 class="text-3xl font-bold mb-6 text-white">Aksara<span class="text-Caramel">.</span></h3>
+                        <p class="leading-relaxed mb-6 text-beige/60">
+                            Membangun peradaban melalui literasi digital yang inklusif dan modern.
+                        </p>
                         <div class="flex space-x-4">
-                            <a href="#" class="text-gray-400 hover:text-amber-500 transition"><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="text-gray-400 hover:text-amber-500 transition"><i
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-Caramel hover:text-white transition"><i
                                     class="fab fa-instagram"></i></a>
-                            <a href="#" class="text-gray-400 hover:text-amber-500 transition"><i
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-Caramel hover:text-white transition"><i
                                     class="fab fa-twitter"></i></a>
                         </div>
                     </div>
 
                     <div>
-                        <h3 class="text-lg font-bold mb-4">Layanan</h3>
-                        <ul class="space-y-2 text-gray-400">
-                            <li><a href="#" class="hover:text-white transition">Peminjaman Buku</a></li>
-                            <li><a href="#" class="hover:text-white transition">Ruang Baca Private</a></li>
-                            <li><a href="#" class="hover:text-white transition">Donasi Buku</a></li>
-                            <li><a href="#" class="hover:text-white transition">Event Literasi</a></li>
+                        <h3 class="text-white font-bold mb-6 uppercase tracking-widest text-sm">Layanan</h3>
+                        <ul class="space-y-4">
+                            <li><a href="#" class="hover:text-Caramel transition">Peminjaman Buku</a></li>
+                            <li><a href="#" class="hover:text-Caramel transition">Ruang Private</a></li>
+                            <li><a href="#" class="hover:text-Caramel transition">Event Literasi</a></li>
                         </ul>
                     </div>
 
                     <div>
-                        <h3 class="text-lg font-bold mb-4">Jam Operasional</h3>
-                        <ul class="space-y-2 text-gray-400 text-sm">
-                            <li class="flex justify-between"><span>Senin - Jumat:</span> <span>08:00 - 20:00</span></li>
-                            <li class="flex justify-between"><span>Sabtu:</span> <span>09:00 - 17:00</span></li>
-                            <li class="flex justify-between text-red-400"><span>Minggu:</span> <span>Tutup</span></li>
+                        <h3 class="text-white font-bold mb-6 uppercase tracking-widest text-sm">Jam Buka</h3>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex justify-between border-b border-white/5 pb-2"><span>Sen - Jum</span>
+                                <span>08:00 - 20:00</span>
+                            </li>
+                            <li class="flex justify-between border-b border-white/5 pb-2"><span>Sabtu</span>
+                                <span>09:00 - 17:00</span>
+                            </li>
+                            <li class="flex justify-between text-Caramel"><span>Minggu</span> <span>Tutup</span></li>
                         </ul>
                     </div>
 
                     <div>
-                        <h3 class="text-lg font-bold mb-4">Lokasi Kami</h3>
-                        <p class="text-gray-400 text-sm">
+                        <h3 class="text-white font-bold mb-6 uppercase tracking-widest text-sm">Lokasi</h3>
+                        <p class="text-sm leading-relaxed text-beige/60">
                             Jl. Barokah No.06, Wanaherang,<br>
                             Kabupaten Bogor, Jawa Barat 16965
                         </p>
                     </div>
                 </div>
 
-                <div class="border-t border-gray-800 pt-8">
-                    <p class="text-gray-500 text-center">&copy; 2026 Aksara. Membangun Negeri Melalui Membaca.</p>
+                <div class="border-t border-white/5 pt-8 text-center text-sm text-beige/40">
+                    <p>&copy; 2026 Aksara. All rights reserved.</p>
                 </div>
             </div>
         </footer>
-    </div>
-@endsection
+    </main>
+
+</body>
+
+</html>

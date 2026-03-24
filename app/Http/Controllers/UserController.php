@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use App\Models\Kategori;
+use App\Models\KoleksiPribadi;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,9 @@ class UserController extends Controller
         }
 
         $buku = $query->get();
-        return view('user.index',compact('buku', 'kategori', 'kategoriAktif'));
+        
+        $koleksi = Auth::check()? Auth::user()->koleksiPribadi()->pluck('buku_id')->toArray(): [];
+        return view('user.index',compact('buku', 'kategori', 'kategoriAktif', 'koleksi'));
     }
 
 
@@ -133,5 +136,27 @@ public function cetakBuktiKembali($id) {
     }
 
     return view('user.riwayat.buktikembali', compact('peminjaman'));
+}
+
+public function koleksipribadi(Buku $buku)
+{
+    $user = Auth::user();
+
+        $koleksi = KoleksiPribadi::where('user_id', $user->id)
+            ->where('buku_id', $buku->id)
+            ->first();
+
+        if ($koleksi) {
+            $koleksi->delete();
+
+            return redirect()->back()->with('success', 'Bookmark berhasil dihapus')->withFragment('daftar-buku');;
+        }
+
+        KoleksiPribadi::create([
+            'user_id' => $user->id,
+            'buku_id' => $buku->id,
+        ]);
+
+        return redirect()->back()->with('success', 'Bookmark berhasil ditambahkan')->withFragment('daftar-buku');;
 }
 }

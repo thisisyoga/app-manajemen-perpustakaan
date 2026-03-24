@@ -2,15 +2,17 @@
 
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('dashboard');
-})->name('welcome');
+
+Route::get('/', [ProfileController::class, 'index'])->name('welcome');
+
 
 Route::get('/akses-ditolak', function () {
     return view('error.akses');
@@ -33,6 +35,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/riwayat/kembalikan/{id}', [UserController::class, 'kembalikan'])->name('peminjaman.kembalikan');
         Route::get('/riwayat/cetak/{id}', [UserController::class, 'cetakBukti'])->name('cetak.bukti');
         Route::get('/riwayat/cetak-kembali/{id}', [UserController::class, 'cetakBuktiKembali'])->name('cetak.bukti.kembali');
+
+        Route::post('/koleksi-pribadi/{buku}', [UserController::class, 'koleksipribadi'])->name('bookmark.store');
+
+        Route::post('/ulasan', [UlasanController::class, 'storeUlasan'])->name('ulasan.store');
 });
 
 Route::middleware(['role:admin|petugas'])->group(function () {

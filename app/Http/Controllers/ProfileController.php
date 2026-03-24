@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Buku;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,12 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+
+public function index(Request $request)
+    {
+        $buku = Buku::with('RelasiKategori')->get();
+        return view('dashboard', compact('buku'));
+    }
     /**
      * Display the user's profile form.
      */

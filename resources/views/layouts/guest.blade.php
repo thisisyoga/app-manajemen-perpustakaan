@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <link rel="icon" href="{{ asset('favicon.png') }}">
     <title>{{ config('app.name', 'Perpustakaan Aksara') }}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,12 +29,16 @@
         <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24 bg-white shadow-2xl z-10">
             <div class="mx-auto w-full max-w-sm lg:w-96">
                 <div class="flex items-center gap-3 mb-10 group cursor-default">
-                    <div class="bg-amber-500 p-2 rounded-xl text-white shadow-lg shadow-amber-200 group-hover:bg-amber-600 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                        </svg>
-                    </div>
-                    <span class="text-2xl font-serif font-bold text-amber-900 tracking-tight">Aksara.</span>
+                    <div class="flex items-center">
+                <a href="#" class="flex items-center group">
+                    <img 
+                        src="{{ asset('image/logo.png') }}" 
+                        alt="Aksara Logo"
+                        class="h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                    >
+                </a>
+            </div>
+                    
                 </div>
 
                 <div class="py-4">
