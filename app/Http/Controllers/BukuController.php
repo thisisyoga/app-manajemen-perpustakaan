@@ -40,7 +40,8 @@ class BukuController extends Controller
             'penerbit'     => 'required|string|max:255',
             'tahun_terbit' => 'required|digits:4|integer|min:1000|max:' . date('Y'),
             'stok'         => 'required|integer|min:0',
-            'kategori'     => 'required|exists:kategoris,id',
+            'kategori'   => 'required|array|min:1',
+            'kategori.*' => 'exists:kategoris,id',
             'deskripsi'    => 'nullable|string',
             'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ], [
@@ -56,20 +57,19 @@ class BukuController extends Controller
             'stok.required'         => 'Stok wajib diisi.',
             'stok.integer'          => 'Stok harus berupa angka.',
             'stok.min'              => 'Stok tidak boleh kurang dari 0.',
-            'kategori.required'     => 'Kategori wajib dipilih.',
-            'kategori.exists'       => 'Kategori tidak valid.',
+            'kategori.required'     => 'Pilih minimal satu kategori.',
+            'kategori.array'        => 'Format kategori tidak valid.',
+            'kategori.*.exists'     => 'Salah satu kategori tidak ditemukan.',
             'image.image'           => 'File cover harus berupa gambar.',
             'image.mimes'           => 'Format cover harus JPG, JPEG, atau PNG.',
             'image.max'             => 'Ukuran cover maksimal 2MB.',
         ]);
 
-        // Handle upload cover
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('covers', 'public');
         }
 
-        // 1. Simpan data ke tabel 'bukus'
         $buku = Buku::create([
             'judul_buku'   => $validatedData['judul_buku'],
             'isbn'         => $validatedData['isbn'],
@@ -81,8 +81,6 @@ class BukuController extends Controller
             'cover'        => $imagePath,
         ]);
 
-        // 2. Hubungkan ke tabel pivot 'kategoribuku_relasi'
-        // Menggunakan nama method relasi yang kamu buat: RelasiKategori()
         $buku->RelasiKategori()->attach($request->kategori);
 
         return redirect()->route('MDB')->with('success', 'Buku berhasil ditambahkan.');
@@ -95,12 +93,10 @@ class BukuController extends Controller
 {
     $kategori = Kategori::all();
     
-    // Ambil ID kategori yang sudah terhubung
     $selectedKategori = $buku->RelasiKategori->pluck('id')->toArray();
     
-    // Kirim variabel $buku dengan nama 'book' ke view
     return view('admin.buku.edit', [
-        'book' => $buku, // Ini yang membuat $book bisa dipakai di Blade
+        'book' => $buku, 
         'kategori' => $kategori,
         'selectedKategori' => $selectedKategori
     ]);
@@ -118,7 +114,8 @@ class BukuController extends Controller
             'penerbit'     => 'required|string|max:255',
             'tahun_terbit' => 'required|digits:4|integer|min:1000|max:' . date('Y'),
             'stok'         => 'required|integer|min:0',
-            'kategori'     => 'required|exists:kategoris,id',
+            'kategori'   => 'required|array|min:1',
+            'kategori.*' => 'exists:kategoris,id',      
             'deskripsi'    => 'nullable|string',
             'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -131,7 +128,6 @@ class BukuController extends Controller
             $buku->cover = $request->file('image')->store('covers', 'public');
         }
 
-        // Update data utama buku
         $buku->update([
             'judul_buku'   => $validatedData['judul_buku'],
             'isbn'         => $validatedData['isbn'],
@@ -153,12 +149,10 @@ class BukuController extends Controller
      */
     public function destroy(Buku $buku)
     {
-        // Hapus file gambar dari storage
         if ($buku->cover) {
             Storage::disk('public')->delete($buku->cover);
         }
 
-        // Hapus data buku (Relasi di tabel pivot akan otomatis terhapus jika pakai onDelete('cascade'))
         $buku->delete();
 
         return redirect()->route('MDB')->with('success', 'Buku berhasil dihapus.');

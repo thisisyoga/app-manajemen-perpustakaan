@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/riwayat/cetak/{id}', [UserController::class, 'cetakBukti'])->name('cetak.bukti');
         Route::get('/riwayat/cetak-kembali/{id}', [UserController::class, 'cetakBuktiKembali'])->name('cetak.bukti.kembali');
 
+        Route::get('/favorit', [UserController::class, 'favorit'])->name('favorit');
         Route::post('/koleksi-pribadi/{buku}', [UserController::class, 'koleksipribadi'])->name('bookmark.store');
 
         Route::post('/ulasan', [UlasanController::class, 'storeUlasan'])->name('ulasan.store');

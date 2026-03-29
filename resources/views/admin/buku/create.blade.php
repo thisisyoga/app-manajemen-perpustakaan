@@ -8,7 +8,8 @@
                 <nav class="flex mb-4 text-sm text-gray-500" aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-1 md:space-x-3">
                         <li class="inline-flex items-center">
-                            <a href="{{ route('admin-dashboard') }}" class="hover:text-Chocolate transition-colors">Dashboard</a>
+                            <a href="{{ route('admin-dashboard') }}"
+                                class="hover:text-Chocolate transition-colors">Dashboard</a>
                         </li>
                         <li>
                             <div class="flex items-center">
@@ -17,7 +18,8 @@
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2" d="m1 9 4-4-4-4" />
                                 </svg>
-                                <a href="{{ route('MDB') }}" class="ml-1 hover:text-Chocolate transition-colors">Data Buku</a>
+                                <a href="{{ route('MDB') }}" class="ml-1 hover:text-Chocolate transition-colors">Data
+                                    Buku</a>
                             </div>
                         </li>
                         <li aria-current="page">
@@ -172,21 +174,31 @@
                                         class="block text-xs font-bold text-DarkChocolate uppercase tracking-widest mb-2 ml-1">Kategori
                                         <span class="text-rose-500">*</span></label>
                                     <div class="relative">
-                                        <select name="kategori" id="kategori"
-                                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-Chocolate focus:ring-4 focus:ring-Chocolate/10 outline-none transition-all appearance-none cursor-pointer">
-                                            <option value="" disabled selected>Pilih Kategori</option>
-                                            @foreach ($kategori as $k)
-                                                <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
-                                            @endforeach
-                                        </select>
-                                        <div
-                                            class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M19 9l-7 7-7-7" />
-                                            </svg>
+                                        <div>
+                                            <div
+                                                class="grid grid-cols-2 md:grid-cols-3 gap-3 p-4 bg-gray-50 border border-gray-200 rounded-xl">
+                                                @foreach ($kategori as $k)
+                                                    <label class="flex items-center space-x-3 cursor-pointer group">
+                                                        <div class="relative flex items-center">
+                                                            <input type="checkbox" name="kategori[]"
+                                                                value="{{ $k->id }}"
+                                                                class="w-5 h-5 rounded border-gray-300 text-Chocolate focus:ring-Chocolate transition-all cursor-pointer"
+                                                                {{ is_array(old('kategori')) && in_array($k->id, old('kategori')) ? 'checked' : '' }}>
+                                                        </div>
+                                                        <span
+                                                            class="text-sm text-gray-600 group-hover:text-DarkChocolate transition-colors">
+                                                            {{ $k->nama_kategori }}
+                                                        </span>
+                                                    </label>
+                                                @endforeach
+                                            </div>
+
+                                            @error('kategori')
+                                                <p class="mt-1 text-xs text-rose-500 font-medium italic">* {{ $message }}
+                                                </p>
+                                            @enderror
                                         </div>
+                                        
                                     </div>
                                 </div>
 

@@ -109,6 +109,6 @@
                 <i class="fas fa-chevron-right text-xs"></i>
             </button>
         </div>
-    </div>  
+    </div>
     </div>
 @endsection

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('favicon.png') }}">
-    <title>Katalog - Aksara</title>
+    <title>Favorit - Aksara</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link
@@ -18,17 +18,24 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
         }
 
         .font-serif {
             font-family: 'Lora', serif;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(93, 58, 46, 0.05);
         }
     </style>
 </head>
 
 <body class="antialiased bg-[#FDFCFB] text-DarkChocolate">
 
-    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-Caramel/10">
+<nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-Caramel/10">
         <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
             <div class="relative flex items-center h-[88px] justify-between">
 
@@ -96,117 +103,106 @@
         </div>
     </nav>
 
-    <header class="bg-white border-b border-beige/50">
-        <div class="max-w-[1440px] mx-auto px-6 lg:px-10 py-16">
-            <h1 class="text-4xl md:text-5xl font-serif text-DarkChocolate leading-tight">
-                Katalog <span class="italic text-Chocolate">Buku</span>
+    <header class="relative overflow-hidden bg-white pt-16 pb-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
+            <span
+                class="inline-block px-4 py-1.5 bg-beige/30 text-Chocolate text-[10px] font-black uppercase tracking-[0.3em] rounded-full mb-6">Koleksi
+                Pribadi</span>
+            <h1 class="text-5xl md:text-6xl font-serif text-DarkChocolate leading-tight">
+                Daftar <span
+                    class="italic text-Chocolate ">Favorit</span>
             </h1>
-            <p class="mt-4 text-MediumBrown/70 text-lg max-w-2xl font-medium">
-                Temukan ribuan koleksi literasi digital untuk mendukung perjalanan belajar Anda di Perpustakaan Aksara.
+            <p class="mt-6 text-MediumBrown/60 text-lg max-w-2xl font-medium leading-relaxed">
+                Ruang penyimpanan khusus untuk karya-karya pilihan Anda. Akses kembali koleksi terbaik untuk menemani
+                waktu baca Anda.
             </p>
         </div>
+        <div class="absolute right-[-5%] top-[-10%] w-[40%] h-full bg-beige/5 rounded-full blur-3xl"></div>
     </header>
 
-    <main class="max-w-[1440px] mx-auto px-6 lg:px-10 py-12">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-
-            <aside class="lg:col-span-3 space-y-6">
-                <div class="bg-white rounded-3xl border border-beige/60 p-6 shadow-sm sticky top-28">
-                    <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-lg font-bold text-DarkChocolate">Kategori</h2>
-                        <i class="fas fa-sliders-h text-Caramel"></i>
-                    </div>
-
-                    <div class="relative mb-6">
-                        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-Caramel/50 text-xs"></i>
-                        <input type="text" placeholder="Cari kategori..."
-                            class="w-full h-11 bg-beige/10 rounded-xl pl-10 pr-4 text-sm outline-none border border-beige focus:border-Chocolate transition-all placeholder:text-MediumBrown/30">
-                    </div>
-
-                    <div class="space-y-1">
-                        <a href="{{ url()->current() }}"
-                            class="flex items-center justify-between px-4 py-3 rounded-xl transition-all {{ !request('kategori') ? 'bg-Chocolate text-white shadow-md font-bold' : 'text-MediumBrown/70 hover:bg-beige/30' }}">
-                            <span class="text-sm">Semua Buku</span>
-                            <i
-                                class="fas fa-chevron-right text-[10px] {{ !request('kategori') ? 'opacity-100' : 'opacity-0' }}"></i>
-                        </a>
-
-                        @foreach ($kategori as $item)
-                            <a href="{{ request()->fullUrlWithQuery(['kategori' => $item->id]) }}"
-                                class="flex items-center justify-between px-4 py-3 rounded-xl transition-all {{ request('kategori') == $item->id ? 'bg-Chocolate text-white shadow-md font-bold' : 'text-MediumBrown/70 hover:bg-beige/30 hover:text-Chocolate' }}">
-                                <span class="text-sm">{{ $item->nama_kategori }}</span>
-                                <i
-                                    class="fas fa-chevron-right text-[10px] {{ request('kategori') == $item->id ? 'opacity-100' : 'opacity-0' }}"></i>
-                            </a>
-                        @endforeach
-                    </div>
+    <main class="max-w-7xl mx-auto px-6 lg:px-10 py-12">
+        @if ($buku->isEmpty())
+            <div class="py-20 text-center">
+                <div class="h-24 w-24 bg-beige/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="far fa-bookmark text-3xl text-MediumBrown/30"></i>
                 </div>
-            </aside>
+                <h3 class="text-xl font-serif font-bold text-DarkChocolate">Belum ada favorit</h3>
+                <p class="text-sm text-gray-400 mt-2">Mulai jelajahi katalog dan simpan buku yang Anda sukai.</p>
+                <a href="{{ route('MDU') }}"
+                    class="inline-block mt-8 px-8 py-3 bg-Chocolate text-white text-[11px] font-black uppercase tracking-widest rounded-xl hover:bg-DarkChocolate transition-all">Lihat
+                    Katalog</a>
+            </div>
+        @else
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                @foreach ($buku as $b)
+                    <div
+                        class="group bg-white rounded-[32px] border border-beige/50 p-4 shadow-sm hover:shadow-2xl hover:shadow-Chocolate/5 hover:-translate-y-2 transition-all duration-500 relative">
 
-            <div class="lg:col-span-9">
-                <div class="bg-white rounded-3xl border border-beige/60 p-4 shadow-sm mb-10">
-                    <div class="flex flex-col md:flex-row gap-3">
-                        <div class="relative flex-grow">
-                            <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-Caramel text-lg"></i>
-                            <input type="text" placeholder="Judul buku, penulis, atau ISBN..."
-                                class="w-full h-14 bg-beige/10 rounded-2xl pl-14 pr-5 text-sm outline-none border border-transparent focus:border-Chocolate focus:bg-white transition-all">
-                        </div>
-                        <button
-                            class="md:w-32 h-14 bg-DarkChocolate hover:bg-Chocolate text-white rounded-2xl font-bold transition-all shadow-lg shadow-DarkChocolate/10">
-                            Cari
-                        </button>
-                    </div>
-                </div>
+                        <a href="{{ route('detail-buku', $b->id) }}">
 
-                <div class="flex items-center justify-between mb-8">
-                    @php $namaKategoriAktif = $kategori->firstWhere('id', request('kategori'))->nama_kategori ?? 'Semua Koleksi'; @endphp
-                    <div class="space-y-1">
-                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-Chocolate">Menampilkan</p>
-                        <h3 class="text-xl font-bold text-DarkChocolate">{{ $namaKategoriAktif }}</h3>
-                    </div>
-                    <div class="px-4 py-2 bg-white border border-beige rounded-full shadow-sm">
-                        <span class="text-xs font-bold text-MediumBrown/60">{{ count($buku) }} Buku</span>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
-                    @foreach ($buku as $b)
-                        <div
-                            class="group bg-white rounded-[32px] border border-beige/50 p-4 shadow-sm hover:shadow-2xl hover:shadow-Chocolate/5 hover:-translate-y-2 transition-all duration-500 relative">
-                            <a href="{{ route('detail-buku', $b->id) }}">
                             <div class="relative h-[280px] rounded-[24px] bg-beige/20 overflow-hidden mb-6">
+
                                 <img src="{{ asset('storage/' . $b->cover) }}" alt="Cover"
-                                    class="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700" onerror="this.src='https://placehold.co/400x600/5D3A2E/FFF?text=No+Cover'"> 
+                                    class="w-full h-full object-contain p-6 transform group-hover:scale-110 transition-transform duration-700">
+
+
 
                                 <div class="absolute top-4 left-4">
+
                                     <span
-                                        class="bg-white text-Chocolate text-[10px] font-bold px-4 py-1.5 rounded-r-full uppercase">
+                                        class="bg-white/90 backdrop-blur-sm text-Chocolate text-[9px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest shadow-sm border border-Caramel/10">
+
                                         {{ $b->RelasiKategori->first()->nama_kategori ?? 'Umum' }}
+
                                     </span>
+
                                 </div>
 
-                                @php $isBookmarked = in_array($b->id, $koleksi); @endphp
-                                <form action="{{ route('bookmark.store', $b->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit"
-                                        class="absolute top-4 right-4 h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 {{ $isBookmarked ? 'text-Chocolate' : 'text-Caramel/30 hover:text-Chocolate' }}">
-                                        <i class="{{ $isBookmarked ? 'fa-solid' : 'fa-regular' }} fa-bookmark"></i>
-                                    </button>
-                                </form>
                             </div>
 
+
+
+                            @php $isBookmarked = in_array($b->id, $koleksi); @endphp
+
+                            <form action="{{ route('bookmark.store', $b->id) }}" method="POST">
+
+                                @csrf
+
+                                <button type="submit"
+                                    class="absolute top-4 right-4 h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 {{ $isBookmarked ? 'text-Chocolate' : 'text-Caramel/30 hover:text-Chocolate' }}">
+
+                                    <i class="{{ $isBookmarked ? 'fa-solid' : 'fa-regular' }} fa-bookmark"></i>
+
+                                </button>
+
+                            </form>
+
+
+
                             <div class="px-2 pb-2">
+
                                 <p class="text-[10px] font-black uppercase tracking-widest text-Chocolate mb-2">
+
                                     {{ $b->penulis }}</p>
+
                                 <a href="{{ route('detail-buku', $b->id) }}">
+
                                     <h4
                                         class="text-lg font-serif font-bold text-DarkChocolate line-clamp-1 group-hover:text-Chocolate transition-colors mb-2">
+
                                         {{ $b->judul_buku }}
+
                                     </h4>
+
                                 </a>
+
                                 <p class="text-xs text-MediumBrown/60 line-clamp-2 leading-relaxed mb-4 min-h-[32px]">
+
                                     {{ $b->deskripsi }}
+
                                 </p>
+
+
 
                                 <div class="flex items-center justify-between pt-4 border-t border-beige/50">
                                     <div class="flex items-center gap-1.5">
@@ -214,21 +210,21 @@
                                         <span class="text-[11px] font-bold text-MediumBrown/80">Stok: {{ $b->stok }}</span>
                                     </div>
                                 </div>
+
                             </div>
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
+
+                        </a>
+
+                    </div>
+                @endforeach
             </div>
-        </div>
+        @endif
     </main>
 
-    <footer class="mt-20 py-10 border-t border-beige/50 text-center">
-        <p class="text-xs font-bold text-MediumBrown/40 uppercase tracking-[0.3em]">
-            &copy; 2026 Aksara Digital Library - Tefa RPL
-        </p>
+    <footer class="mt-20 py-10 border-t border-beige/30 text-center">
+        <p class="text-[10px] font-bold text-MediumBrown/30 uppercase tracking-[0.5em]">© 2026 Perpustakaan Aksara —
+            Literasi Tanpa Batas</p>
     </footer>
-
 </body>
 
 </html>

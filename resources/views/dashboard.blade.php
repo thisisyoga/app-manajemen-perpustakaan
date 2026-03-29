@@ -202,8 +202,8 @@
                         <div class="group bg-white rounded-3xl border border-Caramel/20 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
                             <a href="#" class="block h-full">
                                 <div class="relative h-72 bg-gradient-to-b from-beige/50 to-beige flex items-center justify-center overflow-hidden">
-                                    <img src="{{ asset('storage/' . $b->cover) }}" alt="Cover Buku"
-                                        class="max-h-[85%] max-w-[80%] object-contain drop-shadow-lg transform group-hover:scale-105 transition duration-500">
+                                    <img src="{{ asset('storage/' . $b->cover) }}" alt="Cover Buku" onerror="this.src='https://placehold.co/400x600/5D3A2E/FFF?text=No+Cover'"
+                                        class="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700">
                                     <div class="absolute top-4 left-0">
                                         <span class="bg-Chocolate text-beige text-[10px] font-bold px-4 py-1.5 rounded-r-full uppercase">
                                             {{ $b->RelasiKategori->first()->nama_kategori ?? 'Tanpa Kategori' }}
@@ -225,10 +225,11 @@
                                     <p class="text-DarkChocolate/75 text-sm leading-relaxed line-clamp-3 mb-5">
                                         {{ Str::limit($b->deskripsi, 110, '...') }}
                                     </p>
-                                    <div class="mt-auto pt-4 border-t border-beige flex items-center justify-between">
-                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-beige text-MediumBrown">
-                                            Stok: {{ $b->stok }}
-                                        </span>
+                                    
+                                         <div class="flex items-center gap-1.5">
+                                        <i class="fas fa-layer-group @if ($b->stok != 0) text-green-600 @else text-red-600 @endif text-[10px]"></i>
+                                        <span class="text-[11px] font-bold text-MediumBrown/80">Stok: {{ $b->stok }}</span>
+
                                     </div>
                                 </div>
                             </a>

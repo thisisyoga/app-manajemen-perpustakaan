@@ -2,8 +2,9 @@
     <div class="h-full flex flex-col">
         <div class="h-[88px] flex items-center px-8 border-b border-beige/30">
             <div class="flex items-center gap-3">
-                <div class="bg-Chocolate p-1.5 rounded-lg shadow-sm">
-                    <i class="fas fa-book-open text-white text-xs"></i>
+                <div class="">
+                    <img src="{{ asset('image/logo.png') }}" alt="Aksara Logo"
+                            class="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
                 </div>
                 <span class="text-xl font-serif font-bold text-DarkChocolate">
                     {{ Auth::user()->role == 'admin' ? 'Admin' : 'Petugas' }}<span class="text-Chocolate">.</span>
@@ -88,7 +89,7 @@
             </nav>
         </div>
 
-        <div class="p-4 border-t border-beige/30">
+        {{-- <div class="p-4 border-t border-beige/30">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button class="flex items-center w-full px-4 py-3 text-sm font-bold text-red-500 hover:bg-red-50 rounded-xl transition-colors">
@@ -96,7 +97,7 @@
                     Keluar
                 </button>
             </form>
-        </div>
+        </div> --}}
     </div>
 </aside>
 

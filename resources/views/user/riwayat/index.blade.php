@@ -20,10 +20,10 @@
 
 <body class="bg-[#FDFCFB] min-h-screen text-DarkChocolate">
 
-      <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-Caramel/10">
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-Caramel/10">
         <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
             <div class="relative flex items-center h-[88px] justify-between">
-                
+
                 <div class="flex items-center">
                     <a href="/" class="flex items-center group">
                         <img src="{{ asset('image/logo.png') }}" alt="Aksara Logo"
@@ -42,7 +42,14 @@
                     <a href="{{ route('riwayat') }}"
                         class="relative py-1 text-sm font-bold uppercase tracking-widest {{ request()->routeIs('riwayat') ? 'text-Chocolate' : 'text-MediumBrown/60 hover:text-Chocolate' }} transition-colors">
                         <i class="fas fa-history"></i> Riwayat
-                        @if (request()->routeIs('riwayat'))
+                        @if (request()->routeIs('riwayat') )
+                            <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-Chocolate rounded-full"></span>
+                        @endif
+                    </a>
+                    <a href="{{ route('favorit') }}"
+                        class="relative py-1 text-sm font-bold uppercase tracking-widest {{ request()->routeIs('favorit') ? 'text-Chocolate' : 'text-MediumBrown/60 hover:text-Chocolate' }} transition-colors">
+                        <i class="fas fa-bookmark"></i> Favorit
+                        @if (request()->routeIs('favorit') )
                             <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-Chocolate rounded-full"></span>
                         @endif
                     </a>
@@ -50,21 +57,27 @@
 
                 <div class="flex items-center gap-4">
                     <div class="relative group hidden md:block">
-                        <button type="button" class="flex items-center gap-3 pl-3 pr-1 py-1 rounded-full border border-Caramel/10 hover:bg-beige/20 transition-all">
+                        <button type="button"
+                            class="flex items-center gap-3 pl-3 pr-1 py-1 rounded-full border border-Caramel/10 hover:bg-beige/20 transition-all">
                             <div class="text-right hidden lg:block">
-                                <p class="text-[11px] font-bold text-DarkChocolate leading-none">{{ Auth::user()->name }}</p>
-                                <p class="text-[9px] text-Chocolate uppercase tracking-tighter font-black mt-1">Member</p>
+                                <p class="text-[11px] font-bold text-DarkChocolate leading-none">
+                                    {{ Auth::user()->name }}</p>
+                                <p class="text-[9px] text-Chocolate uppercase tracking-tighter font-black mt-1">Member
+                                </p>
                             </div>
-                            <div class="h-9 w-9 rounded-full overflow-hidden border-2 border-white shadow-sm ring-1 ring-Caramel/20">
+                            <div
+                                class="h-9 w-9 rounded-full overflow-hidden border-2 border-white shadow-sm ring-1 ring-Caramel/20">
                                 <img src="{{ Auth::user()->profile_photo_url ?? 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=5D3A2E&color=fff' }}"
                                     alt="User" class="h-full w-full object-cover">
                             </div>
                         </button>
 
-                        <div class="absolute right-0 mt-3 w-52 bg-white rounded-2xl shadow-xl border border-beige/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 z-[60]">
+                        <div
+                            class="absolute right-0 mt-3 w-52 bg-white rounded-2xl shadow-xl border border-beige/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 z-[60]">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="w-full text-left flex items-center px-5 py-3 text-sm text-red-500 hover:bg-red-50 font-bold transition-colors">
+                                <button type="submit"
+                                    class="w-full text-left flex items-center px-5 py-3 text-sm text-red-500 hover:bg-red-50 font-bold transition-colors">
                                     <i class="fas fa-power-off mr-3 text-xs"></i> Keluar Akun
                                 </button>
                             </form>

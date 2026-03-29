@@ -51,7 +51,14 @@
                     <a href="{{ route('riwayat') }}"
                         class="relative py-1 text-sm font-bold uppercase tracking-widest {{ request()->routeIs('riwayat') ? 'text-Chocolate' : 'text-MediumBrown/60 hover:text-Chocolate' }} transition-colors">
                         <i class="fas fa-history"></i> Riwayat
-                        @if (request()->routeIs('riwayat'))
+                        @if (request()->routeIs('riwayat') )
+                            <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-Chocolate rounded-full"></span>
+                        @endif
+                    </a>
+                    <a href="{{ route('favorit') }}"
+                        class="relative py-1 text-sm font-bold uppercase tracking-widest {{ request()->routeIs('favorit') ? 'text-Chocolate' : 'text-MediumBrown/60 hover:text-Chocolate' }} transition-colors">
+                        <i class="fas fa-bookmark"></i> Favorit
+                        @if (request()->routeIs('favorit') )
                             <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-Chocolate rounded-full"></span>
                         @endif
                     </a>

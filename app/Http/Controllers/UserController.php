@@ -41,7 +41,7 @@ public function detail(string $id)
     $kategori = Kategori::all();
     $kategoriAktif = null;
     $pinjam = Buku::with('RelasiKategori')->findOrFail($id);
-     $koleksi = Auth::check()? Auth::user()->koleksiPribadi()->pluck('buku_id')->toArray(): [];
+    $koleksi = Auth::check()? Auth::user()->koleksiPribadi()->pluck('buku_id')->toArray(): [];
     return view('user.pinjam.detail', compact('pinjam', 'kategori', 'kategoriAktif', 'koleksi'));
 }
 
@@ -139,6 +139,17 @@ public function cetakBuktiKembali($id) {
     }
 
     return view('user.riwayat.buktikembali', compact('peminjaman'));
+}
+
+public function favorit()
+{
+    $kategori = Kategori::all();
+    $kategoriAktif = null;
+    $user = Auth::user();
+    $koleksi = $user->koleksiPribadi()->with('buku')->get();
+    $buku = Buku::whereIn('id', $koleksi->pluck('buku_id'))->get();
+    $koleksi = Auth::check()? Auth::user()->koleksiPribadi()->pluck('buku_id')->toArray(): [];
+    return view('user.favorit.index', compact('koleksi','buku', 'kategori', 'kategoriAktif', 'koleksi'));
 }
 
 public function koleksipribadi(Buku $buku)
