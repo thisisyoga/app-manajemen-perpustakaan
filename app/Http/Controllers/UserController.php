@@ -38,8 +38,11 @@ class UserController extends Controller
 
 public function detail(string $id)
 {
+    $kategori = Kategori::all();
+    $kategoriAktif = null;
     $pinjam = Buku::with('RelasiKategori')->findOrFail($id);
-    return view('user.pinjam.detail', compact('pinjam'));
+     $koleksi = Auth::check()? Auth::user()->koleksiPribadi()->pluck('buku_id')->toArray(): [];
+    return view('user.pinjam.detail', compact('pinjam', 'kategori', 'kategoriAktif', 'koleksi'));
 }
 
         /**

@@ -4,77 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ asset('favicon.png') }}">
     <title>Riwayat Peminjaman - Aksara</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600,700,800&family=lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-serif { font-family: 'Lora', serif; }
+    </style>
 </head>
 
-<body class="bg-beige min-h-screen font-sans">
+<body class="bg-[#FDFCFB] min-h-screen text-DarkChocolate">
 
-    <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-Caramel/20">
-        <div class="max-w-[1440px] mx-auto px-6 lg:px-8">
-            <div class="relative flex items-center h-[88px]">
-                <div class="flex items-center shrink-0">
-                    <a href="{{ route('MDU') }}" class="flex items-center group">
-                        <div
-                            class="bg-Chocolate group-hover:bg-DarkChocolate p-2.5 rounded-xl transition-colors duration-300">
-                            <i class="fas fa-book-open text-white text-xl"></i>
-                        </div>
-                        <span
-                            class="ml-3 text-[28px] font-extrabold text-Chocolate group-hover:text-DarkChocolate transition-colors duration-300 leading-none">
-                            Aksara.
-                        </span>
+      <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-Caramel/10">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+            <div class="relative flex items-center h-[88px] justify-between">
+                
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center group">
+                        <img src="{{ asset('image/logo.png') }}" alt="Aksara Logo"
+                            class="h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
                     </a>
                 </div>
 
-                <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-14">
+                <div class="hidden md:flex items-center gap-10">
                     <a href="{{ route('MDU') }}"
-                        class="text-MediumBrown hover:text-Chocolate text-[18px] font-medium transition-colors">
-                        <i class="fas fa-book mr-2"></i> Koleksi Buku
+                        class="relative py-1 text-sm font-bold uppercase tracking-widest {{ request()->routeIs('MDU') ? 'text-Chocolate' : 'text-MediumBrown/60 hover:text-Chocolate' }} transition-colors">
+                        <i class="fas fa-book "></i> Katalog
+                        @if (request()->routeIs('MDU'))
+                            <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-Chocolate rounded-full"></span>
+                        @endif
                     </a>
                     <a href="{{ route('riwayat') }}"
-                        class="text-Chocolate hover:text-DarkChocolate text-[18px] font-medium transition-colors border-b-2 border-Chocolate pb-1">
-                        <i class="fas fa-history mr-2"></i> Riwayat
+                        class="relative py-1 text-sm font-bold uppercase tracking-widest {{ request()->routeIs('riwayat') ? 'text-Chocolate' : 'text-MediumBrown/60 hover:text-Chocolate' }} transition-colors">
+                        <i class="fas fa-history"></i> Riwayat
+                        @if (request()->routeIs('riwayat'))
+                            <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-Chocolate rounded-full"></span>
+                        @endif
                     </a>
                 </div>
 
-                <div class="ml-auto flex items-center gap-4">
+                <div class="flex items-center gap-4">
                     <div class="relative group hidden md:block">
-                        <button type="button"
-                            class="flex items-center gap-3 p-1 rounded-full hover:bg-beige/50 transition-all duration-200 focus:outline-none">
-                            <div class="relative">
-                                <div class="h-9 w-9 rounded-full overflow-hidden border-2 border-Caramel shadow-sm">
-                                    <img src="{{ Auth::user()->profile_photo_url ?? 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) }}"
-                                        alt="User" class="h-full w-full object-cover">
-                                </div>
-                                <span
-                                    class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-green-500 border-2 border-white"></span>
+                        <button type="button" class="flex items-center gap-3 pl-3 pr-1 py-1 rounded-full border border-Caramel/10 hover:bg-beige/20 transition-all">
+                            <div class="text-right hidden lg:block">
+                                <p class="text-[11px] font-bold text-DarkChocolate leading-none">{{ Auth::user()->name }}</p>
+                                <p class="text-[9px] text-Chocolate uppercase tracking-tighter font-black mt-1">Member</p>
                             </div>
-
-                            <div class="hidden lg:flex flex-col items-start leading-tight">
-                                <span
-                                    class="text-sm font-bold text-DarkChocolate group-hover:text-Chocolate transition-colors">
-                                    {{ Auth::user()->name }}
-                                </span>
-                                <span class="text-[10px] text-MediumBrown uppercase tracking-wider font-semibold">
-                                    {{ Auth::user()->role == 'user' ? 'Member' : 'Admin' }}
-                                </span>
+                            <div class="h-9 w-9 rounded-full overflow-hidden border-2 border-white shadow-sm ring-1 ring-Caramel/20">
+                                <img src="{{ Auth::user()->profile_photo_url ?? 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=5D3A2E&color=fff' }}"
+                                    alt="User" class="h-full w-full object-cover">
                             </div>
-                            <i
-                                class="fas fa-chevron-down text-xs text-Caramel hidden lg:inline transition-transform duration-300 group-hover:rotate-180"></i>
                         </button>
 
-                        <div
-                            class="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-beige py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-[60]">
-                            <div class="px-4 py-3 border-b border-beige mb-1">
-                                <p class="text-xs text-MediumBrown font-bold uppercase tracking-widest mb-1">Akun Saya</p>
-                                <p class="text-sm font-medium text-DarkChocolate truncate">{{ Auth::user()->email }}</p>
-                            </div>
+                        <div class="absolute right-0 mt-3 w-52 bg-white rounded-2xl shadow-xl border border-beige/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 z-[60]">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit"
-                                    class="w-full text-left flex items-center px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors">
-                                    <i class="fas fa-sign-out-alt mr-3 w-5"></i> Keluar
+                                <button type="submit" class="w-full text-left flex items-center px-5 py-3 text-sm text-red-500 hover:bg-red-50 font-bold transition-colors">
+                                    <i class="fas fa-power-off mr-3 text-xs"></i> Keluar Akun
                                 </button>
                             </form>
                         </div>
@@ -84,196 +75,194 @@
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-6 py-10">
-        <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div class="text-center md:text-left">
-                <h2 class="text-3xl font-extrabold text-Chocolate italic">Riwayat Peminjaman</h2>
-                <p class="text-MediumBrown mt-1 text-lg">Kelola dan pantau aktivitas literasi Anda.</p>
+    <main class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div class="text-left">
+                <p class="text-[10px] font-black uppercase tracking-[0.3em] text-Chocolate mb-2">Aktivitas Peminjaman</p>
+                <h1 class="text-4xl md:text-5xl font-serif text-DarkChocolate leading-tight">
+                    Riwayat <span class="italic text-Chocolate">Peminjaman</span>
+                </h1>
             </div>
-            <div class="flex justify-center">
-                <span
-                    class="bg-white text-Chocolate px-4 py-2 rounded-lg text-sm font-bold border border-Caramel shadow-sm">
-                    Total: {{ $totalBuku }} Buku
-                </span>
+            <div class="bg-white border border-beige rounded-2xl px-6 py-4 shadow-sm flex items-center gap-4">
+                <div class="h-10 w-10 bg-beige/30 rounded-full flex items-center justify-center text-Chocolate">
+                    <i class="fas fa-archive text-sm"></i>
+                </div>
+                <div>
+                    <p class="text-[10px] font-bold text-MediumBrown/50 uppercase tracking-wider leading-none">Total Buku</p>
+                    <p class="text-xl font-black text-DarkChocolate leading-tight">{{ $totalBuku }}</p>
+                </div>
             </div>
         </div>
 
-        <div
-            class="bg-gradient-to-r from-Chocolate to-MediumBrown rounded-2xl p-4 mb-8 shadow-lg shadow-Chocolate/20 flex items-center justify-center gap-3">
-            <i class="fas fa-list-ul text-white"></i>
-            <h2 class="text-white font-bold text-lg tracking-wide uppercase">Daftar Aktivitas Terbaru</h2>
+        <div class="bg-DarkChocolate rounded-[24px] p-6 mb-10 shadow-xl shadow-DarkChocolate/10 flex items-center justify-between overflow-hidden relative group">
+            <div class="relative z-10 flex items-center gap-4">
+                <div class="h-12 w-12 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-md">
+                    <i class="fas fa-stream text-white text-lg"></i>
+                </div>
+                <div>
+                    <h2 class="text-white font-bold text-lg leading-tight uppercase tracking-wide">Daftar Riwayat Peminjaman</h2>
+                    <p class="text-white/50 text-xs">Aktivitas peminjaman dan pengembalian Anda.</p>
+                </div>
+            </div>
+            <i class="fas fa-book-reader absolute -right-4 -bottom-4 text-8xl text-white/5 transform -rotate-12 transition-transform group-hover:rotate-0"></i>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             @forelse ($riwayat as $item)
-                <div
-                    class="bg-white rounded-2xl shadow-sm border border-Caramel/20 overflow-hidden hover:shadow-md transition-all group">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            @php
-                                $statusClasses = [
-                                    'menunggu' => 'bg-beige text-MediumBrown border border-Caramel/30',
-                                    'dipinjam' => 'bg-Chocolate text-white',
-                                    'dikembalikan' => 'bg-green-100 text-green-700',
-                                    'ditolak' => 'bg-red-100 text-red-700',
-                                    'diajukan' => 'bg-red-100 text-red-700',
-                                ];
-                                $statusIcons = [
-                                    'menunggu' => 'fa-clock',
-                                    'dipinjam' => 'fa-book-reader',
-                                    'dikembalikan' => 'fa-check-circle',
-                                    'ditolak' => 'fa-times-circle',
-                                    'diajukan' => 'fa-paper-plane',
-                                ];
-                            @endphp
-                            <span
-                                class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold {{ $statusClasses[$item->status] }}">
-                                <i class="fas {{ $statusIcons[$item->status] }} mr-1.5"></i>
-                                {{ strtoupper($item->status) }}
-                            </span>
-                            <span class="text-xs font-semibold text-MediumBrown bg-beige/30 px-3 py-1.5 rounded-lg border border-beige">
-                                <i class="far fa-calendar-alt mr-2 text-Caramel"></i>
-                                {{ \Carbon\Carbon::parse($item->tanggal_peminjaman)->format('d M Y') }}
-                            </span>
-                        </div>
+                <div class="bg-white rounded-[32px] border border-beige/60 p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 group relative overflow-hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        @php
+                            $statusConfig = [
+                                'menunggu' => ['class' => 'bg-amber-50 text-amber-600 border-amber-100', 'icon' => 'fa-clock'],
+                                'dipinjam' => ['class' => 'bg-Chocolate text-white border-transparent shadow-md shadow-Chocolate/20', 'icon' => 'fa-book-reader'],
+                                'dikembalikan' => ['class' => 'bg-emerald-50 text-emerald-600 border-emerald-100', 'icon' => 'fa-check-circle'],
+                                'ditolak' => ['class' => 'bg-rose-50 text-rose-600 border-rose-100', 'icon' => 'fa-times-circle'],
+                                'diajukan' => ['class' => 'bg-blue-50 text-blue-600 border-blue-100', 'icon' => 'fa-paper-plane'],
+                            ];
+                            $config = $statusConfig[$item->status] ?? ['class' => 'bg-gray-50 text-gray-500 border-gray-100', 'icon' => 'fa-info-circle'];
+                        @endphp
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border {{ $config['class'] }}">
+                            <i class="fas {{ $config['icon'] }} mr-2"></i>
+                            {{ $item->status }}
+                        </span>
+                        <span class="text-[11px] font-bold text-MediumBrown/40 flex items-center">
+                            <i class="far fa-calendar-alt mr-2"></i>
+                            {{ \Carbon\Carbon::parse($item->tanggal_peminjaman)->format('d M Y') }}
+                        </span>
+                    </div>
 
-                        <div class="flex gap-4">
-                            <div
-                                class="w-16 h-20 bg-beige rounded-lg flex-shrink-0 flex items-center justify-center overflow-hidden">
-                                @if ($item->buku->cover)
-                                    <img src="{{ asset('storage/' . $item->buku->cover) }}"
-                                        class="w-full h-full object-cover">
-                                @else
-                                    <i class="fas fa-book text-Caramel text-2xl"></i>
-                                @endif
-                            </div>
-                            <div>
-                                <h3
-                                    class="font-bold text-DarkChocolate text-lg group-hover:text-Chocolate transition-colors leading-snug">
-                                    {{ $item->buku->judul_buku }}
-                                </h3>
-                                <p class="text-MediumBrown text-sm mt-1 uppercase tracking-tighter">ID:
-                                    TRX-{{ $item->id }}{{ $item->buku_id }}</p>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 pt-5 border-t border-beige">
-                            <div class="grid grid-cols-2 gap-3 mb-3">
-                                @if ($item->status == 'dipinjam')
-                                    <form action="{{ route('peminjaman.kembalikan', ['id' => $item->id]) }}"
-                                        method="POST" class="w-full">
-                                        @csrf
-                                        <button type="submit"
-                                            onclick="return confirm('Apakah Anda yakin ingin mengajukan pengembalian buku ini?')"
-                                            class="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-sm shadow-red-100">
-                                            <i class="fas fa-undo"></i> AJUKAN KEMBALI
-                                        </button>
-                                    </form>
-                                @elseif($item->status == 'dikembalikan')
-                                    <a href="{{ route('cetak.bukti.kembali', $item->id) }}"
-                                        class="bg-beige hover:bg-Caramel/20 text-Chocolate px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 border border-Caramel/30">
-                                        <i class="fas fa-file-download text-MediumBrown"></i> BUKTI KEMBALI
-                                    </a>
-                                @else
-                                    <button disabled
-                                        class="bg-white text-gray-300 px-4 py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-not-allowed border border-beige">
-                                        <i class="fas fa-lock"></i> BUKTI KEMBALI
-                                    </button>
-                                @endif
-
-                                 <button disabled
-                                        class="bg-white text-gray-300 px-4 py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-not-allowed border border-beige">
-                                        <i class="fas fa-lock"></i> BUKTI Pinjam
-                                    </button>
-
-                                {{-- <a href="{{ route('cetak.bukti', $item->id) }}" 
-                                    class="bg-Caramel hover:bg-MediumBrown text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-sm shadow-Caramel/20">
-                                    <i class="fas fa-file-invoice"></i> BUKTI PINJAM
-                                </a> --}}
-                            </div>
-
-                            @if ($item->status == 'dikembalikan')
-                                <button onclick="openModal('{{ $item->buku->id }}', '{{ $item->buku->judul_buku }}')"
-                                    class="w-full border-2 border-Chocolate text-Chocolate hover:bg-Chocolate hover:text-white px-4 py-2.5 rounded-xl text-sm font-black transition-all duration-300 flex items-center justify-center gap-2 group/btn">
-                                    <i class="fas fa-star text-Caramel group-hover/btn:text-white"></i>
-                                    BERIKAN ULASAN BUKU
-                                </button>
+                    <div class="flex gap-6 items-start">
+                        <div class="w-24 h-32 bg-beige/20 rounded-2xl overflow-hidden border border-beige/50 flex-shrink-0 shadow-inner group-hover:scale-105 transition-transform duration-500">
+                            @if ($item->buku->cover)
+                                <img src="{{ asset('storage/' . $item->buku->cover) }}" class="w-full h-full object-cover">
                             @else
-                                <div
-                                    class="mt-3 py-2.5 text-center bg-beige/20 rounded-xl border border-dashed border-Caramel/40">
-                                    <p class="text-[10px] font-bold text-MediumBrown uppercase tracking-widest italic">
-                                        {{ $item->status == 'menunggu' ? 'Menunggu verifikasi admin' : 'Ulasan tersedia setelah buku kembali' }}
-                                    </p>
+                                <div class="w-full h-full flex items-center justify-center bg-beige/30">
+                                    <i class="fas fa-book text-Caramel text-3xl"></i>
                                 </div>
                             @endif
                         </div>
+                        <div class="flex-1">
+                            <h3 class="font-serif font-bold text-xl text-DarkChocolate group-hover:text-Chocolate transition-colors leading-tight mb-2">
+                                {{ $item->buku->judul_buku }}
+                            </h3>
+                            <p class="text-[10px] font-bold text-MediumBrown/50 uppercase tracking-[0.2em] mb-4">Transaction ID: <span class="text-DarkChocolate/70">TRX-{{ $item->id }}{{ $item->buku_id }}</span></p>
+                            
+                            <div class="py-2 px-3 bg-beige/10 rounded-xl border border-dashed border-beige text-[10px] font-bold text-MediumBrown/60 uppercase tracking-tighter italic">
+                                {{ $item->status == 'menunggu' ? 'Menunggu verifikasi admin' : ($item->status == 'dipinjam' ? 'Buku ini sedang anda pinjam' : 'Buku ini sudah dikembalikan') }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex flex-col gap-3">
+                        <div class="grid grid-cols-2 gap-3">
+                            @if($item->status == 'menunggu')
+                            <div class="h-11 rounded-xl border border-beige/50 bg-gray-50/50 flex items-center justify-center text-gray-300 text-[10px] font-bold">
+                                <i class="fas fa-lock mr-2"></i> BUKTI KEMBALI
+                            </div>
+                                <a href="{{ route('cetak.bukti', $item->id) }}"
+                                    class="bg-white hover:bg-beige/20 text-Chocolate border border-Caramel/20 h-11 rounded-xl text-[10px] font-black tracking-widest transition-all flex items-center justify-center gap-2">
+                                    <i class="fas fa-file-download"></i> BUKTI PINJAM
+                                </a>
+                            @elseif ($item->status == 'dipinjam')
+                                <form action="{{ route('peminjaman.kembalikan', ['id' => $item->id]) }}" method="POST" class="w-full">
+                                    @csrf
+                                    <button type="submit" onclick="return confirm('Ajukan pengembalian buku ini?')"
+                                        class="w-full bg-rose-500 hover:bg-rose-600 text-white h-11 rounded-xl text-[10px] font-black tracking-widest transition-all flex items-center justify-center gap-2 shadow-lg shadow-rose-500/10">
+                                        <i class="fas fa-undo"></i> AJUKAN PENGEMBALIAN
+                                    </button>
+                                </form>
+                            @elseif($item->status == 'dikembalikan')
+                                <a href="{{ route('cetak.bukti.kembali', $item->id) }}"
+                                    class="bg-white hover:bg-beige/20 text-Chocolate border border-Caramel/20 h-11 rounded-xl text-[10px] font-black tracking-widest transition-all flex items-center justify-center gap-2">
+                                    <i class="fas fa-file-download"></i> BUKTI KEMBALI
+                                </a>
+                                <div class="h-11 rounded-xl border border-beige/50 bg-gray-50/50 flex items-center justify-center text-gray-300 text-[10px] font-bold">
+                                <i class="fas fa-lock mr-2"></i> BUKTI PINJAM
+                            </div>
+                            @else
+                                <div class="h-11 rounded-xl border border-beige/50 bg-gray-50/50 flex items-center justify-center text-gray-300 text-[10px] font-bold">
+                                     <i class="fas fa-lock mr-2"></i>BUKTI KEMBALI
+                                </div>
+                            @endif
+                        </div>
+
+                        @if ($item->status == 'dikembalikan')
+                            <button onclick="openModal('{{ $item->buku->id }}', '{{ $item->buku->judul_buku }}')"
+                                class="w-full bg-DarkChocolate text-white hover:bg-Chocolate h-12 rounded-2xl text-xs font-black tracking-widest transition-all duration-300 flex items-center justify-center gap-3">
+                                <i class="fas fa-star-half-alt text-amber-400"></i>
+                                BERIKAN ULASAN BUKU
+                            </button>
+                            
+                        @endif
+                        
                     </div>
                 </div>
             @empty
-                <div
-                    class="col-span-full flex flex-col items-center justify-center py-20 bg-white/50 rounded-3xl border-2 border-dashed border-Caramel/50">
-                    <div class="bg-beige p-6 rounded-full mb-4">
+                <div class="col-span-full flex flex-col items-center justify-center py-24 bg-white rounded-[40px] border-2 border-dashed border-beige shadow-sm">
+                    <div class="h-24 w-24 bg-beige/30 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-folder-open text-Caramel text-5xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-Chocolate">Belum ada riwayat</h3>
-                    <p class="text-MediumBrown">Anda belum pernah melakukan peminjaman buku.</p>
-                    <a href="{{ route('MDU') }}"
-                        class="mt-6 bg-Chocolate text-white px-6 py-2 rounded-xl font-bold hover:bg-DarkChocolate transition-all">Mulai
-                        Pinjam Buku</a>
+                    <h3 class="text-2xl font-serif font-bold text-DarkChocolate">Belum Ada Riwayat</h3>
+                    <p class="text-MediumBrown/60 mt-2 mb-8">Mulailah perjalanan literasi Anda hari ini.</p>
+                    <a href="{{ route('MDU') }}" class="bg-Chocolate text-white px-10 py-4 rounded-2xl font-bold hover:bg-DarkChocolate transition-all shadow-xl shadow-Chocolate/20">
+                        Cari Buku Sekarang
+                    </a>
                 </div>
             @endforelse
         </div>
     </main>
 
-    <div id="modalUlasan" class="fixed inset-0 z-[100] hidden overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen px-4">
-            <div class="fixed inset-0 bg-DarkChocolate opacity-70"></div>
-            <div class="relative bg-white rounded-2xl max-w-md w-full p-8 shadow-2xl border-t-8 border-Chocolate">
-                <h3 class="text-xl font-bold mb-4 text-Chocolate" id="modalTitle">Ulas Buku</h3>
-                <form action="{{ route('ulasan.store') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="buku_id" id="modal_buku_id">
+    <div id="modalUlasan" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6">
+        <div class="absolute inset-0 bg-DarkChocolate/60 backdrop-blur-md transition-opacity duration-500" onclick="closeModal()"></div>
+        <div class="relative bg-white rounded-[32px] max-w-md w-full p-10 shadow-2xl border border-beige overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-2 bg-Chocolate"></div>
+            
+            <h3 class="text-2xl font-serif font-bold text-DarkChocolate mb-2" id="modalTitle">Ulas Buku</h3>
+            <p class="text-xs text-MediumBrown/60 mb-8 font-medium italic">Bagikan pengalaman membaca Anda kepada yang lain.</p>
+            
+            <form action="{{ route('ulasan.store') }}" method="POST" class="space-y-6">
+                @csrf
+                <input type="hidden" name="buku_id" id="modal_buku_id">
 
-                    <div class="mb-4">
-                        <label class="block text-sm font-bold mb-2 text-MediumBrown">Rating</label>
-                        <select name="rating" class="w-full border border-beige rounded-lg p-2 focus:ring-2 focus:ring-Caramel outline-none">
-                            <option value="5">⭐⭐⭐⭐⭐ (Sempurna)</option>
-                            <option value="4">⭐⭐⭐⭐ (Bagus)</option>
-                            <option value="3">⭐⭐⭐ (Cukup)</option>
-                            <option value="2">⭐⭐ (Kurang)</option>
-                            <option value="1">⭐ (Buruk)</option>
-                        </select>
-                    </div>
+                <div class="space-y-3">
+                    <label class="block text-xs font-black uppercase tracking-widest text-Chocolate">Rating</label>
+                    <select name="rating" class="w-full h-14 bg-beige/10 border border-beige rounded-2xl px-5 text-sm font-bold focus:ring-2 focus:ring-Chocolate outline-none transition-all">
+                        <option value="5">⭐⭐⭐⭐⭐ Sempurna</option>
+                        <option value="4">⭐⭐⭐⭐ Bagus</option>
+                        <option value="3">⭐⭐⭐ Cukup</option>
+                        <option value="2">⭐⭐ Kurang</option>
+                        <option value="1">⭐ Buruk</option>
+                    </select>
+                </div>
 
-                    <div class="mb-4">
-                        <label class="block text-sm font-bold mb-2 text-MediumBrown">Ulasan Anda</label>
-                        <textarea name="ulasan" rows="4" class="w-full border border-beige rounded-lg p-2 focus:ring-2 focus:ring-Caramel outline-none"
-                            placeholder="Apa pendapat Anda tentang buku ini?"></textarea>
-                    </div>
+                <div class="space-y-3">
+                    <label class="block text-xs font-black uppercase tracking-widest text-Chocolate">Ulasan Anda</label>
+                    <textarea name="ulasan" rows="4" 
+                        class="w-full bg-beige/10 border border-beige rounded-2xl p-5 text-sm font-medium focus:ring-2 focus:ring-Chocolate outline-none transition-all placeholder:text-MediumBrown/30" 
+                        placeholder="Apa pendapat Anda tentang alur cerita atau isi buku ini?"></textarea>
+                </div>
 
-                    <div class="flex gap-3">
-                        <button type="button" onclick="closeModal()"
-                            class="flex-1 px-4 py-2 bg-beige text-Chocolate rounded-xl font-bold hover:bg-Caramel/20 transition-colors">Batal</button>
-                        <button type="submit"
-                            class="flex-1 px-4 py-2 bg-Chocolate text-white rounded-xl font-bold hover:bg-DarkChocolate transition-colors shadow-lg shadow-Chocolate/20">Kirim</button>
-                    </div>
-                </form>
-            </div>
+                <div class="flex gap-4 pt-4">
+                    <button type="button" onclick="closeModal()" class="flex-1 h-14 bg-beige/30 text-DarkChocolate rounded-2xl font-bold hover:bg-beige/50 transition-all">Batal</button>
+                    <button type="submit" class="flex-1 h-14 bg-Chocolate text-white rounded-2xl font-black tracking-widest hover:bg-DarkChocolate shadow-lg shadow-Chocolate/20 transition-all">KIRIM</button>
+                </div>
+            </form>
         </div>
     </div>
 
     <script>
         function openModal(id, judul) {
-            document.getElementById('modalUlasan').classList.remove('hidden');
+            const modal = document.getElementById('modalUlasan');
+            modal.classList.remove('hidden');
             document.getElementById('modal_buku_id').value = id;
             document.getElementById('modalTitle').innerText = 'Ulas: ' + judul;
+            // Add subtle animation
+            modal.querySelector('.relative').classList.add('animate-scale-in');
         }
 
         function closeModal() {
             document.getElementById('modalUlasan').classList.add('hidden');
         }
     </script>
-
 </body>
-
 </html>

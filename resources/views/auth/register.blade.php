@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-[#F3F0E9]">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-beige">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,12 +13,11 @@
         .font-serif { font-family: 'Lora', serif; }
         
         .custom-input:focus {
-            border-color: #5D3A2E !important;
+            border-color: #5D3A2E !important; /* Chocolate */
             box-shadow: 0 0 0 4px rgba(93, 58, 46, 0.1);
             background-color: white !important;
         }
 
-        /* Border merah jika ada error */
         .input-error {
             border-color: #ef4444 !important;
             background-color: #fef2f2 !important;
@@ -30,7 +29,7 @@
 </head>
 <body class="h-full antialiased text-DarkChocolate flex items-center justify-center p-4">
     
-    <div class="max-w-4xl w-full bg-white rounded-[32px] shadow-2xl shadow-Chocolate/10 border border-Chocolate/5 p-6 md:p-10 relative main-card">
+    <div class="max-w-4xl w-full bg-white rounded-[32px] shadow-2xl shadow-Chocolate/10 border border-Caramel/20 p-6 md:p-10 relative main-card">
         
         <div class="flex justify-between items-center mb-6">
             <div>
@@ -38,7 +37,7 @@
                 <h2 class="text-2xl font-serif text-Chocolate leading-tight">Registrasi Akun</h2>
                 <p class="text-MediumBrown/50 text-[11px] uppercase tracking-widest font-bold">Perpustakaan Digital</p>
             </div>
-            <a href="javascript:history.back()" class="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-Chocolate/40 hover:text-Chocolate transition-all">
+            <a href="javascript:history.back()" class="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-MediumBrown/40 hover:text-Chocolate transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
                 </svg>
@@ -55,7 +54,7 @@
                     <div class="group">
                         <label class="block text-[10px] font-bold uppercase tracking-widest text-Chocolate/50 mb-1 ml-1">Nama Lengkap</label>
                         <input name="NamaLengkap" type="text" value="{{ old('NamaLengkap') }}" required
-                            class="custom-input w-full px-4 py-2.5 bg-[#F9F8F6] border-2 border-transparent rounded-xl transition-all text-sm font-medium @error('NamaLengkap') input-error @enderror"
+                            class="custom-input w-full px-4 py-2.5 bg-beige/20 border-2 border-transparent rounded-xl transition-all text-sm font-medium @error('NamaLengkap') input-error @enderror"
                             placeholder="Nama Lengkap">
                         @error('NamaLengkap') <span class="text-[10px] text-red-500 font-semibold ml-1">{{ $message }}</span> @enderror
                     </div>
@@ -63,7 +62,7 @@
                     <div class="group">
                         <label class="block text-[10px] font-bold uppercase tracking-widest text-Chocolate/50 mb-1 ml-1">Email Aktif</label>
                         <input name="email" type="email" value="{{ old('email') }}" required
-                            class="custom-input w-full px-4 py-2.5 bg-[#F9F8F6] border-2 border-transparent rounded-xl transition-all text-sm font-medium @error('email') input-error @enderror"
+                            class="custom-input w-full px-4 py-2.5 bg-beige/20 border-2 border-transparent rounded-xl transition-all text-sm font-medium @error('email') input-error @enderror"
                             placeholder="email@example.com">
                         @error('email') <span class="text-[10px] text-red-500 font-semibold ml-1">{{ $message }}</span> @enderror
                     </div>
@@ -71,7 +70,7 @@
                     <div class="group">
                         <label class="block text-[10px] font-bold uppercase tracking-widest text-Chocolate/50 mb-1 ml-1">Alamat Domisili</label>
                         <textarea name="alamat" rows="3" required
-                            class="custom-input w-full px-4 py-2.5 bg-[#F9F8F6] border-2 border-transparent rounded-xl transition-all text-sm font-medium resize-none @error('alamat') input-error @enderror"
+                            class="custom-input w-full px-4 py-2.5 bg-beige/20 border-2 border-transparent rounded-xl transition-all text-sm font-medium resize-none @error('alamat') input-error @enderror"
                             placeholder="Alamat Lengkap...">{{ old('alamat') }}</textarea>
                         @error('alamat') <span class="text-[10px] text-red-500 font-semibold ml-1">{{ $message }}</span> @enderror
                     </div>
@@ -81,7 +80,7 @@
                     <div class="group">
                         <label class="block text-[10px] font-bold uppercase tracking-widest text-Chocolate/50 mb-1 ml-1">Username</label>
                         <input name="name" type="text" value="{{ old('name') }}" required
-                            class="custom-input w-full px-4 py-2.5 bg-[#F9F8F6] border-2 border-transparent rounded-xl transition-all text-sm font-medium @error('name') input-error @enderror"
+                            class="custom-input w-full px-4 py-2.5 bg-beige/20 border-2 border-transparent rounded-xl transition-all text-sm font-medium @error('name') input-error @enderror"
                             placeholder="username">
                         @error('name') <span class="text-[10px] text-red-500 font-semibold ml-1">{{ $message }}</span> @enderror
                     </div>
@@ -90,9 +89,9 @@
                         <label class="block text-[10px] font-bold uppercase tracking-widest text-Chocolate/50 mb-1 ml-1">Password</label>
                         <div class="relative">
                             <input id="password" name="password" type="password" required
-                                class="custom-input w-full px-4 py-2.5 pr-10 bg-[#F9F8F6] border-2 border-transparent rounded-xl transition-all text-sm font-medium @error('password') input-error @enderror"
+                                class="custom-input w-full px-4 py-2.5 pr-10 bg-beige/20 border-2 border-transparent rounded-xl transition-all text-sm font-medium @error('password') input-error @enderror"
                                 placeholder="••••••••">
-                            <button type="button" onclick="togglePass('password', 'eye1')" class="absolute inset-y-0 right-3 flex items-center text-Chocolate/30 hover:text-Chocolate transition-colors">
+                            <button type="button" onclick="togglePass('password', 'eye1')" class="absolute inset-y-0 right-3 flex items-center text-MediumBrown/30 hover:text-Chocolate transition-colors">
                                 <svg id="eye1" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -106,9 +105,9 @@
                         <label class="block text-[10px] font-bold uppercase tracking-widest text-Chocolate/50 mb-1 ml-1">Konfirmasi Password</label>
                         <div class="relative">
                             <input id="password_confirmation" name="password_confirmation" type="password" required
-                                class="custom-input w-full px-4 py-2.5 pr-10 bg-[#F9F8F6] border-2 border-transparent rounded-xl transition-all text-sm font-medium"
+                                class="custom-input w-full px-4 py-2.5 pr-10 bg-beige/20 border-2 border-transparent rounded-xl transition-all text-sm font-medium"
                                 placeholder="••••••••">
-                            <button type="button" onclick="togglePass('password_confirmation', 'eye2')" class="absolute inset-y-0 right-3 flex items-center text-Chocolate/30 hover:text-Chocolate transition-colors">
+                            <button type="button" onclick="togglePass('password_confirmation', 'eye2')" class="absolute inset-y-0 right-3 flex items-center text-MediumBrown/30 hover:text-Chocolate transition-colors">
                                 <svg id="eye2" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -127,7 +126,7 @@
             </button>
         </form>
 
-        <div class="mt-6 pt-5 border-t border-beige/40 text-center">
+        <div class="mt-6 pt-5 border-t border-beige text-center">
             <p class="text-[11px] text-MediumBrown/60">
                 Sudah punya akun? 
                 <a href="{{ route('login') }}" class="text-Chocolate font-bold border-b border-Caramel/30 hover:border-Caramel transition-all ml-1">Masuk Sekarang</a>

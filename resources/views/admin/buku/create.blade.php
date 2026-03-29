@@ -1,279 +1,244 @@
 @extends('layouts.admin')
 
 @section('content')
+    <div class="min-h-screen bg-gray-50/50 pb-20">
+        <main class="px-4 md:px-8 max-w-5xl mx-auto pt-8">
 
-    <body class="bg-gray-100 font-sans antialiased">
-        <div class="flex min-h-screen">
-            <div class="flex flex-1 flex-col overflow-hidden">
+            <div class="mb-8">
+                <nav class="flex mb-4 text-sm text-gray-500" aria-label="Breadcrumb">
+                    <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                        <li class="inline-flex items-center">
+                            <a href="{{ route('admin-dashboard') }}" class="hover:text-Chocolate transition-colors">Dashboard</a>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 9 4-4-4-4" />
+                                </svg>
+                                <a href="{{ route('MDB') }}" class="ml-1 hover:text-Chocolate transition-colors">Data Buku</a>
+                            </div>
+                        </li>
+                        <li aria-current="page">
+                            <div class="flex items-center">
+                                <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 9 4-4-4-4" />
+                                </svg>
+                                <span class="ml-1 font-medium text-Chocolate">Tambah Buku</span>
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
+                <div>
+                    <h2 class="text-3xl font-extrabold text-DarkChocolate tracking-tight">Tambah Buku Baru</h2>
+                    <p class="text-gray-500 mt-1">Daftarkan koleksi buku baru ke dalam sistem perpustakaan.</p>
+                </div>
 
-                <main class="p-6 space-y-6 overflow-y-auto bg-gray-50 flex-1">
+            </div>
 
-                    <div class="flex justify-between items-center">
-                        <h2 class="text-2xl font-bold text-amber-600">Tambah Buku Baru</h2>
-                    </div>
+            <div class="bg-white rounded-[24px] shadow-sm border border-gray-100 overflow-hidden">
+                {{-- <div class="h-2 bg-gradient-to-r from-Chocolate via-Caramel to-transparent"></div> --}}
 
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
-                        <div class="p-6 md:p-8">
-                            <form action="{{ route('store-MDB') }}" method="POST" enctype="multipart/form-data" novalidate>
-                                @csrf
-
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                                    <!-- Judul Buku -->
-                                    <div class="col-span-2">
-                                        <label for="judul_buku" class="block text-sm font-medium text-gray-700 mb-1">
-                                            Judul Buku <span class="text-red-500">*</span>
-                                        </label>
-                                        <div class="relative">
-                                            <div
-                                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
-                                                    stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                                </svg>
-                                            </div>
-                                            <input type="text" name="judul_buku" id="judul_buku"
-                                                class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all text-sm"
-                                                placeholder="Masukkan judul buku" required>
-                                        </div>
-                                        @error('judul_buku')
-                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-
-                                    <!-- ISBN -->
-                                    <div class="col-span-1">
-                                        <label for="isbn" class="block text-sm font-medium text-gray-700 mb-1">
-                                            ISBN <span class="text-red-500">*</span>
-                                        </label>
-                                        <div class="relative">
-                                            <div
-                                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
-                                                    stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
-                                                </svg>
-                                            </div>
-                                            <input type="text" name="isbn" id="isbn"
-                                                class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all text-sm"
-                                                placeholder="978-xxx-xxx-xxx-x" required>
-                                        </div>
-                                        @error('isbn')
-                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-
-                                    <!-- Penulis -->
-                                    <div class="col-span-1">
-                                        <label for="penulis" class="block text-sm font-medium text-gray-700 mb-1">
-                                            Penulis <span class="text-red-500">*</span>
-                                        </label>
-                                        <div class="relative">
-                                            <div
-                                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
-                                                    stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                                </svg>
-                                            </div>
-                                            <input type="text" name="penulis" id="penulis"
-                                                class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all text-sm"
-                                                placeholder="Nama penulis" required>
-                                        </div>
-                                        @error('penulis')
-                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-
-                                    <!-- Penerbit -->
-                                    <div class="col-span-1">
-                                        <label for="penerbit" class="block text-sm font-medium text-gray-700 mb-1">
-                                            Penerbit <span class="text-red-500">*</span>
-                                        </label>
-                                        <div class="relative">
-                                            <div
-                                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
-                                                    stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                                </svg>
-                                            </div>
-                                            <input type="text" name="penerbit" id="penerbit"
-                                                class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all text-sm"
-                                                placeholder="Nama penerbit" required>
-                                        </div>
-                                        @error('penerbit')
-                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-
-                                    <!-- Tahun Terbit -->
-                                    <div class="col-span-1">
-                                        <label for="tahun_terbit" class="block text-sm font-medium text-gray-700 mb-1">
-                                            Tahun Terbit <span class="text-red-500">*</span>
-                                        </label>
-                                        <div class="relative">
-                                            <div
-                                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
-                                                    stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                </svg>
-                                            </div>
-                                            <input type="number" name="tahun_terbit" id="tahun_terbit"
-                                                class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all text-sm"
-                                                placeholder="2024" min="1900" max="2100" required>
-                                        </div>
-                                        @error('tahun_terbit')
-                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-
-                                    <!-- Stok -->
-                                    <div class="col-span-1">
-                                        <label for="stok" class="block text-sm font-medium text-gray-700 mb-1">
-                                            Stok <span class="text-red-500">*</span>
-                                        </label>
-                                        <div class="relative">
-                                            <div
-                                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
-                                                    stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                                                </svg>
-                                            </div>
-                                            <input type="number" name="stok" id="stok"
-                                                class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all text-sm"
-                                                placeholder="0" min="0" required>
-                                        </div>
-                                        @error('stok')
-                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-
-                                    <!-- Kategori -->
-                                    <div class="col-span-1">
-                                        <label for="kategori" class="block text-sm font-medium text-gray-700 mb-1">
-                                            Kategori <span class="text-red-500">*</span>
-                                        </label>
-                                        <div class="relative">
-                                            <div
-                                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
-                                                    stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                                                </svg>
-                                            </div>
-                                            <select name="kategori" id="kategori"
-                                                class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all text-sm appearance-none"
-                                                required>
-                                                <option value="" disabled selected>Pilih Kategori</option>
-                                                @foreach ($kategori as $k)
-                                                   <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
-                                                @endforeach
-                                            </select>
-
-                                            <div
-                                                class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
-                                                    stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M19 9l-7 7-7-7" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        @error('kategori')
-                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-
-                                    <!-- Deskripsi -->
-                                    <div class="col-span-2">
-                                        <label for="deskripsi" class="block text-sm font-medium text-gray-700 mb-1">
-                                            Deskripsi Buku
-                                        </label>
-                                        <textarea name="deskripsi" id="deskripsi" rows="4"
-                                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all text-sm resize-none"
-                                            placeholder="Tulis deskripsi singkat atau sinopsis buku"></textarea>
-                                    </div>
-
-                                    <!-- Upload Foto -->
-                                    <div class="col-span-2">
-                                        <label for="image" class="block text-sm font-medium text-gray-700 mb-1">
-                                            Foto Cover Buku
-                                        </label>
-                                        <div class="flex items-center justify-center w-full">
-                                            <label for="image"
-                                                class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition duration-200">
-                                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                                    <svg class="w-10 h-10 mb-3 text-gray-400" fill="none"
-                                                        stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
-                                                        </path>
-                                                    </svg>
-                                                    <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Klik
-                                                            untuk upload</span> atau drag and drop</p>
-                                                    <p class="text-xs text-gray-500">PNG, JPG atau JPEG (MAX. 2MB)</p>
-                                                </div>
-                                                <input id="image" name="image" type="file" class="hidden"
-                                                    accept="image/*" />
-                                            </label>
-                                        </div>
-                                        <div id="preview" class="mt-4 hidden">
-                                            <img id="preview-image" class="w-32 h-40 object-cover rounded-lg shadow-md"
-                                                src="" alt="Preview">
-                                        </div>
-                                    </div>
-
+                <form action="{{ route('store-MDB') }}" method="POST" enctype="multipart/form-data" class="p-6 md:p-10">
+                    @csrf
+                    @if ($errors->any())
+                        <div class="mb-6 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3">
+                            <div class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-rose-500 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8v4m0 4h.01M10.29 3.86l-7.82 13.54A1 1 0 003.34 19h17.32a1 1 0 00.87-1.5L13.71 3.86a1 1 0 00-1.74 0z" />
+                                </svg>
+                                <div>
+                                    <p class="text-sm font-bold text-rose-700">Data belum bisa disimpan.</p>
+                                    <ul class="mt-1 text-sm text-rose-600 list-disc list-inside">
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
                                 </div>
+                            </div>
+                        </div>
+                    @endif
 
-                                <div class="mt-8 flex items-center justify-end gap-4 border-t pt-6">
-                                    <button type="button"
-                                        class="px-6 py-2.5 rounded-lg text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors">
-                                        Batal
-                                    </button>
-                                    <button type="submit"
-                                        class="px-6 py-2.5 rounded-lg text-sm font-medium text-white bg-amber-600 hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 shadow-md transition-colors flex items-center">
-                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor"
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+
+                        <div class="lg:col-span-4 space-y-6">
+                            <div>
+                                <label
+                                    class="block text-sm font-bold text-DarkChocolate uppercase tracking-wider mb-4">Cover
+                                    Buku</label>
+
+                                <div id="preview"
+                                    class="relative mb-4 group aspect-[3/4] rounded-2xl overflow-hidden bg-gray-100 border-2 border-dashed border-gray-200 flex items-center justify-center">
+                                    <img id="preview-image" class="hidden w-full h-full object-cover shadow-inner"
+                                        src="" alt="Preview">
+
+                                    <div id="upload-placeholder"
+                                        class="flex flex-col items-center text-gray-400 group-hover:text-Chocolate transition-colors">
+                                        <svg class="w-12 h-12 mb-2" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
+                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                         </svg>
-                                        Simpan Buku
-                                    </button>
+                                        <p class="text-xs font-medium">Belum ada foto</p>
+                                    </div>
                                 </div>
 
-                            </form>
+                                <label for="image"
+                                    class="flex items-center justify-center gap-2 w-full py-3 px-4 bg-beige/10 border border-Chocolate/20 text-Chocolate rounded-xl cursor-pointer hover:bg-Chocolate hover:text-white transition-all font-bold text-xs uppercase tracking-widest shadow-sm">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    Pilih File Cover
+                                </label>
+                                <input id="image" name="image" type="file" class="hidden" accept="image/*" />
+                                <p class="mt-3 text-[11px] text-gray-400 leading-relaxed text-center">Rekomendasi rasio 3:4.
+                                    Format JPG/PNG max 2MB.</p>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-8 space-y-6">
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div class="md:col-span-2">
+                                    <label for="judul_buku"
+                                        class="block text-xs font-bold text-DarkChocolate uppercase tracking-widest mb-2 ml-1">Judul
+                                        Buku <span class="text-rose-500">*</span></label>
+                                    <input type="text" name="judul_buku" id="judul_buku"
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-4 focus:ring-Chocolate/10 focus:border-Chocolate focus:bg-white transition-all outline-none text-gray-700 placeholder:text-gray-300"
+                                        placeholder="Masukkan judul lengkap buku..." required
+                                        value="{{ old('judul_buku') }}">
+                                    @error('judul_buku')
+                                        <p class="mt-1 text-xs text-rose-500 font-medium italic">* {{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label for="isbn"
+                                        class="block text-xs font-bold text-DarkChocolate uppercase tracking-widest mb-2 ml-1">ISBN
+                                        <span class="text-rose-500">*</span></label>
+                                    <input type="text" name="isbn" id="isbn"
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-Chocolate focus:ring-4 focus:ring-Chocolate/10 outline-none transition-all"
+                                        placeholder="978-xxx..." required value="{{ old('isbn') }}">
+                                </div>
+
+                                <div>
+                                    <label for="penulis"
+                                        class="block text-xs font-bold text-DarkChocolate uppercase tracking-widest mb-2 ml-1">Penulis
+                                        <span class="text-rose-500">*</span></label>
+                                    <input type="text" name="penulis" id="penulis"
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-Chocolate focus:ring-4 focus:ring-Chocolate/10 outline-none transition-all"
+                                        placeholder="Nama penulis..." required value="{{ old('penulis') }}">
+                                </div>
+
+                                <div>
+                                    <label for="penerbit"
+                                        class="block text-xs font-bold text-DarkChocolate uppercase tracking-widest mb-2 ml-1">Penerbit
+                                        <span class="text-rose-500">*</span></label>
+                                    <input type="text" name="penerbit" id="penerbit"
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-Chocolate focus:ring-4 focus:ring-Chocolate/10 outline-none transition-all"
+                                        placeholder="Nama penerbit..." required value="{{ old('penerbit') }}">
+                                </div>
+
+                                <div class="relative">
+                                    <label for="tahun_terbit"
+                                        class="block text-xs font-bold text-DarkChocolate uppercase tracking-widest mb-2 ml-1">Tahun
+                                        Terbit <span class="text-rose-500">*</span></label>
+                                    <input type="number" name="tahun_terbit" id="tahun_terbit"
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-Chocolate focus:ring-4 focus:ring-Chocolate/10 outline-none transition-all"
+                                        placeholder="2024" required value="{{ old('tahun_terbit') }}">
+                                </div>
+
+                                <div class="relative">
+                                    <label for="stok"
+                                        class="block text-xs font-bold text-DarkChocolate uppercase tracking-widest mb-2 ml-1">Stok
+                                        Tersedia <span class="text-rose-500">*</span></label>
+                                    <div class="relative">
+                                        <input type="number" name="stok" id="stok"
+                                            class="w-full pl-4 pr-12 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-Chocolate focus:ring-4 focus:ring-Chocolate/10 outline-none transition-all"
+                                            placeholder="0" required value="{{ old('stok') }}">
+                                        <span
+                                            class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-xs font-bold">PCS</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="kategori"
+                                        class="block text-xs font-bold text-DarkChocolate uppercase tracking-widest mb-2 ml-1">Kategori
+                                        <span class="text-rose-500">*</span></label>
+                                    <div class="relative">
+                                        <select name="kategori" id="kategori"
+                                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-Chocolate focus:ring-4 focus:ring-Chocolate/10 outline-none transition-all appearance-none cursor-pointer">
+                                            <option value="" disabled selected>Pilih Kategori</option>
+                                            @foreach ($kategori as $k)
+                                                <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div
+                                            class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="md:col-span-2">
+                                    <label for="deskripsi"
+                                        class="block text-xs font-bold text-DarkChocolate uppercase tracking-widest mb-2 ml-1">Sinopsis
+                                        Singkat</label>
+                                    <textarea name="deskripsi" id="deskripsi" rows="4"
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-Chocolate focus:ring-4 focus:ring-Chocolate/10 outline-none transition-all resize-none placeholder:text-gray-300"
+                                        placeholder="Tulis sinopsis buku untuk menarik pembaca...">{{ old('deskripsi') }}</textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                </main>
+                    <div class="flex items-center justify-end gap-4 pt-10 mt-10 border-t border-gray-100">
+                        <a href="{{ route('MDB') }}"
+                            class="px-8 py-3 rounded-xl text-xs font-bold uppercase tracking-[0.2em] text-gray-400 hover:text-rose-500 hover:bg-rose-50 transition-all">
+                            Batal
+                        </a>
+                        <button type="submit"
+                            class="flex items-center gap-2 px-10 py-3 bg-Chocolate text-white text-xs font-bold uppercase tracking-[0.2em] rounded-xl hover:bg-DarkChocolate transition-all shadow-lg shadow-Chocolate/20 active:scale-95">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                            </svg>
+                            Simpan
+                        </button>
+                    </div>
+                </form>
             </div>
-        </div>
+        </main>
+    </div>
 
-        <!-- JavaScript for Image Preview -->
-        <script>
-            document.getElementById('image').addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        document.getElementById('preview-image').src = e.target.result;
-                        document.getElementById('preview').classList.remove('hidden');
-                    }
-                    reader.readAsDataURL(file);
+    <script>
+        document.getElementById('image').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('preview');
+            const previewImg = document.getElementById('preview-image');
+            const placeholder = document.getElementById('upload-placeholder');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewImg.classList.remove('hidden');
+                    placeholder.classList.add('hidden');
+                    preview.classList.remove('border-dashed', 'bg-gray-100');
+                    preview.classList.add('border-solid', 'border-white', 'ring-1', 'ring-gray-200');
                 }
-            });
-        </script>
-
-    </body>
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 @endsection

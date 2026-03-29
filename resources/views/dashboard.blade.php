@@ -22,7 +22,7 @@
             height: 2px;
             bottom: -4px;
             left: 0;
-            background-color: #C99B66;
+            background-color: #C99B66; /* Caramel Hex */
             transition: width 0.3s ease;
         }
 
@@ -31,15 +31,8 @@
         }
 
         @keyframes wiggle {
-
-            0%,
-            100% {
-                transform: scale(1.1) translate(0, 0);
-            }
-
-            50% {
-                transform: scale(1.15) translate(-10px, -10px);
-            }
+            0%, 100% { transform: scale(1.1) translate(0, 0); }
+            50% { transform: scale(1.15) translate(-10px, -10px); }
         }
 
         .animate-slow-zoom {
@@ -54,7 +47,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
 
-                <!-- Logo -->
                 <div class="flex items-center">
                     <a href="/" class="flex items-center group">
                         <img src="{{ asset('image/logo.png') }}" alt="Aksara Logo"
@@ -62,8 +54,7 @@
                     </a>
                 </div>
 
-                <!-- Menu -->
-                <div class="flex items-center space-x-2">
+                <div class="hidden md:flex items-center space-x-2">
                     <a href="#"
                         class="nav-link text-Chocolate hover:text-MediumBrown px-4 py-2 rounded-lg transition-colors">
                         Beranda
@@ -82,7 +73,6 @@
                     </a>
                 </div>
 
-                <!-- Button -->
                 <div class="flex items-center">
                     <a href="{{ route('login') }}"
                         class="flex items-center bg-Chocolate hover:bg-MediumBrown text-beige px-6 py-2.5 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-lg active:scale-95">
@@ -99,7 +89,7 @@
             <div class="absolute inset-0">
                 <img src="{{ asset('image/background.jpg') }}" class="w-full h-full object-cover animate-slow-zoom"
                     alt="Background">
-                <div class="absolute inset-0 bg-DarkChocolate/30 backdrop-blur-[2px]"></div>
+                <div class="absolute inset-0 bg-DarkChocolate/40 backdrop-blur-[1px]"></div>
             </div>
 
             <div class="relative z-10 px-8 md:px-16 w-full max-w-7xl mx-auto">
@@ -151,13 +141,11 @@
                         <div class="grid grid-cols-2 gap-8 border-t border-Chocolate/10 pt-8">
                             <div>
                                 <span class="block text-4xl font-black text-Chocolate">1000+</span>
-                                <span class="text-sm text-MediumBrown font-bold uppercase tracking-widest">Koleksi
-                                    Buku</span>
+                                <span class="text-sm text-MediumBrown font-bold uppercase tracking-widest">Koleksi Buku</span>
                             </div>
                             <div>
                                 <span class="block text-4xl font-black text-Chocolate">5000+</span>
-                                <span
-                                    class="text-sm text-MediumBrown font-bold uppercase tracking-widest">Anggota</span>
+                                <span class="text-sm text-MediumBrown font-bold uppercase tracking-widest">Anggota</span>
                             </div>
                         </div>
                     </div>
@@ -173,49 +161,37 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                    <div
-                        class="p-8 bg-beige/30 rounded-3xl border border-Caramel/10 hover:border-Caramel transition-all duration-300 group">
-                        <div
-                            class="w-16 h-16 bg-Chocolate text-beige rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                    <div class="p-8 bg-beige/30 rounded-3xl border border-Caramel/10 hover:border-Caramel transition-all duration-300 group">
+                        <div class="w-16 h-16 bg-Chocolate text-beige rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
                             <i class="fas fa-search"></i>
                         </div>
                         <h3 class="text-2xl font-bold text-Chocolate mb-3">Pencarian Cerdas</h3>
-                        <p class="text-DarkChocolate/70">Temukan lokasi buku tepat di raknya melalui navigasi digital
-                            kami.</p>
+                        <p class="text-DarkChocolate/70">Temukan lokasi buku tepat di raknya melalui navigasi digital kami.</p>
                     </div>
 
-                    <div
-                        class="p-8 bg-beige/30 rounded-3xl border border-Caramel/10 hover:border-Caramel transition-all duration-300 group">
-                        <div
-                            class="w-16 h-16 bg-Chocolate text-beige rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                    <div class="p-8 bg-beige/30 rounded-3xl border border-Caramel/10 hover:border-Caramel transition-all duration-300 group">
+                        <div class="w-16 h-16 bg-Chocolate text-beige rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
                             <i class="fas fa-couch"></i>
                         </div>
                         <h3 class="text-2xl font-bold text-Chocolate mb-3">Ruang Nyaman</h3>
-                        <p class="text-DarkChocolate/70">Area baca eksklusif dengan atmosfer tenang dan pencahayaan
-                            hangat.</p>
+                        <p class="text-DarkChocolate/70">Area baca eksklusif dengan atmosfer tenang dan pencahayaan hangat.</p>
                     </div>
 
-                    <div
-                        class="p-8 bg-beige/30 rounded-3xl border border-Caramel/10 hover:border-Caramel transition-all duration-300 group">
-                        <div
-                            class="w-16 h-16 bg-Chocolate text-beige rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                    <div class="p-8 bg-beige/30 rounded-3xl border border-Caramel/10 hover:border-Caramel transition-all duration-300 group">
+                        <div class="w-16 h-16 bg-Chocolate text-beige rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
                             <i class="fas fa-qrcode"></i>
                         </div>
                         <h3 class="text-2xl font-bold text-Chocolate mb-3">Pinjam Kilat</h3>
-                        <p class="text-DarkChocolate/70">Sistem peminjaman mandiri hanya dengan memindai kode QR buku.
-                        </p>
+                        <p class="text-DarkChocolate/70">Sistem peminjaman mandiri hanya dengan memindai kode QR buku.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="koleksi" class="py-24 bg-[#FFF8F0]">
+        <section id="koleksi" class="py-24 bg-beige/20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold text-Chocolate mb-4">
-                        Koleksi Terpopuler
-                    </h2>
+                    <h2 class="text-4xl md:text-5xl font-bold text-Chocolate mb-4">Koleksi Terpopuler</h2>
                     <p class="text-MediumBrown font-medium max-w-2xl mx-auto">
                         Temukan buku pilihan dengan tampilan yang lebih rapi, elegan, dan nyaman dijelajahi.
                     </p>
@@ -223,76 +199,55 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     @foreach ($buku as $b)
-                        <div
-                            class="group bg-white rounded-3xl border border-[#EADBC8] shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+                        <div class="group bg-white rounded-3xl border border-Caramel/20 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
                             <a href="#" class="block h-full">
-
-                                <div
-                                    class="relative h-72 bg-gradient-to-b from-[#FAF3EA] to-[#F5EBE0] flex items-center justify-center overflow-hidden">
+                                <div class="relative h-72 bg-gradient-to-b from-beige/50 to-beige flex items-center justify-center overflow-hidden">
                                     <img src="{{ asset('storage/' . $b->cover) }}" alt="Cover Buku"
                                         class="max-h-[85%] max-w-[80%] object-contain drop-shadow-lg transform group-hover:scale-105 transition duration-500">
-
                                     <div class="absolute top-4 left-0">
-                                        <span
-                                            class="bg-Chocolate text-beige text-[10px] font-bold px-4 py-1.5 rounded-r-full uppercase">{{ $b->RelasiKategori->first()->nama_kategori ?? 'Tanpa Kategori' }}</span>
+                                        <span class="bg-Chocolate text-beige text-[10px] font-bold px-4 py-1.5 rounded-r-full uppercase">
+                                            {{ $b->RelasiKategori->first()->nama_kategori ?? 'Tanpa Kategori' }}
+                                        </span>
                                     </div>
                                 </div>
 
                                 <div class="p-5 flex flex-col min-h-[220px]">
-                                    <p
-                                        class="text-[#B07D4F] text-[11px] font-semibold tracking-[0.18em] uppercase mb-2">
+                                    <p class="text-Caramel text-[11px] font-semibold tracking-[0.18em] uppercase mb-2">
                                         {{ Str::limit($b->penulis, 24, '...') }}
                                     </p>
-
-                                    <h3
-                                        class="text-lg font-bold text-[#3C2A21] leading-snug line-clamp-2 mb-3 group-hover:text-[#8B5E3C] transition">
+                                    <h3 class="text-lg font-bold text-Chocolate leading-snug line-clamp-2 mb-3 group-hover:text-MediumBrown transition">
                                         {{ Str::limit($b->judul_buku, 45, '...') }}
                                     </h3>
-
-                                    <div class="flex items-center gap-1 mb-3 text-[#D4A373] text-xs">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span class="text-[#5C4033]/50 text-[11px] ml-2">(2.4k)</span>
+                                    <div class="flex items-center gap-1 mb-3 text-Caramel text-xs">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        <span class="text-DarkChocolate/50 text-[11px] ml-2">(2.4k)</span>
                                     </div>
-
-                                    <p class="text-[#5C4033]/75 text-sm leading-relaxed line-clamp-3 mb-5">
+                                    <p class="text-DarkChocolate/75 text-sm leading-relaxed line-clamp-3 mb-5">
                                         {{ Str::limit($b->deskripsi, 110, '...') }}
                                     </p>
-                                    <div
-                                        class="mt-auto pt-4 border-t border-[#F1E4D5] flex items-center justify-between">
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#FAF3EA] text-[#8B5E3C]">
+                                    <div class="mt-auto pt-4 border-t border-beige flex items-center justify-between">
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-beige text-MediumBrown">
                                             Stok: {{ $b->stok }}
                                         </span>
-
                                     </div>
-
                                 </div>
-
                             </a>
                         </div>
                     @endforeach
                 </div>
-
             </div>
         </section>
 
         <section class="py-20 bg-Chocolate relative overflow-hidden">
             <div class="absolute top-0 right-0 w-64 h-64 bg-Caramel/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
-            <div class="absolute bottom-0 left-0 w-64 h-64 bg-MediumBrown/20 rounded-full -ml-32 -mb-32 blur-3xl">
-            </div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-MediumBrown/20 rounded-full -ml-32 -mb-32 blur-3xl"></div>
 
             <div class="container mx-auto px-8 relative z-10">
                 <div class="max-w-4xl mx-auto text-center">
                     <h2 class="text-4xl md:text-5xl font-bold mb-8 text-beige">Siap Memulai Petualangan?</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                        <div
-                            class="bg-white/10 backdrop-blur-md p-6 rounded-2xl flex items-center text-left border border-white/10">
-                            <div
-                                class="w-12 h-12 bg-Caramel rounded-full flex items-center justify-center text-white mr-4">
+                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl flex items-center text-left border border-white/10">
+                            <div class="w-12 h-12 bg-Caramel rounded-full flex items-center justify-center text-white mr-4">
                                 <i class="fab fa-whatsapp"></i>
                             </div>
                             <div>
@@ -300,10 +255,8 @@
                                 <p class="text-beige font-bold">+62 812-3456-789</p>
                             </div>
                         </div>
-                        <div
-                            class="bg-white/10 backdrop-blur-md p-6 rounded-2xl flex items-center text-left border border-white/10">
-                            <div
-                                class="w-12 h-12 bg-Caramel rounded-full flex items-center justify-center text-white mr-4">
+                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl flex items-center text-left border border-white/10">
+                            <div class="w-12 h-12 bg-Caramel rounded-full flex items-center justify-center text-white mr-4">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div>
@@ -329,12 +282,8 @@
                             Membangun peradaban melalui literasi digital yang inklusif dan modern.
                         </p>
                         <div class="flex space-x-4">
-                            <a href="#"
-                                class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-Caramel hover:text-white transition"><i
-                                    class="fab fa-instagram"></i></a>
-                            <a href="#"
-                                class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-Caramel hover:text-white transition"><i
-                                    class="fab fa-twitter"></i></a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-Caramel hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-Caramel hover:text-white transition"><i class="fab fa-twitter"></i></a>
                         </div>
                     </div>
 
@@ -350,12 +299,8 @@
                     <div>
                         <h3 class="text-white font-bold mb-6 uppercase tracking-widest text-sm">Jam Buka</h3>
                         <ul class="space-y-3 text-sm">
-                            <li class="flex justify-between border-b border-white/5 pb-2"><span>Sen - Jum</span>
-                                <span>08:00 - 20:00</span>
-                            </li>
-                            <li class="flex justify-between border-b border-white/5 pb-2"><span>Sabtu</span>
-                                <span>09:00 - 17:00</span>
-                            </li>
+                            <li class="flex justify-between border-b border-white/5 pb-2"><span>Sen - Jum</span> <span>08:00 - 20:00</span></li>
+                            <li class="flex justify-between border-b border-white/5 pb-2"><span>Sabtu</span> <span>09:00 - 17:00</span></li>
                             <li class="flex justify-between text-Caramel"><span>Minggu</span> <span>Tutup</span></li>
                         </ul>
                     </div>

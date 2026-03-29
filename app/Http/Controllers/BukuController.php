@@ -44,10 +44,23 @@ class BukuController extends Controller
             'deskripsi'    => 'nullable|string',
             'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ], [
-            'judul_buku.required' => 'Judul buku wajib diisi.',
-            'isbn.required'       => 'ISBN wajib diisi.',
-            'isbn.unique'         => 'ISBN sudah digunakan.',
-            'kategori.required'   => 'Kategori wajib diisi.',
+            'judul_buku.required'   => 'Judul buku wajib diisi.',
+            'isbn.required'         => 'ISBN wajib diisi.',
+            'isbn.unique'           => 'ISBN sudah terdaftar.',
+            'penulis.required'      => 'Nama penulis wajib diisi.',
+            'penerbit.required'     => 'Nama penerbit wajib diisi.',
+            'tahun_terbit.required' => 'Tahun terbit wajib diisi.',
+            'tahun_terbit.digits'   => 'Tahun terbit harus 4 digit.',
+            'tahun_terbit.min'      => 'Tahun terbit tidak valid.',
+            'tahun_terbit.max'      => 'Tahun terbit tidak boleh melebihi tahun sekarang.',
+            'stok.required'         => 'Stok wajib diisi.',
+            'stok.integer'          => 'Stok harus berupa angka.',
+            'stok.min'              => 'Stok tidak boleh kurang dari 0.',
+            'kategori.required'     => 'Kategori wajib dipilih.',
+            'kategori.exists'       => 'Kategori tidak valid.',
+            'image.image'           => 'File cover harus berupa gambar.',
+            'image.mimes'           => 'Format cover harus JPG, JPEG, atau PNG.',
+            'image.max'             => 'Ukuran cover maksimal 2MB.',
         ]);
 
         // Handle upload cover

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use App\Models\Peminjaman;
+use App\Models\Ulasan;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -18,7 +19,9 @@ class DashboardController extends Controller
         $user = User::all();
         $buku = Buku::all();
         $pinjam = Peminjaman::where('status', 'menunggu')->get();
-        return view('admin.index', compact('user','buku','pinjam'));
+        $bukudipinjam = Peminjaman::where('status', 'dipinjam')->count();
+        $ulasan = Ulasan::all();
+        return view('admin.index', compact('user','buku','pinjam','bukudipinjam','ulasan'));
     }
 
     public function setuju($id)

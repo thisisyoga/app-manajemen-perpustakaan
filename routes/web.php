@@ -46,10 +46,11 @@ Route::middleware(['role:admin|petugas'])->group(function () {
     Route::get('/admin-dashboard', [DashboardController::class, 'admin'])->name('admin-dashboard');
     Route::get('/admin/peminjaman/{id}/setuju', [DashboardController::class, 'setuju'])->name('admin.peminjaman.setuju');
     Route::get('/admin/peminjaman/{id}/tolak', [DashboardController::class, 'tolak'])->name('admin.peminjaman.tolak');
-    Route::get('/admin-pengembalian', [DashboardController::class, 'pengembalian'])->name('admin-pengembalian');
     Route::get('/admin/peminjaman/{id}/dikembalikan', [DashboardController::class, 'dikembalikan'])->name('admin.peminjaman.dikembalikan');
     Route::get('/admin/peminjaman/{id}/diajukan', [DashboardController::class, 'diajukan'])->name('admin.peminjaman.diajukan');
-
+    
+    Route::get('/admin-pengembalian', [DashboardController::class, 'pengembalian'])->name('admin-pengembalian');
+    
 Route::middleware(['role:admin'])->group(function () {
     // Master Data Akun
     Route::get('/akun/petugas', [AkunController::class, 'index'])->name('MDA');
@@ -80,7 +81,7 @@ Route::middleware(['role:admin'])->group(function () {
 
     Route::get('/export-halaman', function () {
         return view('admin.laporan.index');
-    })->name('laporan.index');
+    })->name('laporan');
     Route::get('/export-pdf/{role}', [DashboardController::class, 'exportByRole'])->name('export.pdf');
     Route::get('/export-peminjaman-selesai', [DashboardController::class, 'exportPeminjamanSelesai'])->name('export.peminjaman');
 

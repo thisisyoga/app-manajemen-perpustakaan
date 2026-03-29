@@ -1,64 +1,103 @@
-<aside
-    class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full md:translate-x-0 bg-white shadow-md border-r">
-    <div class="h-full px-0 py-4 overflow-y-auto">
-        @if (Auth::user()->role == 'admin')
-            <div class="p-6 font-bold text-amber-600 text-2xl">AdminPanel</div>
-        @elseif (Auth::user()->role == 'petugas')
-            <div class="p-6 font-bold text-amber-600 text-2xl">PetugasPanel</div>
-        @endif
-
-        <nav class="mt-8">
-            <a href="{{ route('admin-dashboard') }}"
-                class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
-            @if (request()->routeIs('admin-dashboard')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">
-                Dashboard
-            </a>
-            <a href="{{ route('admin-pengembalian') }}"
-                class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
-            @if (request()->routeIs('admin-pengembalian')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">
-                Pengembalian
-            </a>
-            @if (Auth::user()->role == 'admin')
-                <div class="relative">
-                    <button id="btn-master-akun" type="button"
-                        class="w-full flex items-center justify-between py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors border-l-4 border-transparent focus:outline-none">
-                        <span>Master Data Akun</span>
-                        <svg id="arrow-icon"
-                            class="w-4 h-4 transition-transform duration-200 @if (request()->routeIs('MDA*')) rotate-180 @endif"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-
-                    <div id="menu-master-akun" class="@if (!request()->routeIs('MDA*')) hidden @endif bg-gray-50 pb-2">
-                        <a href="{{ route('MDA') }}"
-                            class="block py-2 pl-12 pr-6 text-sm text-gray-600 hover:text-amber-600 @if (request()->routeIs('MDA-petugas')) font-bold text-amber-600 @endif">
-                            Data Petugas
-                        </a>
-                        <a href="{{ route('data-user') }}"
-                            class="block py-2 pl-12 pr-6 text-sm text-gray-600 hover:text-amber-600 @if (request()->routeIs('MDA-user')) font-bold text-amber-600 @endif">
-                            Data User
-                        </a>
-                    </div>
+<aside class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full md:translate-x-0 bg-white border-r border-beige/50 shadow-sm">
+    <div class="h-full flex flex-col">
+        <div class="h-[88px] flex items-center px-8 border-b border-beige/30">
+            <div class="flex items-center gap-3">
+                <div class="bg-Chocolate p-1.5 rounded-lg shadow-sm">
+                    <i class="fas fa-book-open text-white text-xs"></i>
                 </div>
-            @endif
+                <span class="text-xl font-serif font-bold text-DarkChocolate">
+                    {{ Auth::user()->role == 'admin' ? 'Admin' : 'Petugas' }}<span class="text-Chocolate">.</span>
+                </span>
+            </div>
+        </div>
 
-            <a href="{{ route('MDK') }}"
-                class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
-                 @if (request()->routeIs('MDK')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">Master
-                Data Kategori</a>
-            <a href="{{ route('MDB') }}"
-                class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-color
-            @if (request()->routeIs('MDB')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">Master
-                Data Buku</a>
-            <a href="{{ route('ulasan') }}"
-                class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
-                @if (request()->routeIs('ulasan')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">Ulasan</a>
-            <a href="{{ route('laporan.index') }}"
-                class="block py-3 px-6 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors 
-                @if (request()->routeIs('laporan.index')) border-l-4 border-amber-500 font-medium bg-amber-50 @else border-l-4 border-transparent @endif">Laporan</a>
-        </nav>
+        <div class="flex-1 px-4 py-6 overflow-y-auto custom-scrollbar">
+            <nav class="space-y-1.5">
+                <p class="px-4 text-[10px] font-black uppercase tracking-[0.2em] text-MediumBrown/40 mb-3">Main Menu</p>
+                
+                <a href="{{ route('admin-dashboard') }}"
+                    class="group flex items-center px-4 py-3 text-sm font-bold rounded-xl transition-all
+                    {{ request()->routeIs('admin-dashboard') ? 'bg-Chocolate text-white shadow-lg shadow-Chocolate/20' : 'text-MediumBrown hover:bg-beige/20 hover:text-Chocolate' }}">
+                    <i class="fas fa-th-large w-5 mr-3 {{ request()->routeIs('admin-dashboard') ? 'text-white' : 'text-MediumBrown group-hover:text-Chocolate' }}"></i>
+                    Dashboard
+                </a>
+
+                <a href="{{ route('admin-pengembalian') }}"
+                    class="group flex items-center px-4 py-3 text-sm font-bold rounded-xl transition-all
+                    {{ request()->routeIs('admin-pengembalian') ? 'bg-Chocolate text-white shadow-lg shadow-Chocolate/20' : 'text-MediumBrown hover:bg-beige/20 hover:text-Chocolate' }}">
+                    <i class="fas fa-exchange-alt w-5 mr-3 {{ request()->routeIs('admin-pengembalian') ? 'text-white' : 'text-MediumBrown group-hover:text-Chocolate' }}"></i>
+                    Pengembalian
+                </a>
+
+                @if (Auth::user()->role == 'admin')
+                    <div class="relative">
+                        <button id="btn-master-akun" type="button"
+                            class="w-full group flex items-center justify-between px-4 py-3 text-sm font-bold rounded-xl transition-all outline-none
+                            {{ request()->routeIs('MDA*') ? 'bg-beige/30 text-Chocolate' : 'text-MediumBrown hover:bg-beige/20 hover:text-Chocolate' }}">
+                            <div class="flex items-center">
+                                <i class="fas fa-users-cog w-5 mr-3"></i>
+                                <span>Master Akun</span>
+                            </div>
+                            <i id="arrow-icon" class="fas fa-chevron-down text-[10px] transition-transform duration-300 {{ request()->routeIs('MDA*') ? 'rotate-180' : '' }}"></i>
+                        </button>
+
+                        <div id="menu-master-akun" class="{{ request()->routeIs('MDA*') ? '' : 'hidden' }} mt-1 ml-4 border-l-2 border-beige/50 space-y-1">
+                            <a href="{{ route('MDA') }}"
+                                class="block py-2.5 pl-8 pr-4 text-[13px] font-bold transition-all rounded-r-xl
+                                {{ request()->routeIs('MDA-petugas') ? 'text-Chocolate bg-beige/10' : 'text-MediumBrown/60 hover:text-Chocolate' }}">
+                                Data Petugas
+                            </a>
+                            <a href="{{ route('data-user') }}"
+                                class="block py-2.5 pl-8 pr-4 text-[13px] font-bold transition-all rounded-r-xl
+                                {{ request()->routeIs('MDA-user') ? 'text-Chocolate bg-beige/10' : 'text-MediumBrown/60 hover:text-Chocolate' }}">
+                                Data User
+                            </a>
+                        </div>
+                    </div>
+                @endif
+
+                <p class="px-4 text-[10px] font-black uppercase tracking-[0.2em] text-MediumBrown/40 pt-4 mb-3">Katalog & Laporan</p>
+
+                <a href="{{ route('MDK') }}"
+                    class="group flex items-center px-4 py-3 text-sm font-bold rounded-xl transition-all
+                    {{ request()->routeIs('MDK') ? 'bg-Chocolate text-white shadow-lg shadow-Chocolate/20' : 'text-MediumBrown hover:bg-beige/20 hover:text-Chocolate' }}">
+                    <i class="fas fa-tags w-5 mr-3 {{ request()->routeIs('MDK') ? 'text-white' : 'text-MediumBrown group-hover:text-Chocolate' }}"></i>
+                    Kategori
+                </a>
+
+                <a href="{{ route('MDB') }}"
+                    class="group flex items-center px-4 py-3 text-sm font-bold rounded-xl transition-all
+                    {{ request()->routeIs('MDB') ? 'bg-Chocolate text-white shadow-lg shadow-Chocolate/20' : 'text-MediumBrown hover:bg-beige/20 hover:text-Chocolate' }}">
+                    <i class="fas fa-book w-5 mr-3 {{ request()->routeIs('MDB') ? 'text-white' : 'text-MediumBrown group-hover:text-Chocolate' }}"></i>
+                    Data Buku
+                </a>
+
+                <a href="{{ route('ulasan') }}"
+                    class="group flex items-center px-4 py-3 text-sm font-bold rounded-xl transition-all
+                    {{ request()->routeIs('ulasan') ? 'bg-Chocolate text-white shadow-lg shadow-Chocolate/20' : 'text-MediumBrown hover:bg-beige/20 hover:text-Chocolate' }}">
+                    <i class="fas fa-star w-5 mr-3 {{ request()->routeIs('ulasan') ? 'text-white' : 'text-MediumBrown group-hover:text-Chocolate' }}"></i>
+                    Ulasan
+                </a>
+
+                <a href="{{ route('laporan') }}"
+                    class="group flex items-center px-4 py-3 text-sm font-bold rounded-xl transition-all
+                    {{ request()->routeIs('laporan') ? 'bg-Chocolate text-white shadow-lg shadow-Chocolate/20' : 'text-MediumBrown hover:bg-beige/20 hover:text-Chocolate' }}">
+                    <i class="fas fa-file-alt w-5 mr-3 {{ request()->routeIs('laporan') ? 'text-white' : 'text-MediumBrown group-hover:text-Chocolate' }}"></i>
+                    Laporan
+                </a>
+            </nav>
+        </div>
+
+        <div class="p-4 border-t border-beige/30">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button class="flex items-center w-full px-4 py-3 text-sm font-bold text-red-500 hover:bg-red-50 rounded-xl transition-colors">
+                    <i class="fas fa-sign-out-alt w-5 mr-3"></i>
+                    Keluar
+                </button>
+            </form>
+        </div>
+    </div>
 </aside>
 
 <script>
