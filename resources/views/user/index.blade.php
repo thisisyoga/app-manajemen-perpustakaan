@@ -50,14 +50,14 @@
                     <a href="{{ route('riwayat') }}"
                         class="relative py-1 text-sm font-bold uppercase tracking-widest {{ request()->routeIs('riwayat') ? 'text-Chocolate' : 'text-MediumBrown/60 hover:text-Chocolate' }} transition-colors">
                         <i class="fas fa-history"></i> Riwayat
-                        @if (request()->routeIs('riwayat') )
+                        @if (request()->routeIs('riwayat'))
                             <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-Chocolate rounded-full"></span>
                         @endif
                     </a>
                     <a href="{{ route('favorit') }}"
                         class="relative py-1 text-sm font-bold uppercase tracking-widest {{ request()->routeIs('favorit') ? 'text-Chocolate' : 'text-MediumBrown/60 hover:text-Chocolate' }} transition-colors">
                         <i class="fas fa-bookmark"></i> Favorit
-                        @if (request()->routeIs('favorit') )
+                        @if (request()->routeIs('favorit'))
                             <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-Chocolate rounded-full"></span>
                         @endif
                     </a>
@@ -117,44 +117,70 @@
                         <i class="fas fa-sliders-h text-Caramel"></i>
                     </div>
 
-                    <div class="relative mb-6">
+                    <form action="{{ url()->current() }}" method="GET" class="relative mb-6">
                         <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-Caramel/50 text-xs"></i>
-                        <input type="text" placeholder="Cari kategori..."
+                        <input type="text" name="search_kategori" value="{{ request('search_kategori') }}"
+                            placeholder="Cari kategori..."
                             class="w-full h-11 bg-beige/10 rounded-xl pl-10 pr-4 text-sm outline-none border border-beige focus:border-Chocolate transition-all placeholder:text-MediumBrown/30">
-                    </div>
+                    </form>
 
                     <div class="space-y-1">
-                        <a href="{{ url()->current() }}"
+                        <a href="{{ request()->url() }}"
                             class="flex items-center justify-between px-4 py-3 rounded-xl transition-all {{ !request('kategori') ? 'bg-Chocolate text-white shadow-md font-bold' : 'text-MediumBrown/70 hover:bg-beige/30' }}">
                             <span class="text-sm">Semua Buku</span>
                             <i
                                 class="fas fa-chevron-right text-[10px] {{ !request('kategori') ? 'opacity-100' : 'opacity-0' }}"></i>
                         </a>
 
-                        @foreach ($kategori as $item)
+                        @forelse ($dataKategori as $item)
                             <a href="{{ request()->fullUrlWithQuery(['kategori' => $item->id]) }}"
                                 class="flex items-center justify-between px-4 py-3 rounded-xl transition-all {{ request('kategori') == $item->id ? 'bg-Chocolate text-white shadow-md font-bold' : 'text-MediumBrown/70 hover:bg-beige/30 hover:text-Chocolate' }}">
                                 <span class="text-sm">{{ $item->nama_kategori }}</span>
                                 <i
                                     class="fas fa-chevron-right text-[10px] {{ request('kategori') == $item->id ? 'opacity-100' : 'opacity-0' }}"></i>
                             </a>
-                        @endforeach
+                        @empty
+                            <div class="px-4 py-3 text-xs text-MediumBrown/50 italic">
+                                Kategori tidak ditemukan...
+                            </div>
+                        @endforelse
                     </div>
                 </div>
             </aside>
 
             <div class="lg:col-span-9">
                 <div class="bg-white rounded-3xl border border-beige/60 p-4 shadow-sm mb-10">
-                    <div class="flex flex-col md:flex-row gap-3">
+                    <form action="{{ url()->current() }}" method="GET" class="flex flex-col md:flex-row gap-3">
+                        @if (request('kategori'))
+                            <input type="hidden" name="kategori" value="{{ request('kategori') }}">
+                        @endif
+
                         <div class="relative flex-grow">
                             <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-Caramel text-lg"></i>
-                            <input type="text" placeholder="Judul buku, penulis, atau ISBN..."
+                            <input type="text" name="search" value="{{ request('search') }}"
+                                placeholder="Judul buku, penulis, atau ISBN..."
                                 class="w-full h-14 bg-beige/10 rounded-2xl pl-14 pr-5 text-sm outline-none border border-transparent focus:border-Chocolate focus:bg-white transition-all">
                         </div>
-                        <button
+
+                        <button type="submit"
                             class="md:w-32 h-14 bg-DarkChocolate hover:bg-Chocolate text-white rounded-2xl font-bold transition-all shadow-lg shadow-DarkChocolate/10">
                             Cari
                         </button>
+                    </form>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+                        @forelse ($buku as $b)
+                        @empty
+                            <div class="col-span-full py-20 text-center">
+                                <img src="{{ asset('image/empty-state.png') }}" class="w-40 mx-auto opacity-20 mb-4"
+                                    alt="">
+                                <p class="text-MediumBrown/50 font-medium">Wah, buku yang kamu cari tidak ditemukan...
+                                </p>
+                                <a href="{{ request()->url() }}"
+                                    class="text-Chocolate font-bold text-sm underline mt-2 inline-block">Lihat Semua
+                                    Koleksi</a>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
 
@@ -174,47 +200,52 @@
                         <div
                             class="group bg-white rounded-[32px] border border-beige/50 p-4 shadow-sm hover:shadow-2xl hover:shadow-Chocolate/5 hover:-translate-y-2 transition-all duration-500 relative">
                             <a href="{{ route('detail-buku', $b->id) }}">
-                            <div class="relative h-[280px] rounded-[24px] bg-beige/20 overflow-hidden mb-6">
-                                <img src="{{ asset('storage/' . $b->cover) }}" alt="Cover"
-                                    class="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700" onerror="this.src='https://placehold.co/400x600/5D3A2E/FFF?text=No+Cover'"> 
+                                <div class="relative h-[280px] rounded-[24px] bg-beige/20 overflow-hidden mb-6">
+                                    <img src="{{ asset('storage/' . $b->cover) }}" alt="Cover"
+                                        class="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700"
+                                        onerror="this.src='https://placehold.co/400x600/5D3A2E/FFF?text=No+Cover'">
 
-                                <div class="absolute top-4 left-4">
-                                    <span
-                                        class="bg-white text-Chocolate text-[10px] font-bold px-4 py-1.5 rounded-r-full uppercase">
-                                        {{ $b->RelasiKategori->first()->nama_kategori ?? 'Umum' }}
-                                    </span>
+                                    <div class="absolute top-4 left-4">
+                                        <span
+                                            class="bg-white text-Chocolate text-[10px] font-bold px-4 py-1.5 rounded-r-full uppercase">
+                                            {{ $b->RelasiKategori->first()->nama_kategori ?? 'Umum' }}
+                                        </span>
+                                    </div>
+
+                                    @php $isBookmarked = in_array($b->id, $koleksi); @endphp
+                                    <form action="{{ route('bookmark.store', $b->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit"
+                                            class="absolute top-4 right-4 h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 {{ $isBookmarked ? 'text-Chocolate' : 'text-Caramel/30 hover:text-Chocolate' }}">
+                                            <i
+                                                class="{{ $isBookmarked ? 'fa-solid' : 'fa-regular' }} fa-bookmark"></i>
+                                        </button>
+                                    </form>
                                 </div>
 
-                                @php $isBookmarked = in_array($b->id, $koleksi); @endphp
-                                <form action="{{ route('bookmark.store', $b->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit"
-                                        class="absolute top-4 right-4 h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 {{ $isBookmarked ? 'text-Chocolate' : 'text-Caramel/30 hover:text-Chocolate' }}">
-                                        <i class="{{ $isBookmarked ? 'fa-solid' : 'fa-regular' }} fa-bookmark"></i>
-                                    </button>
-                                </form>
-                            </div>
+                                <div class="px-2 pb-2">
+                                    <p class="text-[10px] font-black uppercase tracking-widest text-Chocolate mb-2">
+                                        {{ $b->penulis }}</p>
+                                    <a href="{{ route('detail-buku', $b->id) }}">
+                                        <h4
+                                            class="text-lg font-serif font-bold text-DarkChocolate line-clamp-1 group-hover:text-Chocolate transition-colors mb-2">
+                                            {{ $b->judul_buku }}
+                                        </h4>
+                                    </a>
+                                    <p
+                                        class="text-xs text-MediumBrown/60 line-clamp-2 leading-relaxed mb-4 min-h-[32px]">
+                                        {{ $b->deskripsi }}
+                                    </p>
 
-                            <div class="px-2 pb-2">
-                                <p class="text-[10px] font-black uppercase tracking-widest text-Chocolate mb-2">
-                                    {{ $b->penulis }}</p>
-                                <a href="{{ route('detail-buku', $b->id) }}">
-                                    <h4
-                                        class="text-lg font-serif font-bold text-DarkChocolate line-clamp-1 group-hover:text-Chocolate transition-colors mb-2">
-                                        {{ $b->judul_buku }}
-                                    </h4>
-                                </a>
-                                <p class="text-xs text-MediumBrown/60 line-clamp-2 leading-relaxed mb-4 min-h-[32px]">
-                                    {{ $b->deskripsi }}
-                                </p>
-
-                                <div class="flex items-center justify-between pt-4 border-t border-beige/50">
-                                    <div class="flex items-center gap-1.5">
-                                        <i class="fas fa-layer-group @if ($b->stok != 0) text-green-600 @else text-red-600 @endif text-[10px]"></i>
-                                        <span class="text-[11px] font-bold text-MediumBrown/80">Stok: {{ $b->stok }}</span>
+                                    <div class="flex items-center justify-between pt-4 border-t border-beige/50">
+                                        <div class="flex items-center gap-1.5">
+                                            <i
+                                                class="fas fa-layer-group @if ($b->stok != 0) text-green-600 @else text-red-600 @endif text-[10px]"></i>
+                                            <span class="text-[11px] font-bold text-MediumBrown/80">Stok:
+                                                {{ $b->stok }}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             </a>
                         </div>
                     @endforeach
@@ -223,11 +254,11 @@
         </div>
     </main>
 
-    <footer class="mt-20 py-10 border-t border-beige/50 text-center">
+    {{-- <footer class="mt-20 py-10 border-t border-beige/50 text-center">
         <p class="text-xs font-bold text-MediumBrown/40 uppercase tracking-[0.3em]">
             &copy; 2026 Aksara Digital Library - Tefa RPL
         </p>
-    </footer>
+    </footer> --}}
 
 </body>
 

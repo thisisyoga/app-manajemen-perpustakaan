@@ -18,7 +18,8 @@ class UserController extends Controller
     {
         $kategori = Kategori::all();
         $kategoriAktif = null;
-
+        $kategoriInput = $request->query('search_kategori');
+        $bukuInput = $request->query('search');
         $query = Buku::with('RelasiKategori');
 
         if ($request->filled('kategori')) {
@@ -28,11 +29,17 @@ class UserController extends Controller
             $q->where('kategori_id', $request->kategori);
         });
         }
-
-        $buku = $query->get();
         
         $koleksi = Auth::check()? Auth::user()->koleksiPribadi()->pluck('buku_id')->toArray(): [];
-        return view('user.index',compact('buku', 'kategori', 'kategoriAktif', 'koleksi'));
+
+        $dataKategori = Kategori::when($kategoriInput, function ($query) use ($kategoriInput) {
+        return $query->SearchKategori($kategoriInput);})->get();
+
+        if ($bukuInput) {
+            $query->searchBuku($bukuInput);}
+
+        $buku = $query->get();
+        return view('user.index',compact('buku', 'kategori', 'kategoriAktif', 'koleksi', 'dataKategori'));
     }
 
 

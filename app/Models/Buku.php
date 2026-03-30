@@ -28,4 +28,15 @@ class Buku extends Model
     {
         return $this->hasMany(KoleksiPribadi::class, 'buku_id');
     }
+
+    public function scopeSearchBuku($query, $buku)
+    {
+        return $query->where(function ($query) use ($buku) {
+            $query->where('judul_buku', 'like', "%{$buku}%")
+                    ->orWhere('penulis', 'like', "%{$buku}%")
+                    ->orWhere('penerbit', 'like', "%{$buku}%")
+                    ->orWhere('tahun_terbit', 'like', "%{$buku}%")
+                    ->orWhere('isbn', 'like', "%{$buku}%");
+        });
+    }
 }
