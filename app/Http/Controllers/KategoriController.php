@@ -13,6 +13,14 @@ class KategoriController extends Controller
     public function index()
     {
         $kategori = Kategori::all();
+        $kategoriInput = request()->query('search');
+        $query = Kategori::query();
+
+        $query->when($kategoriInput, function ($q) use ($kategoriInput) {
+        return $q->searchKategori($kategoriInput);
+        });
+
+        $kategori = $query->get();
         return view('admin.kategori.index', compact('kategori'));
     }
 

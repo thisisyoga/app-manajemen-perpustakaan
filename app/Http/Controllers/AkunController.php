@@ -14,12 +14,28 @@ class AkunController extends Controller
     public function index()
     {
         $petugas = User::where('role', 'petugas')->get();
+        $userInput = request()->query('user');
+        $query = User::where('role', 'petugas');
+        
+        $query->when($userInput, function ($q) use ($userInput) {
+        return $q->searchUser($userInput);
+        });
+
+        $petugas = $query->get();
         return view('admin.akun.petugas', compact('petugas'));
     }
 
     public function user()
     {
         $user = User::where('role', 'user')->get();
+        $userInput = request()->query('user');
+        $query = User::where('role', 'user');
+
+        $query->when($userInput, function ($q) use ($userInput) {
+        return $q->searchUser($userInput);
+        });
+        
+        $user = $query->get();
         return view('admin.akun.user', compact('user'));
     }
 

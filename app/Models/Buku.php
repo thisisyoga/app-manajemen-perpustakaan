@@ -36,7 +36,8 @@ class Buku extends Model
                     ->orWhere('penulis', 'like', "%{$buku}%")
                     ->orWhere('penerbit', 'like', "%{$buku}%")
                     ->orWhere('tahun_terbit', 'like', "%{$buku}%")
-                    ->orWhere('isbn', 'like', "%{$buku}%");
-        });
+                    ->orwhereHas('RelasiKategori', function ($q) use ($buku) {
+                        $q->where('nama_kategori', 'like', "%{$buku}%");});
+                    })->orWhere('isbn', 'like', "%{$buku}%");
     }
 }

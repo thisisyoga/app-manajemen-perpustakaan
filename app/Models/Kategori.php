@@ -12,9 +12,10 @@ class Kategori extends Model
 
     
     public function scopeSearchKategori($query, $kategori)
-{
+    {
     return $query->where(function ($query) use ($kategori) {
         $query->where('nama_kategori', 'like', "%{$kategori}%");
     });
-}
+    }
+
 }

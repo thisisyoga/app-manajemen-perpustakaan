@@ -14,8 +14,16 @@ class BukuController extends Controller
      */
     public function index()
     {
-        // Menggunakan Eager Loading dengan nama relasi 'RelasiKategori'
         $buku = Buku::with('RelasiKategori')->get();
+        $bukuInput = request()->query('search');
+        $query = Buku::with('RelasiKategori');
+
+        $query->when($bukuInput, function ($q) use ($bukuInput) {
+            return $q->searchBuku($bukuInput);
+        }); 
+        
+        $buku = $query->get();
+    
         return view('admin.buku.index', compact('buku'));
     }
 

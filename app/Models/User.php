@@ -50,16 +50,24 @@ class User extends Authenticatable
     }
 
 public function hasRole($roles)
-{
+    {
     if (is_array($roles)) {
-        return in_array($this->role, $roles);
-    }
+        return in_array($this->role, $roles);}
     
     return $this->role === $roles;
-}
+    }
 
     public function koleksiPribadi()
     {
         return $this->hasMany(KoleksiPribadi::class, 'user_id');
+    }
+
+    public function scopeSearchUser($query, $user)
+    {
+        return $query->where(function ($query) use ($user) {
+            $query->where('name', 'like', "%{$user}%")
+                    ->orWhere('email', 'like', "%{$user}%")
+                    ->orWhere('NamaLengkap', 'like', "%{$user}%");
+        });
     }
 }

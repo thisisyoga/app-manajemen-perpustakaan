@@ -37,9 +37,6 @@
                     <h3 class="font-serif font-bold text-lg text-DarkChocolate">Data Peminjaman Buku</h3>
                     <p class="text-[10px] text-MediumBrown/60 font-medium">Daftar permintaan peminjaman terbaru yang butuh tindakan.</p>
                 </div>
-                <button class="bg-beige/20 hover:bg-beige/40 text-Chocolate text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-xl transition-colors">
-                    Lihat Semua
-                </button>
             </div>
             
             <div class="overflow-x-auto">
