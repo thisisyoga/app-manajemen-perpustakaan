@@ -62,6 +62,22 @@
                         <i class="fas fa-file-pdf mr-2"></i> PDF Peminjaman
                     </a>
                 </div>
+                <div class="group bg-white rounded-[32px] border border-Chocolate/20 p-8 shadow-sm hover:shadow-xl hover:shadow-Chocolate/10 transition-all duration-500 relative overflow-hidden">
+
+                    <div class="w-14 h-14 bg-beige/10 text-Chocolate rounded-2xl flex items-center justify-center mb-6 ">
+                        <i class="fas fa-book text-xl"></i>
+                    </div>
+                    
+                    <h3 class="text-lg font-serif font-bold text-DarkChocolate mb-3">Laporan Pengembalian</h3>
+                    <p class="text-xs text-DarkChocolate mb-8 leading-relaxed">
+                        Arsip transaksi buku yang telah tuntas. Laporan ini mencakup durasi pinjam dan status pengembalian.
+                    </p>
+                    
+                    <a href="{{ route('export.peminjaman.selesai') }}"
+                        class="flex items-center justify-center w-full px-6 py-3 bg-white border border-beige/60 text-[11px] font-black uppercase tracking-widest rounded-xl text-DarkChocolate hover:bg-Chocolate hover:text-white hover:border-Chocolate transition-all duration-300 shadow-sm active:scale-95">
+                        <i class="fas fa-file-pdf mr-2"></i> PDF Pengembalian
+                    </a>
+                </div>
 
             </div>
         </div>

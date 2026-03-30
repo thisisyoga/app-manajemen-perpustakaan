@@ -145,4 +145,17 @@ class DashboardController extends Controller
 
         return $pdf->download('laporan-peminjaman-selesai.pdf');
     }
+    public function exportpeminjaman()
+    {
+        $data = Peminjaman::with(['user', 'buku'])
+            ->where('status', 'dipinjam')
+            ->get();
+
+        $pdf = Pdf::loadView('pdf.laporan_peminjaman', [
+            'laporan' => $data,
+            'judul'   => 'Laporan Peminjaman (Sedang Dipinjam)'
+        ]);
+
+        return $pdf->download('laporan-peminjaman.pdf');
+    }
 }

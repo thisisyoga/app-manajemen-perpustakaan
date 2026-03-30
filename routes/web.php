@@ -84,7 +84,8 @@ Route::middleware(['role:admin'])->group(function () {
         return view('admin.laporan.index');
     })->name('laporan');
     Route::get('/export-pdf/{role}', [DashboardController::class, 'exportByRole'])->name('export.pdf');
-    Route::get('/export-peminjaman-selesai', [DashboardController::class, 'exportPeminjamanSelesai'])->name('export.peminjaman');
+    Route::get('/export-peminjaman-selesai', [DashboardController::class, 'exportPeminjamanSelesai'])->name('export.peminjaman.selesai');
+    Route::get('/export-peminjaman', [DashboardController::class, 'exportpeminjaman'])->name('export.peminjaman');
 
     //ulasan
     Route::get('/ulasan', function () {

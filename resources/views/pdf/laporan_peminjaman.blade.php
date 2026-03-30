@@ -28,14 +28,20 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($laporan as $key => $p)
+            @forelse($laporan as $key => $p)
             <tr>
                 <td>{{ $key + 1 }}</td>
                 <td>{{ $p->user->NamaLengkap }}</td> <td>{{ $p->buku->judul_buku }}</td>        <td>{{ $p->tanggal_peminjaman }}</td>
                 <td>{{ $p->tanggal_pengembalian }}</td>
                 <td>{{ ucfirst($p->status) }}</td>
             </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 20px; font-style: italic; color: #666;">
+                        Tidak ada data peminjaman saat ini.
+                    </td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </body>
