@@ -22,7 +22,8 @@
             height: 2px;
             bottom: -4px;
             left: 0;
-            background-color: #C99B66; /* Caramel Hex */
+            background-color: #C99B66;
+            /* Caramel Hex */
             transition: width 0.3s ease;
         }
 
@@ -31,8 +32,15 @@
         }
 
         @keyframes wiggle {
-            0%, 100% { transform: scale(1.1) translate(0, 0); }
-            50% { transform: scale(1.15) translate(-10px, -10px); }
+
+            0%,
+            100% {
+                transform: scale(1.1) translate(0, 0);
+            }
+
+            50% {
+                transform: scale(1.15) translate(-10px, -10px);
+            }
         }
 
         .animate-slow-zoom {
@@ -100,7 +108,7 @@
                     </h1>
                     <p class="text-lg md:text-xl text-beige/90 mb-10 leading-relaxed max-w-xl">
                         Menjelajahi cakrawala tanpa batas melalui koleksi buku pilihan. Mulailah petualangan literasi
-                        Anda dengan kenyamanan teknologi modern.
+                        anda dengan kenyamanan teknologi modern.
                     </p>
                     <div class="flex flex-wrap gap-5">
                         <a href="#koleksi"
@@ -134,18 +142,19 @@
                             Membawa Perpustakaan Konvensional ke Era Digital
                         </h3>
                         <p class="text-DarkChocolate/80 mb-6 text-lg leading-relaxed">
-                            Aksara adalah solusi modern untuk pecinta literasi yang menghargai sensasi membaca buku
-                            fisik namun mendambakan kemudahan akses digital.
+                            Aksara adalah platform manajemen literasi yang menyederhanakan proses peminjaman buku fisik melalui sistem digital yang praktis dan terorganisir.
                         </p>
 
                         <div class="grid grid-cols-2 gap-8 border-t border-Chocolate/10 pt-8">
                             <div>
                                 <span class="block text-4xl font-black text-Chocolate">1000+</span>
-                                <span class="text-sm text-MediumBrown font-bold uppercase tracking-widest">Koleksi Buku</span>
+                                <span class="text-sm text-MediumBrown font-bold uppercase tracking-widest">Koleksi
+                                    Buku</span>
                             </div>
                             <div>
                                 <span class="block text-4xl font-black text-Chocolate">5000+</span>
-                                <span class="text-sm text-MediumBrown font-bold uppercase tracking-widest">Anggota</span>
+                                <span
+                                    class="text-sm text-MediumBrown font-bold uppercase tracking-widest">Anggota</span>
                             </div>
                         </div>
                     </div>
@@ -161,28 +170,37 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                    <div class="p-8 bg-beige/30 rounded-3xl border border-Caramel/10 hover:border-Caramel transition-all duration-300 group">
-                        <div class="w-16 h-16 bg-Chocolate text-beige rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fas fa-search"></i>
+                    <div
+                        class="p-8 bg-beige/30 rounded-3xl border border-Caramel/10 hover:border-Caramel transition-all duration-300 group">
+                        <div
+                            class="w-16 h-16 bg-Chocolate text-beige rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-book-open"></i>
                         </div>
-                        <h3 class="text-2xl font-bold text-Chocolate mb-3">Pencarian Cerdas</h3>
-                        <p class="text-DarkChocolate/70">Temukan lokasi buku tepat di raknya melalui navigasi digital kami.</p>
+                        <h3 class="text-2xl font-bold text-Chocolate mb-3">Katalog Digital</h3>
+                        <p class="text-DarkChocolate/70">Akses seluruh koleksi pustaka kami secara lengkap langsung dari
+                            genggaman anda.</p>
                     </div>
 
-                    <div class="p-8 bg-beige/30 rounded-3xl border border-Caramel/10 hover:border-Caramel transition-all duration-300 group">
-                        <div class="w-16 h-16 bg-Chocolate text-beige rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fas fa-couch"></i>
+                    <div
+                        class="p-8 bg-beige/30 rounded-3xl border border-Caramel/10 hover:border-Caramel transition-all duration-300 group">
+                        <div
+                            class="w-16 h-16 bg-Chocolate text-beige rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-check-circle"></i>
                         </div>
-                        <h3 class="text-2xl font-bold text-Chocolate mb-3">Ruang Nyaman</h3>
-                        <p class="text-DarkChocolate/70">Area baca eksklusif dengan atmosfer tenang dan pencahayaan hangat.</p>
+                        <h3 class="text-2xl font-bold text-Chocolate mb-3">Peminjaman Mudah</h3>
+                        <p class="text-DarkChocolate/70">Proses peminjaman buku yang simpel dan cepat hanya melalui
+                            aplikasi ini.</p>
                     </div>
 
-                    <div class="p-8 bg-beige/30 rounded-3xl border border-Caramel/10 hover:border-Caramel transition-all duration-300 group">
-                        <div class="w-16 h-16 bg-Chocolate text-beige rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fas fa-qrcode"></i>
+                    <div
+                        class="p-8 bg-beige/30 rounded-3xl border border-Caramel/10 hover:border-Caramel transition-all duration-300 group">
+                        <div
+                            class="w-16 h-16 bg-Chocolate text-beige rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-history"></i>
                         </div>
-                        <h3 class="text-2xl font-bold text-Chocolate mb-3">Pinjam Kilat</h3>
-                        <p class="text-DarkChocolate/70">Sistem peminjaman mandiri hanya dengan memindai kode QR buku.</p>
+                        <h3 class="text-2xl font-bold text-Chocolate mb-3">Manajemen Pinjaman</h3>
+                        <p class="text-DarkChocolate/70">Pantau batas waktu pengembalian buku agar Anda terhindar dari
+                            keterlambatan.</p>
                     </div>
                 </div>
             </div>
@@ -199,13 +217,17 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     @foreach ($buku as $b)
-                        <div class="group bg-white rounded-3xl border border-Caramel/20 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+                        <div
+                            class="group bg-white rounded-3xl border border-Caramel/20 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
                             <a href="#" class="block h-full">
-                                <div class="relative h-72 bg-gradient-to-b from-beige/50 to-beige flex items-center justify-center overflow-hidden">
-                                    <img src="{{ asset('storage/' . $b->cover) }}" alt="Cover Buku" onerror="this.src='https://placehold.co/400x600/5D3A2E/FFF?text=No+Cover'"
+                                <div
+                                    class="relative h-72 bg-gradient-to-b from-beige/50 to-beige flex items-center justify-center overflow-hidden">
+                                    <img src="{{ asset('storage/' . $b->cover) }}" alt="Cover Buku"
+                                        onerror="this.src='https://placehold.co/400x600/5D3A2E/FFF?text=No+Cover'"
                                         class="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700">
                                     <div class="absolute top-4 left-0">
-                                        <span class="bg-Chocolate text-beige text-[10px] font-bold px-4 py-1.5 rounded-r-full uppercase">
+                                        <span
+                                            class="bg-Chocolate text-beige text-[10px] font-bold px-4 py-1.5 rounded-r-full uppercase">
                                             {{ $b->RelasiKategori->first()->nama_kategori ?? 'Tanpa Kategori' }}
                                         </span>
                                     </div>
@@ -215,22 +237,27 @@
                                     <p class="text-Caramel text-[11px] font-semibold tracking-[0.18em] uppercase mb-2">
                                         {{ Str::limit($b->penulis, 24, '...') }}
                                     </p>
-                                    <h3 class="text-lg font-bold text-Chocolate leading-snug line-clamp-2 mb-3 group-hover:text-MediumBrown transition">
+                                    <h3
+                                        class="text-lg font-bold text-Chocolate leading-snug line-clamp-2 mb-3 group-hover:text-MediumBrown transition">
                                         {{ Str::limit($b->judul_buku, 45, '...') }}
                                     </h3>
                                     <div class="flex items-center gap-1 mb-3 text-Caramel text-xs">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i>
                                         <span class="text-DarkChocolate/50 text-[11px] ml-2">(2.4k)</span>
                                     </div>
                                     <p class="text-DarkChocolate/75 text-sm leading-relaxed line-clamp-3 mb-5">
                                         {{ Str::limit($b->deskripsi, 110, '...') }}
                                     </p>
-                                    
-                                         <div class="flex items-center gap-1.5">
-                                        <i class="fas fa-layer-group @if ($b->stok != 0) text-green-600 @else text-red-600 @endif text-[10px]"></i>
-                                        <span class="text-[11px] font-bold text-MediumBrown/80">Stok: {{ $b->stok }}</span>
 
-                                    </div>
+                                </div>
+                                <div class="flex items-center px-5 py-3 border-t border-Caramel/20">
+                                    <i
+                                        class="fas fa-layer-group @if ($b->stok != 0) text-green-600 @else text-red-600 @endif text-[10px]"></i>
+                                    <span class="text-[11px] ml-2 font-bold text-MediumBrown/80">Stok:
+                                        {{ $b->stok }}</span>
+
                                 </div>
                             </a>
                         </div>
@@ -241,28 +268,33 @@
 
         <section class="py-20 bg-Chocolate relative overflow-hidden">
             <div class="absolute top-0 right-0 w-64 h-64 bg-Caramel/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
-            <div class="absolute bottom-0 left-0 w-64 h-64 bg-MediumBrown/20 rounded-full -ml-32 -mb-32 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-MediumBrown/20 rounded-full -ml-32 -mb-32 blur-3xl">
+            </div>
 
             <div class="container mx-auto px-8 relative z-10">
                 <div class="max-w-4xl mx-auto text-center">
                     <h2 class="text-4xl md:text-5xl font-bold mb-8 text-beige">Siap Memulai Petualangan?</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl flex items-center text-left border border-white/10">
-                            <div class="w-12 h-12 bg-Caramel rounded-full flex items-center justify-center text-white mr-4">
+                        <div
+                            class="bg-white/10 backdrop-blur-md p-6 rounded-2xl flex items-center text-left border border-white/10">
+                            <div
+                                class="w-12 h-12 bg-Caramel rounded-full flex items-center justify-center text-white mr-4">
                                 <i class="fab fa-whatsapp"></i>
                             </div>
                             <div>
                                 <p class="text-beige/60 text-sm">WhatsApp</p>
-                                <p class="text-beige font-bold">+62 812-3456-789</p>
+                                <a href="https://wa.me/081310405034" target="_blank" class="text-beige font-bold">081310405034</a>
                             </div>
                         </div>
-                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl flex items-center text-left border border-white/10">
-                            <div class="w-12 h-12 bg-Caramel rounded-full flex items-center justify-center text-white mr-4">
+                        <div
+                            class="bg-white/10 backdrop-blur-md p-6 rounded-2xl flex items-center text-left border border-white/10">
+                            <div
+                                class="w-12 h-12 bg-Caramel rounded-full flex items-center justify-center text-white mr-4">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div>
                                 <p class="text-beige/60 text-sm">Email</p>
-                                <p class="text-beige font-bold">halo@aksara.id</p>
+                                <a href="mailto:owneraksara@aksara.id" class="text-beige font-bold">owneraksara@gmail.com</a>
                             </div>
                         </div>
                     </div>
@@ -283,8 +315,12 @@
                             Membangun peradaban melalui literasi digital yang inklusif dan modern.
                         </p>
                         <div class="flex space-x-4">
-                            <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-Caramel hover:text-white transition"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-Caramel hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/vloidgoy/" target="_blank"
+                                class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-Caramel hover:text-white transition"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/081310405034" target="_blank"
+                                class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-Caramel hover:text-white transition"><i
+                                    class="fab fa-whatsapp"></i></a>
                         </div>
                     </div>
 
@@ -292,16 +328,20 @@
                         <h3 class="text-white font-bold mb-6 uppercase tracking-widest text-sm">Layanan</h3>
                         <ul class="space-y-4">
                             <li><a href="#" class="hover:text-Caramel transition">Peminjaman Buku</a></li>
-                            <li><a href="#" class="hover:text-Caramel transition">Ruang Private</a></li>
-                            <li><a href="#" class="hover:text-Caramel transition">Event Literasi</a></li>
+                            <li><a href="#" class="hover:text-Caramel transition">Katalog Digital</a></li>
+                            <li><a href="#" class="hover:text-Caramel transition">Manajemen Pinjaman</a></li>
                         </ul>
                     </div>
 
                     <div>
                         <h3 class="text-white font-bold mb-6 uppercase tracking-widest text-sm">Jam Buka</h3>
                         <ul class="space-y-3 text-sm">
-                            <li class="flex justify-between border-b border-white/5 pb-2"><span>Sen - Jum</span> <span>08:00 - 20:00</span></li>
-                            <li class="flex justify-between border-b border-white/5 pb-2"><span>Sabtu</span> <span>09:00 - 17:00</span></li>
+                            <li class="flex justify-between border-b border-white/5 pb-2"><span>Sen - Jum</span>
+                                <span>08:00 - 20:00</span>
+                            </li>
+                            <li class="flex justify-between border-b border-white/5 pb-2"><span>Sabtu</span>
+                                <span>09:00 - 17:00</span>
+                            </li>
                             <li class="flex justify-between text-Caramel"><span>Minggu</span> <span>Tutup</span></li>
                         </ul>
                     </div>

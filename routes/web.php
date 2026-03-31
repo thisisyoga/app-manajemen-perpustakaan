@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
@@ -18,6 +19,10 @@ Route::get('/akses-ditolak', function () {
     return view('error.akses');
 })->name('akses-ditolak');
 
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route::get('admin/login', [AuthenticatedSessionController::class, 'create'])->name('admin.login');
+    Route::post('admin/login', [AuthenticatedSessionController::class, 'store']);
 
 
 Route::middleware('auth')->group(function () {

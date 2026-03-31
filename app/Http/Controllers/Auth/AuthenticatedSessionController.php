@@ -14,31 +14,48 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
+    public function create(Request $request): View
     {
+        if ($request->is('admin/login')) {
+        return view('admin.auth.login'); 
+    }
         return view('auth.login');
     }
 
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+public function store(LoginRequest $request): RedirectResponse
+{
+    $request->authenticate();
+    $request->session()->regenerate();
+    
+    $user = Auth::user();
 
-        $request->session()->regenerate();
-        $user = Auth::user();
-
-        if ($user->role == 'admin') {
-            return redirect()->intended('/admin-dashboard');
-        } elseif ($user->role == 'user') {
-            return redirect()->intended('/halaman-user');
-        } elseif ($user->role == 'petugas') {
-            return redirect()->intended('/admin-dashboard');
-        }
-
-        return redirect()->intended(route('dashboard', absolute: false));
+    // 1. PROTEKSI: User biasa dilarang login di halaman /admin/login
+    if ($request->is('admin/login') && $user->role === 'user') {
+        Auth::logout();
+        return redirect()->route('admin.login')->withErrors([
+            'email' => 'Akses ditolak. Halaman ini khusus Administrator.',
+        ]);
     }
+
+    // 2. PROTEKSI: Admin/Petugas dilarang login di halaman /login (User)
+    // Jika URL saat ini BUKAN admin/login, tapi yang login adalah admin/petugas
+    if (!$request->is('admin/login') && ($user->role === 'admin' || $user->role === 'petugas')) {
+        Auth::logout();
+        return redirect()->route('login')->withErrors([
+            'email' => 'Staf/Admin silakan login melalui pintu khusus.',
+        ]);
+    }
+
+    // 3. REDIRECT: Jika lolos semua proteksi di atas
+    if ($user->role === 'admin' || $user->role === 'petugas') {
+        return redirect()->intended('/admin-dashboard');
+    } 
+    
+    return redirect()->intended('/halaman-user');
+}
 
     /**
      * Destroy an authenticated session.
