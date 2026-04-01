@@ -50,27 +50,17 @@ Pastikan Anda memiliki **PHP >= 8.2**, **Composer**, dan **Node.js** terinstal d
     php artisan key:generate
     ```
 
-4.  **Generate Key**
-    ```bash
-    php artisan key:generate
-    ```
-
-5.  **Migrasi Database**
+4.  **Migrasi Database**
     ```bash
     php artisan migrate
     ```
 
-6.  **Jalankan Server**
+5.  **Jalankan Server**
     ```bash
     php artisan serve
     ```
 
-7. **Install npm**
-    ```bash
-    npm install
-    ```
-
-8. **Jalankan npm**
+6. **Jalankan npm**
     ```bash
     npm run dev
     ```
