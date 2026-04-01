@@ -102,16 +102,37 @@
                                 </div>
 
                                 <div>
-                                    <label for="kategori" class="block text-sm font-semibold text-DarkChocolate mb-2">Kategori <span class="text-red-500">*</span></label>
-                                    <select name="kategori" id="kategori"
-                                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-4 focus:ring-Chocolate/10 focus:border-Chocolate focus:bg-white transition-all outline-none text-gray-700 appearance-none">
-                                        <option value="">Pilih Kategori</option>
-                                        @foreach ($kategori as $k)
-                                            <option value="{{ $k->id }}" {{ (old('kategori', $selectedKategori) == $k->id) ? 'selected' : '' }}>
-                                                {{ $k->nama_kategori }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    <label for="kategori"
+                                        class="block text-xs font-bold text-DarkChocolate uppercase tracking-widest mb-2 ml-1">Kategori
+                                        <span class="text-rose-500">*</span></label>
+                                    <div class="relative">
+                                        <div>
+                                            <div
+                                                class="grid grid-cols-2 md:grid-cols-3 gap-3 p-4 bg-gray-50 border border-gray-200 rounded-xl">
+                                                @foreach ($kategori as $k)
+                                                    <label class="flex items-center space-x-3 cursor-pointer group">
+                                                        <div class="relative flex items-center">
+                                                            <input type="checkbox" name="kategori[]"
+                                                                value="{{ $k->id }}"
+                                                                class="w-5 h-5 rounded border-gray-300 text-Chocolate focus:ring-Chocolate transition-all cursor-pointer"
+                                                                {{ is_array(old('kategori')) && in_array($k->id, old('kategori')) ? 'checked' : '' }}>
+                                                        </div>
+                                                        <span
+                                                            class="text-sm text-gray-600 group-hover:text-DarkChocolate transition-colors">
+                                                            {{ $k->nama_kategori }}
+                                                        </span>
+                                                    </label>
+                                                @endforeach
+                                            </div>
+
+                                            @error('kategori')
+                                                <p class="mt-1 text-xs text-rose-500 font-medium italic">* {{ $message }}
+                                                </p>
+                                            @enderror
+                                        </div>
+                                        
+                                    </div>
+                                </div>
                                 </div>
 
                                 <div class="md:col-span-2">
