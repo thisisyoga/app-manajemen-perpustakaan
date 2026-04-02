@@ -19,7 +19,7 @@
                 <a href="{{ route('admin-dashboard') }}"
                     class="group flex items-center px-4 py-3 text-sm font-bold rounded-xl transition-all
                     {{ request()->routeIs('admin-dashboard') ? 'bg-Chocolate text-white shadow-lg shadow-Chocolate/20' : 'text-MediumBrown hover:bg-beige/20 hover:text-Chocolate' }}">
-                    <i class="fas fa-th-large w-5 mr-3 {{ request()->routeIs('admin-dashboard') ? 'text-white' : 'text-MediumBrown group-hover:text-Chocolate' }}"></i>
+                    <i class="fas fa-house w-5 mr-3 {{ request()->routeIs('admin-dashboard') ? 'text-white' : 'text-MediumBrown group-hover:text-Chocolate' }}"></i>
                     Dashboard
                 </a>
 

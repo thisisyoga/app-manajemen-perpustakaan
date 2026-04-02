@@ -40,4 +40,19 @@ class Buku extends Model
                         $q->where('nama_kategori', 'like', "%{$buku}%");});
                     })->orWhere('isbn', 'like', "%{$buku}%");
     }
+
+    public function ulasans()
+    {
+        return $this->hasMany(Ulasan::class, 'buku_id');
+    }
+
+    public function averageRating()
+    {
+        return $this->ulasans()->avg('rating') ?? 0;
+    }
+
+    public function totalUlasans()
+    {
+        return $this->ulasans()->count();
+    }
 }

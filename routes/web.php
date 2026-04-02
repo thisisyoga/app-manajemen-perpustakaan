@@ -45,16 +45,19 @@ Route::middleware('auth')->group(function () {
         Route::post('/koleksi-pribadi/{buku}', [UserController::class, 'koleksipribadi'])->name('bookmark.store');
 
         Route::post('/ulasan', [UlasanController::class, 'storeUlasan'])->name('ulasan.store');
+        Route::put('/ulasan/{id}', [UlasanController::class, 'updateUlasan'])->name('ulasan.update');
 });
 
 Route::middleware(['role:admin|petugas'])->group(function () {
+
+    Route::get('/profile-admin', [ProfileController::class, 'profilAdmin'])->name('profile.admin');
+    Route::patch('/profile', [ProfileController::class, 'updateAdmin'])->name('profile.update.admin');
 
     Route::get('/admin-dashboard', [DashboardController::class, 'admin'])->name('admin-dashboard');
     Route::get('/admin/peminjaman/{id}/setuju', [DashboardController::class, 'setuju'])->name('admin.peminjaman.setuju');
     Route::get('/admin/peminjaman/{id}/tolak', [DashboardController::class, 'tolak'])->name('admin.peminjaman.tolak');
     Route::get('/admin/peminjaman/{id}/dikembalikan', [DashboardController::class, 'dikembalikan'])->name('admin.peminjaman.dikembalikan');
     Route::get('/admin/peminjaman/{id}/diajukan', [DashboardController::class, 'diajukan'])->name('admin.peminjaman.diajukan');
-    
     Route::get('/admin-pengembalian', [DashboardController::class, 'pengembalian'])->name('admin-pengembalian');
     
 Route::middleware(['role:admin'])->group(function () {
@@ -83,7 +86,12 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/buku/{buku}/edit', [BukuController::class, 'edit'])->name('edit-MDB');
     Route::put('/buku/{buku}', [BukuController::class, 'update'])->name('update-MDB');
     Route::delete('/buku/{buku}', [BukuController::class, 'destroy'])->name('delete-MDB');
+    Route::get('/buku/show/{buku}', [BukuController::class, 'show'])->name('show-MDB');
 
+     //Laporan
+     Route::get('/laporan', function () {
+        return view('admin.laporan.index');
+    })->name('laporan');
 
     Route::get('/export-halaman', function () {
         return view('admin.laporan.index');
@@ -91,11 +99,13 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/export-pdf/{role}', [DashboardController::class, 'exportByRole'])->name('export.pdf');
     Route::get('/export-peminjaman-selesai', [DashboardController::class, 'exportPeminjamanSelesai'])->name('export.peminjaman.selesai');
     Route::get('/export-peminjaman', [DashboardController::class, 'exportpeminjaman'])->name('export.peminjaman');
-
+    Route::get('/export-buku', [DashboardController::class, 'exportbuku'])->name('export.buku');
+    
     //ulasan
-    Route::get('/ulasan', function () {
-        return view('admin.ulasan.index');
-    })->name('ulasan');
+    Route::get('/ulasan', [UlasanController::class, 'AdminUlasan'])->name('ulasan');
+    // Route::get('/ulasan', function () {
+    //     return view('admin.ulasan.index');
+    // })->name('ulasan');
 });
 
 

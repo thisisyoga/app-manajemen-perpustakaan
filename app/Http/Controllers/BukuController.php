@@ -27,6 +27,12 @@ class BukuController extends Controller
         return view('admin.buku.index', compact('buku'));
     }
 
+    public function show(Buku $buku)
+    {
+        $buku = Buku::with('RelasiKategori')->findOrFail($buku->id);
+        return view('admin.buku.show', compact('buku'));
+    }
+
     /**
      * Form tambah buku.
      */
@@ -126,10 +132,28 @@ class BukuController extends Controller
             'kategori.*' => 'exists:kategoris,id',      
             'deskripsi'    => 'nullable|string',
             'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ],[
+            'judul_buku.required'   => 'Judul buku wajib diisi.',
+            'isbn.required'         => 'ISBN wajib diisi.',
+            'isbn.unique'           => 'ISBN sudah terdaftar.',
+            'penulis.required'      => 'Nama penulis wajib diisi.',
+            'penerbit.required'     => 'Nama penerbit wajib diisi.',
+            'tahun_terbit.required' => 'Tahun terbit wajib diisi.',
+            'tahun_terbit.digits'   => 'Tahun terbit harus 4 digit.',
+            'tahun_terbit.min'      => 'Tahun terbit tidak valid.',
+            'tahun_terbit.max'      => 'Tahun terbit tidak boleh melebihi tahun sekarang.',
+            'stok.required'         => 'Stok wajib diisi.',
+            'stok.integer'          => 'Stok harus berupa angka.',
+            'stok.min'              => 'Stok tidak boleh kurang dari 0.',
+            'kategori.required'     => 'Pilih minimal satu kategori.',
+            'kategori.array'        => 'Format kategori tidak valid.',
+            'kategori.*.exists'     => 'Salah satu kategori tidak ditemukan.',
+            'image.image'           => 'File cover harus berupa gambar.',
+            'image.mimes'           => 'Format cover harus JPG, JPEG, atau PNG.',
+            'image.max'             => 'Ukuran cover maksimal 2MB.',
         ]);
 
         if ($request->hasFile('image')) {
-            // Hapus cover lama jika ada
             if ($buku->cover) {
                 Storage::disk('public')->delete($buku->cover);
             }
@@ -145,8 +169,7 @@ class BukuController extends Controller
             'stok'         => $validatedData['stok'],
             'deskripsi'    => $validatedData['deskripsi'] ?? null,
         ]);
-
-        // Update relasi di tabel pivot (sync akan menghapus yang lama dan mengganti dengan yang baru)
+        
         $buku->RelasiKategori()->sync($request->kategori);
 
         return redirect()->route('MDB')->with('success', 'Buku berhasil diperbarui.');

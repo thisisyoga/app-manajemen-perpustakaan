@@ -133,89 +133,84 @@
                     Katalog</a>
             </div>
         @else
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
                 @foreach ($buku as $b)
-                    <div
-                        class="group bg-white rounded-[32px] border border-beige/50 p-4 shadow-sm hover:shadow-2xl hover:shadow-Chocolate/5 hover:-translate-y-2 transition-all duration-500 relative">
+                    <div class="group bg-white rounded-[32px] border border-beige/50 p-4 shadow-sm hover:shadow-2xl hover:shadow-Chocolate/5 hover:-translate-y-2 transition-all duration-500 relative">
+                            <a href="{{ route('detail-buku', $b->id) }}">
+                                <div
+                                    class="relative aspect-[3/4] w-full rounded-[24px] bg-beige/20 overflow-hidden mb-6">
+                                    <img src="{{ asset('storage/' . $b->cover) }}" alt="Cover Buku"
+                                        onerror="this.src='https://placehold.co/400x533/5D3A2E/FFF?text=No+Cover'"
+                                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
 
-                        <a href="{{ route('detail-buku', $b->id) }}">
-
-                            <div class="relative h-[280px] rounded-[24px] bg-beige/20 overflow-hidden mb-6">
-
-                                <img src="{{ asset('storage/' . $b->cover) }}" alt="Cover"
-                                    class="w-full h-full object-contain p-6 transform group-hover:scale-110 transition-transform duration-700">
-
-
-
-                                <div class="absolute top-4 left-4">
-
-                                    <span
-                                        class="bg-white/90 backdrop-blur-sm text-Chocolate text-[9px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest shadow-sm border border-Caramel/10">
-
-                                        {{ $b->RelasiKategori->first()->nama_kategori ?? 'Umum' }}
-
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-
-                            @php $isBookmarked = in_array($b->id, $koleksi); @endphp
-
-                            <form action="{{ route('bookmark.store', $b->id) }}" method="POST">
-
-                                @csrf
-
-                                <button type="submit"
-                                    class="absolute top-4 right-4 h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 {{ $isBookmarked ? 'text-Chocolate' : 'text-Caramel/30 hover:text-Chocolate' }}">
-
-                                    <i class="{{ $isBookmarked ? 'fa-solid' : 'fa-regular' }} fa-bookmark"></i>
-
-                                </button>
-
-                            </form>
-
-
-
-                            <div class="px-2 pb-2">
-
-                                <p class="text-[10px] font-black uppercase tracking-widest text-Chocolate mb-2">
-
-                                    {{ $b->penulis }}</p>
-
-                                <a href="{{ route('detail-buku', $b->id) }}">
-
-                                    <h4
-                                        class="text-lg font-serif font-bold text-DarkChocolate line-clamp-1 group-hover:text-Chocolate transition-colors mb-2">
-
-                                        {{ $b->judul_buku }}
-
-                                    </h4>
-
-                                </a>
-
-                                <p class="text-xs text-MediumBrown/60 line-clamp-2 leading-relaxed mb-4 min-h-[32px]">
-
-                                    {{ $b->deskripsi }}
-
-                                </p>
-
-
-
-                                <div class="flex items-center justify-between pt-4 border-t border-beige/50">
-                                    <div class="flex items-center gap-1.5">
-                                        <i class="fas fa-layer-group @if ($b->stok != 0) text-green-600 @else text-red-600 @endif text-[10px]"></i>
-                                        <span class="text-[11px] font-bold text-MediumBrown/80">Stok: {{ $b->stok }}</span>
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-DarkChocolate/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                                     </div>
+
+                                    <div class="absolute top-4 left-0 z-10">
+                                        <span
+                                            class="bg-Chocolate/90 backdrop-blur-sm text-beige text-[10px] font-bold px-4 py-1.5 rounded-r-xl uppercase tracking-wider shadow-lg">
+                                            {{ $b->RelasiKategori->first()->nama_kategori ?? 'Tanpa Kategori' }}
+                                        </span>
+                                    </div>
+
+                                    @php $isBookmarked = in_array($b->id, $koleksi); @endphp
+                                    <form action="{{ route('bookmark.store', $b->id) }}" method="POST"
+                                        class="absolute top-4 right-4 z-20">
+                                        @csrf
+                                        <button type="submit"
+                                            class="h-10 w-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110 active:scale-95 {{ $isBookmarked ? 'text-Chocolate' : 'text-Caramel/30 hover:text-Chocolate' }}">
+                                            <i
+                                                class="{{ $isBookmarked ? 'fa-solid' : 'fa-regular' }} fa-bookmark"></i>
+                                        </button>
+                                    </form>
                                 </div>
 
-                            </div>
+                                <div class="px-2 pb-2 flex flex-col min-h-[200px]">
+                                    <p
+                                        class="text-Caramel text-[10px] font-bold tracking-[0.15em] uppercase mb-1 opacity-80">
+                                        {{ Str::limit($b->penulis, 24, '...') }}
+                                    </p>
+                                    <h3
+                                        class="text-lg font-extrabold text-Chocolate leading-tight line-clamp-2 mb-2 group-hover:text-MediumBrown transition">
+                                        {{ $b->judul_buku }}
+                                    </h3>
 
-                        </a>
+                                    {{-- Star Rating --}}
+                                    @php
+                                        $avgRating = round($b->averageRating());
+                                        $totalUlasan = $b->totalUlasans();
+                                    @endphp
+                                    <div class="flex items-center gap-1 mb-3 text-[10px]">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <i
+                                                class="fas fa-star {{ $i <= $avgRating ? 'text-Caramel' : 'text-gray-200' }}"></i>
+                                        @endfor
+                                        <span class="text-DarkChocolate/40 text-[10px] ml-1 font-semibold">
+                                            ({{ $totalUlasan > 999 ? number_format($totalUlasan / 1000, 1) . 'k' : $totalUlasan }})
+                                        </span>
+                                    </div>
 
-                    </div>
+                                    <p class="text-DarkChocolate/70 text-xs leading-relaxed line-clamp-3 mb-4">
+                                        {{ $b->deskripsi }}
+                                    </p>
+                                </div>
+
+                                <div class="flex items-center justify-between px-2 pt-3 border-t border-beige/50">
+                                    <div class="flex items-center">
+                                        <div
+                                            class="w-1.5 h-1.5 rounded-full {{ $b->stok != 0 ? 'bg-green-500' : 'bg-red-500' }} animate-pulse">
+                                        </div>
+                                        <span
+                                            class="text-[10px] ml-2 font-bold text-MediumBrown/60 uppercase tracking-wider">
+                                            Stok: {{ $b->stok }}
+                                        </span>
+                                    </div>
+                                    <i
+                                        class="fas fa-arrow-right text-xs text-beige group-hover:text-Chocolate transition-colors"></i>
+                                </div>
+                            </a>
+                        </div>
                 @endforeach
             </div>
         @endif

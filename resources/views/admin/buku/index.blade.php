@@ -89,7 +89,7 @@
                                             </button>
                                         </form>
 
-                                        <a href="#"
+                                        <a href="{{ route('show-MDB', $b->id) }}"
                                             class="h-9 w-9 flex items-center justify-center bg-white border border-beige/40 text-green-500 rounded-xl hover:bg-green-50 hover:border-green-200 transition-all shadow-sm">
                                             <i class="fas fa-eye text-[10px]"></i>
                                         </a>

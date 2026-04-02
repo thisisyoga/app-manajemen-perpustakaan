@@ -124,7 +124,7 @@
             </div>
         </section>
 
-        <section class="py-24 bg-beige" id="about">
+        <section class="py-24 bg-gray-100" id="about">
             <div class="px-8 md:px-16 max-w-7xl mx-auto">
                 <div class="flex flex-col md:flex-row items-center gap-16">
                     <div class="w-full md:w-1/2 relative">
@@ -142,7 +142,8 @@
                             Membawa Perpustakaan Konvensional ke Era Digital
                         </h3>
                         <p class="text-DarkChocolate/80 mb-6 text-lg leading-relaxed">
-                            Aksara adalah platform manajemen literasi yang menyederhanakan proses peminjaman buku fisik melalui sistem digital yang praktis dan terorganisir.
+                            Aksara adalah platform manajemen literasi yang menyederhanakan proses peminjaman buku fisik
+                            melalui sistem digital yang praktis dan terorganisir.
                         </p>
 
                         <div class="grid grid-cols-2 gap-8 border-t border-Chocolate/10 pt-8">
@@ -206,7 +207,7 @@
             </div>
         </section>
 
-        <section id="koleksi" class="py-24 bg-beige/20">
+        <section id="koleksi" class="py-24 bg-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-bold text-Chocolate mb-4">Koleksi Terpopuler</h2>
@@ -221,16 +222,26 @@
                             class="group bg-white rounded-3xl border border-Caramel/20 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
                             <a href="#" class="block h-full">
                                 <div
-                                    class="relative h-72 bg-gradient-to-b from-beige/50 to-beige flex items-center justify-center overflow-hidden">
+                                    class="relative aspect-[3/4] w-full bg-gradient-to-br from-beige/80 to-beige flex items-center justify-center overflow-hidden rounded-2xl shadow-sm group">
                                     <img src="{{ asset('storage/' . $b->cover) }}" alt="Cover Buku"
-                                        onerror="this.src='https://placehold.co/400x600/5D3A2E/FFF?text=No+Cover'"
-                                        class="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700">
-                                    <div class="absolute top-4 left-0">
+                                        onerror="this.src='https://placehold.co/400x533/5D3A2E/FFF?text=No+Cover'"
+                                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
+
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-DarkChocolate/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                    </div>
+
+                                    <div class="absolute top-4 left-0 z-10">
                                         <span
-                                            class="bg-Chocolate text-beige text-[10px] font-bold px-4 py-1.5 rounded-r-full uppercase">
+                                            class="bg-Chocolate/90 backdrop-blur-sm text-beige text-[10px] font-bold px-4 py-1.5 rounded-r-xl uppercase tracking-wider shadow-lg">
                                             {{ $b->RelasiKategori->first()->nama_kategori ?? 'Tanpa Kategori' }}
                                         </span>
                                     </div>
+                                    <button type="submit"
+                                            class="absolute top-4 right-4 h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110">
+                                            <i
+                                                class="fa-regular fa-bookmark"></i>
+                                        </button>
                                 </div>
 
                                 <div class="p-5 flex flex-col min-h-[220px]">
@@ -239,18 +250,26 @@
                                     </p>
                                     <h3
                                         class="text-lg font-bold text-Chocolate leading-snug line-clamp-2 mb-3 group-hover:text-MediumBrown transition">
-                                        {{ Str::limit($b->judul_buku, 45, '...') }}
+                                        {{ Str::limit($b->judul_buku, 15, '...') }}
                                     </h3>
-                                    <div class="flex items-center gap-1 mb-3 text-Caramel text-xs">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                            class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                            class="fas fa-star"></i>
-                                        <span class="text-DarkChocolate/50 text-[11px] ml-2">(2.4k)</span>
+                                    @php
+                                        $avgRating = round($b->averageRating()); 
+                                        $totalUlasan = $b->totalUlasans();
+                                    @endphp
+
+                                    <div class="flex items-center gap-1 mb-3 text-xs">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <i
+                                                class="fas fa-star {{ $i <= $avgRating ? 'text-Caramel' : 'text-gray-200' }}"></i>
+                                        @endfor
+
+                                        <span class="text-DarkChocolate/50 text-[11px] ml-2 font-medium">
+                                            ({{ $totalUlasan > 999 ? number_format($totalUlasan / 1000, 1) . 'k' : $totalUlasan }})
+                                        </span>
                                     </div>
                                     <p class="text-DarkChocolate/75 text-sm leading-relaxed line-clamp-3 mb-5">
                                         {{ Str::limit($b->deskripsi, 110, '...') }}
                                     </p>
-
                                 </div>
                                 <div class="flex items-center px-5 py-3 border-t border-Caramel/20">
                                     <i
@@ -283,7 +302,8 @@
                             </div>
                             <div>
                                 <p class="text-beige/60 text-sm">WhatsApp</p>
-                                <a href="https://wa.me/081310405034" target="_blank" class="text-beige font-bold">081310405034</a>
+                                <a href="https://wa.me/081310405034" target="_blank"
+                                    class="text-beige font-bold">081310405034</a>
                             </div>
                         </div>
                         <div
@@ -294,7 +314,8 @@
                             </div>
                             <div>
                                 <p class="text-beige/60 text-sm">Email</p>
-                                <a href="mailto:owneraksara@aksara.id" class="text-beige font-bold">owneraksara@gmail.com</a>
+                                <a href="mailto:owneraksara@aksara.id"
+                                    class="text-beige font-bold">owneraksara@gmail.com</a>
                             </div>
                         </div>
                     </div>

@@ -25,6 +25,9 @@ class ProfileUpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
+            'NamaLengkap' => ['nullable', 'string', 'max:255'], 
+            'alamat' => ['nullable', 'string'], 
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],          
         ];
     }
 }

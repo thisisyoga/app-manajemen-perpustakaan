@@ -28,56 +28,65 @@
         @include('layouts.sidebar')
 
         <div class="flex flex-1 flex-col md:ml-64">
-    
+
             <main class="p-6 space-y-6">
                 <header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-beige/30 p-4 mb-8">
                     <div class="flex justify-between items-center max-w-full mx-auto px-2">
-                         @if (request()->routeIs('admin-dashboard'))
-                        <div>
-                            <h1 class="text-xl font-serif font-bold text-DarkChocolate">Overview Dashboard</h1>
-                            <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Selamat
-                                datang kembali, {{ Auth::user()->name }}</p>
-                        </div>
+                        @if (request()->routeIs('admin-dashboard'))
+                            <div>
+                                <h1 class="text-xl font-serif font-bold text-DarkChocolate">Overview Dashboard</h1>
+                                <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Selamat
+                                    datang kembali, {{ Auth::user()->name }}</p>
+                            </div>
                         @elseif (request()->routeIs('MDK'))
-                        <div>
-                            <h1 class="text-xl font-serif font-bold text-DarkChocolate">Master Data Kategori</h1>
-                            <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Kelola klasifikasi buku perpustakaan</p>
-                        </div>
+                            <div>
+                                <h1 class="text-xl font-serif font-bold text-DarkChocolate">Master Data Kategori</h1>
+                                <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Kelola
+                                    klasifikasi buku perpustakaan</p>
+                            </div>
                         @elseif (request()->routeIs('MDB'))
-                        <div>
-                            <h1 class="text-xl font-serif font-bold text-DarkChocolate">Master Data Buku</h1>
-                            <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Kelola koleksi buku perpustakaan</p>
-                        </div>
+                            <div>
+                                <h1 class="text-xl font-serif font-bold text-DarkChocolate">Master Data Buku</h1>
+                                <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Kelola
+                                    koleksi buku perpustakaan</p>
+                            </div>
                         @elseif (request()->routeIs('ulasan'))
-                        <div>
-                            <h1 class="text-xl font-serif font-bold text-DarkChocolate">Master Data Ulasan</h1>
-                            <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Pantau ulasan dari peminjam</p>
-                        </div>
+                            <div>
+                                <h1 class="text-xl font-serif font-bold text-DarkChocolate">Master Data Ulasan</h1>
+                                <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Pantau
+                                    ulasan dari peminjam</p>
+                            </div>
                         @elseif (request()->routeIs('laporan'))
-                        <div>
-                            <h1 class="text-xl font-serif font-bold text-DarkChocolate">Pusat Unduhan Laporan</h1>
-                            <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Ekspor data perpustakaan dalam format PDF</p>
-                        </div>
+                            <div>
+                                <h1 class="text-xl font-serif font-bold text-DarkChocolate">Pusat Unduhan Laporan</h1>
+                                <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Ekspor
+                                    data perpustakaan dalam format PDF</p>
+                            </div>
                         @elseif (request()->routeIs('admin-pengembalian'))
-                        <div>
-                            <h1 class="text-xl font-serif font-bold text-DarkChocolate">Master Data Pengembalian</h1>
-                            <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Manajemen Peminjaman & Pengembalian</p>
-                        </div>
+                            <div>
+                                <h1 class="text-xl font-serif font-bold text-DarkChocolate">Master Data Pengembalian
+                                </h1>
+                                <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Manajemen
+                                    Peminjaman & Pengembalian</p>
+                            </div>
                         @elseif (request()->routeIs('MDA'))
-                        <div>
-                            <h1 class="text-xl font-serif font-bold text-DarkChocolate">Master Data Petugas</h1>
-                            <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Kelola akun petugas</p>
-                        </div>
+                            <div>
+                                <h1 class="text-xl font-serif font-bold text-DarkChocolate">Master Data Petugas</h1>
+                                <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Kelola
+                                    akun petugas</p>
+                            </div>
                         @elseif (request()->routeIs('data-user'))
-                        <div>
-                            <h1 class="text-xl font-serif font-bold text-DarkChocolate">Master Data Anggota</h1>
-                            <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Kelola akun user</p>
-                        </div>
+                            <div>
+                                <h1 class="text-xl font-serif font-bold text-DarkChocolate">Master Data Anggota</h1>
+                                <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Kelola
+                                    akun user</p>
+                            </div>
                         @else
-                        <div>
-                            <h1 class="text-xl font-serif font-bold text-DarkChocolate">Admin Panel</h1>
-                            <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Kelola data perpustakaan dengan mudah</p>
-                        </div>
+                            <div>
+                                <h1 class="text-xl font-serif font-bold text-DarkChocolate">Admin Panel</h1>
+                                <p class="text-[10px] text-MediumBrown/60 font-bold uppercase tracking-widest">Kelola
+                                    data perpustakaan dengan mudah</p>
+                            </div>
                         @endif
 
                         <div class="flex items-center gap-6">
@@ -96,13 +105,26 @@
 
                                 <div
                                     class="absolute right-0 mt-3 w-56 bg-white rounded-2xl shadow-xl border border-beige/20 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50">
+
                                     <div class="px-4 py-3 border-b border-beige/10 mb-1">
                                         <p class="text-xs font-bold text-DarkChocolate truncate">
-                                            {{ Auth::user()->email }}</p>
+                                            {{ Auth::user()->email }}
+                                        </p>
                                     </div>
+
+                                    @if (auth()->user()->role === 'petugas')
+                                    
+                                    <a href="{{ route('profile.admin') }}"
+                                        class="flex items-center px-4 py-2.5 text-[11px] font-bold text-DarkChocolate hover:bg-beige/10 transition-colors">
+                                        <i class="fas fa-user-circle mr-3 text-Chocolate"></i> Profil Saya
+                                    </a>
+                                    @endif
+
+                                    <div class="border-t border-beige/5 my-1"></div>
+
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
-                                        <button
+                                        <button type="submit"
                                             class="w-full text-left flex items-center px-4 py-2.5 text-[11px] font-bold text-red-500 hover:bg-red-50 transition-colors">
                                             <i class="fas fa-sign-out-alt mr-3"></i> Logout
                                         </button>

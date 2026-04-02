@@ -67,13 +67,13 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between text-[11px] px-1">
+                    {{-- <div class="flex items-center justify-between text-[11px] px-1">
                         <label class="flex items-center cursor-pointer group">
                             
                             <span class="ml-2 text-MediumBrown/60 group-hover:text-MediumBrown transition-colors"></span>
                         </label>
                         <a href="#" class="text-Chocolate font-bold hover:underline">Lupa Password?</a>
-                    </div>
+                    </div> --}}
 
                     <button type="submit"
                         class="w-full py-3.5 rounded-2xl bg-Chocolate text-white text-xs font-bold uppercase tracking-widest hover:bg-DarkChocolate shadow-lg shadow-Chocolate/10 transition-all active:scale-[0.98] mt-2">

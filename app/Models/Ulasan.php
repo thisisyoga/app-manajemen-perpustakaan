@@ -23,4 +23,15 @@ class Ulasan extends Model
     {
         return $this->belongsTo(Buku::class);
     }
+
+    public function scopeSearchUlasan($query, $ulasan)
+    {
+        return $query->where(function ($query) use ($ulasan) {
+            $query->where('ulasan', 'like', "%{$ulasan}%")
+                    ->orwhereHas('buku', function ($q) use ($ulasan) {
+                        $q->where('judul_buku', 'like', "%{$ulasan}%");})
+                    ->orwhereHas('user', function ($q) use ($ulasan) {
+                        $q->where('name', 'like', "%{$ulasan}%");});
+                    });
+    }
 }

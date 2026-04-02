@@ -158,4 +158,15 @@ class DashboardController extends Controller
 
         return $pdf->download('laporan-peminjaman.pdf');
     }
+    public function exportbuku()
+    {
+        $data = Buku::all();
+
+        $pdf = Pdf::loadView('pdf.laporan_buku', [
+            'bukus' => $data,
+            'judul'   => 'Laporan Inventaris Buku'
+        ]);
+
+        return $pdf->download('laporan-buku.pdf');
+    }
 }

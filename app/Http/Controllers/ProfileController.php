@@ -15,7 +15,7 @@ class ProfileController extends Controller
 
 public function index(Request $request)
     {
-        $buku = Buku::with('RelasiKategori')->get();
+        $buku = Buku::with('ulasans',   'RelasiKategori')->paginate(5);
         return view('dashboard', compact('buku'));
     }
     /**
@@ -43,6 +43,27 @@ public function index(Request $request)
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
+
+        public function profilAdmin(Request $request): View
+    {
+        return view('admin.auth.profil', [
+            'user' => $request->user(),
+        ]);
+    }
+
+    public function updateAdmin(ProfileUpdateRequest $request): RedirectResponse
+    {
+        $request->user()->fill($request->validated());
+
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
+        }
+
+        $request->user()->save();
+
+        return Redirect::route('profile.admin')->with('status', 'profile-updated');
+    }
+    
 
     /**
      * Delete the user's account.

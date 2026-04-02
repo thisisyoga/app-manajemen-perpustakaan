@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div class="flex items-center justify-between px-1">
+            {{-- <div class="flex items-center justify-between px-1">
                 <label class="flex items-center">
                     <input type="checkbox" name="remember" class="rounded border-Caramel/30 text-Chocolate focus:ring-Chocolate/20 w-4 h-4">
                     <span class="ml-2 text-xs text-MediumBrown/60 font-medium">Ingat saya</span>
@@ -64,7 +64,7 @@
                 @if (Route::has('password.request'))
                     <a href="{{ route('password.request') }}" class="text-xs font-bold text-Chocolate hover:underline">Lupa Sandi?</a>
                 @endif
-            </div>
+            </div> --}}
 
             <button type="submit"
                 class="w-full py-4 rounded-2xl bg-Chocolate text-white text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-DarkChocolate shadow-lg shadow-Chocolate/20 transition-all active:scale-[0.98] mt-4">

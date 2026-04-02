@@ -49,7 +49,6 @@ public function store(LoginRequest $request): RedirectResponse
         ]);
     }
 
-    // 3. REDIRECT: Jika lolos semua proteksi di atas
     if ($user->role === 'admin' || $user->role === 'petugas') {
         return redirect()->intended('/admin-dashboard');
     } 

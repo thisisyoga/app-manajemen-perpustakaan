@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -60,6 +61,11 @@ public function hasRole($roles)
     public function koleksiPribadi()
     {
         return $this->hasMany(KoleksiPribadi::class, 'user_id');
+    }
+
+    public function peminjamans(): HasMany
+    {
+        return $this->hasMany(Peminjaman::class, 'user_id');
     }
 
     public function scopeSearchUser($query, $user)
