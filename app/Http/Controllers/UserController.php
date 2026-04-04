@@ -174,4 +174,11 @@ public function koleksipribadi(Buku $buku)
 
         return redirect()->back()->with('success', 'Bookmark berhasil ditambahkan')->withFragment('daftar-buku');;
 }
+
+    public function profile(string $id)
+    {
+        return view('user.profile.index');
+    }
+
+
 }

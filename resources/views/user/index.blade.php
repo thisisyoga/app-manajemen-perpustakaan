@@ -82,11 +82,17 @@
 
                         <div
                             class="absolute right-0 mt-3 w-52 bg-white rounded-2xl shadow-xl border border-beige/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 z-[60]">
+                            
+                            <a href="{{ route('user.profile') }}"
+                                class="w-full text-left flex items-center px-5 py-3 text-sm text-MediumBrown/70 hover:bg-beige/30 font-bold transition-colors">
+                                <i class="fas fa-user mr-3 text-xs"></i> Profile
+                            </a>
+
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
                                     class="w-full text-left flex items-center px-5 py-3 text-sm text-red-500 hover:bg-red-50 font-bold transition-colors">
-                                    <i class="fas fa-sign-out mr-3 text-xs"></i> Keluar Akun
+                                    <i class="fas fa-sign-out mr-3 text-xs"></i> Logout
                                 </button>
                             </form>
                         </div>

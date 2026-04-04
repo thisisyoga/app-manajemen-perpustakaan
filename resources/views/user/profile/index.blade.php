@@ -17,7 +17,7 @@
 
             <nav class="flex mb-8 text-sm font-medium text-Caramel" aria-label="Breadcrumb">
                 <ol class="flex items-center space-x-2">
-                    <li><a href="{{ route('admin-dashboard') }}" class="hover:text-Chocolate transition">Dashboard</a></li>
+                    <li><a href="{{ route('MDU') }}" class="hover:text-Chocolate transition">Dashboard</a></li>
                     <li><i class="fas fa-chevron-right text-[10px] mx-2 text-beige"></i></li>
                     <li class="text-Chocolate">Pengaturan Profil</li>
                 </ol>
@@ -58,7 +58,7 @@
                             </h3>
                         </div>
 
-                        <form method="post" action="{{ route('profile.update.admin') }}" class="p-8 space-y-6">
+                        <form method="post" action="{{ route('user.profile.update') }}" class="p-8 space-y-6">
                             @csrf
                             @method('patch')
 
@@ -96,7 +96,7 @@
                                         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
                                             <i class="fas fa-lock text-sm"></i>
                                         </span>
-                                        <input type="password" name="password" placeholder="....."
+                                        <input type="password" name="password" placeholder="....." value="{{ old('password') }}"
                                             class="block w-full pl-10 pr-3 py-3 border-gray-200 rounded-xl focus:ring-Caramel focus:border-Caramel text-sm transition shadow-sm">
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@
                                         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
                                             <i class="fas fa-lock text-sm"></i>
                                         </span>
-                                            <input type="password" name="password_confirmation" placeholder="....."
+                                            <input type="password" name="password_confirmation" placeholder="....." value="{{ old('password_confirmation') }}"
                                             class="block w-full pl-10 pr-3 py-3 border-gray-200 rounded-xl focus:ring-Caramel focus:border-Caramel text-sm transition shadow-sm">
                                     </div>
                                 </div>

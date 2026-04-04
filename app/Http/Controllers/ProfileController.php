@@ -7,6 +7,7 @@ use App\Models\Buku;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -21,9 +22,9 @@ public function index(Request $request)
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function profilUser(Request $request): View
     {
-        return view('profile.edit', [
+        return view('user.profile.index', [
             'user' => $request->user(),
         ]);
     }
@@ -31,17 +32,27 @@ public function index(Request $request)
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function updateUser(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+    
+    $data = $request->validated();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+    if (empty($data['password'])) {
+        unset($data['password']);
+    } else {
+        $data['password'] = Hash::make($data['password']);
+    }
 
-        $request->user()->save();
+    $user->fill($data);
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    if ($user->isDirty('email')) {
+        $user->email_verified_at = null;
+    }
+
+    $user->save();
+
+        return Redirect::route('user.profile')->with('status', 'profile-updated');
     }
 
         public function profilAdmin(Request $request): View
@@ -52,17 +63,27 @@ public function index(Request $request)
     }
 
     public function updateAdmin(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
+{
+    $user = $request->user();
+    
+    $data = $request->validated();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.admin')->with('status', 'profile-updated');
+    if (empty($data['password'])) {
+        unset($data['password']);
+    } else {
+        $data['password'] = Hash::make($data['password']);
     }
+
+    $user->fill($data);
+
+    if ($user->isDirty('email')) {
+        $user->email_verified_at = null;
+    }
+
+    $user->save();
+
+    return Redirect::route('profile.admin')->with('status', 'profile-updated');
+}
     
 
     /**
