@@ -6,6 +6,7 @@
     use App\Http\Controllers\DashboardController;
     use App\Http\Controllers\KategoriController;
     use App\Http\Controllers\ProfileController;
+    use App\Http\Controllers\RiwayatController;
     use App\Http\Controllers\UlasanController;
     use App\Http\Controllers\UserController;
     use Illuminate\Support\Facades\Route;
@@ -55,8 +56,9 @@
         Route::get('/admin/peminjaman/{id}/dikembalikan', [DashboardController::class, 'dikembalikan'])->name('admin.peminjaman.dikembalikan');
         Route::get('/admin/peminjaman/{id}/diajukan', [DashboardController::class, 'diajukan'])->name('admin.peminjaman.diajukan');
         Route::get('/admin-pengembalian', [DashboardController::class, 'pengembalian'])->name('admin-pengembalian');
-        Route::get('/admin-riwayat', [DashboardController::class, 'riwayat'])->name('admin-riwayat');
-        Route::delete('/admin-riwayat/{id}', [DashboardController::class, 'destroy'])->name('admin-riwayat.hapus');
+        Route::get('/admin-riwayat', [RiwayatController::class, 'riwayat'])->name('admin-riwayat');
+        Route::delete('/admin-riwayat/{id}', [RiwayatController::class, 'destroy'])->name('admin-riwayat.hapus');
+        Route::get('/admin-riwayat/{id}/bukti-kembali', [RiwayatController::class, 'buktiKembali'])->name('admin.bukti.kembali');
         
     Route::middleware(['role:admin'])->group(function () {
         // Master Data Akun

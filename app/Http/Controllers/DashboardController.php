@@ -169,20 +169,5 @@ class DashboardController extends Controller
         return $pdf->download('laporan-buku.pdf');
     }
 
-    public function riwayat()
-    {
-        $pinjam = Peminjaman::with(['user', 'buku'])
-            ->whereIn('status', ['dikembalikan','ditolak'])
-            ->get();
-
-        return view('admin.riwayat.index', compact('pinjam'));
-    }
-
-    public function destroy($id)
-    {
-        $peminjaman = Peminjaman::findOrFail($id);
-        $peminjaman->delete();
-
-        return redirect()->back()->with('success', 'Data peminjaman berhasil dihapus.');
-    }
+    
 }

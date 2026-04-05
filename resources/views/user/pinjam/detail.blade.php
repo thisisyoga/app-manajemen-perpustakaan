@@ -113,8 +113,13 @@
                 <div class="grid grid-cols-5 gap-3">
                     @if ($pinjam->stok == 0)
                         <button disabled
-                            class="col-span-4 bg-red-500 hover:bg-red-400 text-white text-center py-4 rounded-2xl font-bold transition-all shadow-lg shadow-Chocolate/20 active:scale-95 tracking-widest text-sm">
+                            class="col-span-4 bg-red-500 text-white text-center py-4 rounded-2xl font-bold opacity-50 cursor-not-allowed tracking-widest text-sm">
                             STOK HABIS
+                        </button>
+                    @elseif ($telat)
+                        <button disabled
+                            class="col-span-4 bg-orange-200 text-orange-700 text-center py-4 rounded-2xl font-bold cursor-not-allowed tracking-widest text-xs px-2 leading-tight">
+                            KEMBALIKAN BUKU YANG TERLAMBAT  UNTUK PINJAM LAGI
                         </button>
                     @else
                         <a href="{{ route('pinjam.create', $pinjam->id) }}"

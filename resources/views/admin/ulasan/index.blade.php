@@ -39,8 +39,8 @@
                             <option value="">Semua Rating</option>
                             <option value="rendah" {{ request('rating') == 'rendah' ? 'selected' : '' }}>Rating Rendah (1-2)
                             </option>
+                        </option>
                             <option value="tinggi" {{ request('rating') == 'tinggi' ? 'selected' : '' }}>Rating Tinggi (5)
-                            </option>
                         </select>
                     </div>
                 </form>

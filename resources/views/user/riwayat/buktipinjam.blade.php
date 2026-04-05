@@ -80,12 +80,12 @@
                         {{-- <p class="text-[11px] text-beige/70 font-bold tracking-[0.4em] mt-2 uppercase">Official Borrowing Receipt</p> --}}
                     </div>
                 </div>
-                <div class="text-right border-l-2 border-white/10 pl-8">
+                {{-- <div class="text-right border-l-2 border-white/10 pl-8">
                     <p class="text-beige/50 font-bold text-[10px] uppercase tracking-widest mb-1">ID Transaksi</p>
                     <p class="text-xl font-mono font-bold tracking-tight">
                         #TRX-{{ $peminjaman->created_at->format('Ymd') }}-{{ $peminjaman->id }}
                     </p>
-                </div>
+                </div> --}}
             </div>
 
             <div class="bg-beige/30 px-10 py-4 border-b border-beige/40 flex justify-between items-center">
