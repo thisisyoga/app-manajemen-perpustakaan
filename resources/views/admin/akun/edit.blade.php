@@ -54,8 +54,7 @@
                         </div>
                     </div>
 
-                    <div
-                        class="bg-white rounded-2xl shadow-xl shadow-Chocolate/5  overflow-hidden">
+                    <div class="bg-white rounded-2xl shadow-xl shadow-Chocolate/5  overflow-hidden">
                         <div class="p-8 md:p-10">
                             <form action="{{ route('update-MDA', $petugas->id) }}" method="POST" class="space-y-8">
                                 @csrf
@@ -129,9 +128,26 @@
                                                         d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                                 </svg>
                                             </div>
+
                                             <input type="password" name="password" id="password"
-                                                class="w-full pl-11 pr-4 py-3 bg-beige/10 border border-Caramel/20 rounded-xl focus:ring-4 focus:ring-Caramel/10 focus:border-Caramel outline-none transition-all text-sm text-DarkChocolate"
+                                                class="w-full pl-11 pr-12 py-3 bg-beige/10 border border-Caramel/20 rounded-xl focus:ring-4 focus:ring-Caramel/10 focus:border-Caramel outline-none transition-all text-sm text-DarkChocolate"
                                                 placeholder="Kosongkan jika tidak ingin mengubah">
+
+                                            <button type="button" onclick="togglePassword()"
+                                                class="absolute inset-y-0 right-0 pr-4 flex items-center text-Caramel/60 hover:text-Chocolate transition-colors">
+                                                <svg id="eyeIcon" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                </svg>
+                                                <svg id="eyeOffIcon" class="h-5 w-5 hidden" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" />
+                                                </svg>
+                                            </button>
                                         </div>
                                     </div>
 
@@ -159,9 +175,9 @@
                                 <div
                                     class="flex flex-col sm:flex-row items-center justify-end gap-3 pt-6 border-t border-beige">
                                     <a href="{{ route('MDA') }}"><button type="button"
-                                        class="w-full sm:w-auto px-8 py-3 rounded-xl text-sm font-bold text-MediumBrown hover:text-Chocolate bg-white border border-Caramel/30 hover:border-Caramel hover:bg-beige/20 transition-all duration-200">
-                                        Batal
-                                    </button></a>
+                                            class="w-full sm:w-auto px-8 py-3 rounded-xl text-sm font-bold text-MediumBrown hover:text-Chocolate bg-white border border-Caramel/30 hover:border-Caramel hover:bg-beige/20 transition-all duration-200">
+                                            Batal
+                                        </button></a>
                                     <button type="submit"
                                         class="w-full sm:w-auto px-8 py-3 rounded-xl text-sm font-bold text-white bg-Caramel hover:bg-MediumBrown shadow-lg shadow-Caramel/20 hover:shadow-MediumBrown/30 active:scale-95 transition-all duration-200 flex items-center justify-center">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor"
@@ -181,4 +197,22 @@
             </div>
         </div>
     </body>
+
+    <script>
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+            const eyeOffIcon = document.getElementById('eyeOffIcon');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                eyeIcon.classList.add('hidden');
+                eyeOffIcon.classList.remove('hidden');
+            } else {
+                input.type = 'password';
+                eyeIcon.classList.remove('hidden');
+                eyeOffIcon.classList.add('hidden');
+            }
+        }
+    </script>
 @endsection

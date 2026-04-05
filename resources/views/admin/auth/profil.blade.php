@@ -17,7 +17,8 @@
 
             <nav class="flex mb-8 text-sm font-medium text-Caramel" aria-label="Breadcrumb">
                 <ol class="flex items-center space-x-2">
-                    <li><a href="{{ route('admin-dashboard') }}" class="hover:text-Chocolate transition">Dashboard</a></li>
+                    <li><a href="{{ route('admin-dashboard') }}" class="hover:text-Chocolate transition">Dashboard</a>
+                    </li>
                     <li><i class="fas fa-chevron-right text-[10px] mx-2 text-beige"></i></li>
                     <li class="text-Chocolate">Pengaturan Profil</li>
                 </ol>
@@ -89,26 +90,44 @@
                                             class="block w-full pl-10 pr-3 py-3 border-gray-200 rounded-xl focus:ring-Caramel focus:border-Caramel text-sm transition shadow-sm">
                                     </div>
                                 </div>
-                                <div class="space-y-2">
-                                    <label
-                                        class="text-xs font-bold text-Chocolate uppercase tracking-wider">Password</label>
-                                    <div class="relative">
-                                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-                                            <i class="fas fa-lock text-sm"></i>
-                                        </span>
-                                        <input type="password" name="password" placeholder="....."
-                                            class="block w-full pl-10 pr-3 py-3 border-gray-200 rounded-xl focus:ring-Caramel focus:border-Caramel text-sm transition shadow-sm">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="space-y-2">
+                                        <label
+                                            class="text-xs font-bold text-Chocolate uppercase tracking-wider">Password
+                                            Baru</label>
+                                        <div class="relative group">
+                                            <span
+                                                class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 group-focus-within:text-Caramel transition-colors">
+                                                <i class="fas fa-lock text-sm"></i>
+                                            </span>
+                                            <input type="password" name="password" id="password" placeholder="....."
+                                                class="block w-full pl-10 pr-10 py-3 border-gray-200 rounded-xl focus:ring-Caramel focus:border-Caramel text-sm transition shadow-sm">
+
+                                            <button type="button" onclick="togglePass('password', 'eye1')"
+                                                class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-Chocolate transition-colors">
+                                                <i id="eye1" class="fas fa-eye text-sm"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="space-y-2">
-                                    <label
-                                        class="text-xs font-bold text-Chocolate uppercase tracking-wider">Password</label>
-                                    <div class="relative">
-                                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-                                            <i class="fas fa-lock text-sm"></i>
-                                        </span>
-                                            <input type="password" name="password_confirmation" placeholder="....."
-                                            class="block w-full pl-10 pr-3 py-3 border-gray-200 rounded-xl focus:ring-Caramel focus:border-Caramel text-sm transition shadow-sm">
+
+                                    <div class="space-y-2">
+                                        <label
+                                            class="text-xs font-bold text-Chocolate uppercase tracking-wider">Konfirmasi
+                                            Password</label>
+                                        <div class="relative group">
+                                            <span
+                                                class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 group-focus-within:text-Caramel transition-colors">
+                                                <i class="fas fa-lock text-sm"></i>
+                                            </span>
+                                            <input type="password" name="password_confirmation"
+                                                id="password_confirmation" placeholder="....."
+                                                class="block w-full pl-10 pr-10 py-3 border-gray-200 rounded-xl focus:ring-Caramel focus:border-Caramel text-sm transition shadow-sm">
+
+                                            <button type="button" onclick="togglePass('password_confirmation', 'eye2')"
+                                                class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-Chocolate transition-colors">
+                                                <i id="eye2" class="fas fa-eye text-sm"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -155,5 +174,22 @@
     </div>
 
 </body>
+
+<script>
+    function togglePass(inputId, iconId) {
+        const input = document.getElementById(inputId);
+        const icon = document.getElementById(iconId);
+        
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
+</script>
 
 </html>

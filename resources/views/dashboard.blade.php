@@ -98,7 +98,7 @@
                 <div class="absolute inset-0 bg-DarkChocolate/40 backdrop-blur-[1px]"></div>
             </div>
 
-            <div class="relative z-10 px-8 md:px-16 w-full max-w-7xl mx-auto">
+            <div class="relative z-10 px-8 md:px-16 w-full max-w-7xl mx-auto flex justify-start text-left">
                 <div class="max-w-3xl">
                     <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
                         Temukan Dunia di Balik <br>
