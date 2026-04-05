@@ -99,16 +99,29 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div class="lg:col-span-4 lg:sticky lg:top-28 self-start">
                 <div class="bg-white p-4 rounded-3xl shadow-xl shadow-beige/20 border border-beige mb-6">
-                    <img src="{{ asset('storage/' . $pinjam->cover) }}"
-                        class="w-full rounded-2xl aspect-[3/4] object-cover shadow-inner"
-                        onerror="this.src='https://placehold.co/400x533/5D3A2E/FFF?text=No+Cover'">
+                    @if ($pinjam->cover)
+                        <img src="{{ asset('storage/' . $pinjam->cover) }}"
+                            class="w-full rounded-2xl aspect-[3/4] object-cover shadow-inner">
+                    @else
+                        <div
+                            class="w-full rounded-2xl aspect-[3/4] bg-beige flex items-center justify-center text-MediumBrown font-bold text-sm uppercase tracking-widest">
+                            Tidak ada sampul
+                        </div>
+                    @endif
                 </div>
 
                 <div class="grid grid-cols-5 gap-3">
-                    <a href="{{ route('pinjam.create', $pinjam->id) }}"
-                        class="col-span-4 bg-Chocolate hover:bg-MediumBrown text-white text-center py-4 rounded-2xl font-bold transition-all shadow-lg shadow-Chocolate/20 active:scale-95 tracking-widest text-sm">
-                        PINJAM SEKARANG
-                    </a>
+                    @if ($pinjam->stok == 0)
+                        <button disabled
+                            class="col-span-4 bg-red-500 hover:bg-red-400 text-white text-center py-4 rounded-2xl font-bold transition-all shadow-lg shadow-Chocolate/20 active:scale-95 tracking-widest text-sm">
+                            STOK HABIS
+                        </button>
+                    @else
+                        <a href="{{ route('pinjam.create', $pinjam->id) }}"
+                            class="col-span-4 bg-Chocolate hover:bg-MediumBrown text-white text-center py-4 rounded-2xl font-bold transition-all shadow-lg shadow-Chocolate/20 active:scale-95 tracking-widest text-sm">
+                            PINJAM SEKARANG
+                        </a>
+                    @endif
                     <form action="{{ route('bookmark.store', $pinjam->id) }}" method="POST" class="col-span-1">
                         @csrf
                         <button
@@ -215,7 +228,12 @@
 
                 @php
                     $ulasanUser = $pinjam->ulasans->where('user_id', Auth::id())->first();
-                    $peminjamanTerakhir = Auth::user()->peminjamans()->where('buku_id', $pinjam->id)->latest()->first();
+                    $peminjamanTerakhir = Auth::user()
+                        ->peminjamans()
+                        ->where('buku_id', $pinjam->id)
+                        ->where('status', 'dikembalikan')
+                        ->latest()
+                        ->first();
 
                     $bolehMengulas = false;
 
@@ -231,7 +249,8 @@
                 @endphp
 
                 @if ($bolehMengulas)
-                    <section class="mt-12 bg-Chocolate rounded-[2.5rem] p-8 text-white shadow-2xl shadow-Chocolate/30" id="ulasan">
+                    <section class="mt-12 bg-Chocolate rounded-[2.5rem] p-8 text-white shadow-2xl shadow-Chocolate/30"
+                        id="ulasan">
                         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                             <div>
                                 <h3 class="text-2xl font-serif font-bold">

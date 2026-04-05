@@ -66,8 +66,8 @@
                                     <div class="flex items-center gap-5">
                                         <div
                                             class="h-16 w-11 rounded-lg overflow-hidden shadow-md border border-white flex-shrink-0 relative group-hover:scale-105 transition-transform">
-                                            <img src="{{ asset('storage/' . $u->buku->cover) }}"
-                                                class="h-full w-full object-cover" alt="Cover">
+                                            <img src="{{ asset('storage/' . $u->buku->cover) }}" 
+                                                class="h-full w-full object-cover" alt="Cover" onerror="this.src='https://placehold.co/400x600/5D3A2E/FFF?text=No+Cover'"> 
                                             <div class="absolute inset-0 bg-black/10"></div>
                                         </div>
                                         <div>
@@ -119,14 +119,20 @@
                                 </td>
                                 <td class="p-6 pr-10">
                                     <div class="flex justify-center gap-3">
-                                        <button
+                                        {{-- <button
                                             class="h-10 w-10 flex items-center justify-center bg-white border border-gray-100 text-blue-500 rounded-2xl hover:bg-blue-50 hover:border-blue-100 hover:shadow-lg transition-all active:scale-90 shadow-sm">
                                             <i class="fas fa-eye text-xs"></i>
-                                        </button>
-                                        <button onclick="confirmDelete()"
-                                            class="h-10 w-10 flex items-center justify-center bg-white border border-gray-100 text-rose-400 rounded-2xl hover:bg-rose-50 hover:border-rose-100 hover:shadow-lg transition-all active:scale-90 shadow-sm">
-                                            <i class="fas fa-trash-alt text-xs"></i>
-                                        </button>
+                                        </button> --}}
+
+                                        <form action="{{ route('ulasan.delete', $u->id) }}" method="POST"
+                                            onsubmit="return confirm('Hapus buku ini dari database?');" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="h-10 w-10 flex items-center justify-center bg-white border border-gray-100 text-rose-400 rounded-2xl hover:bg-rose-50 hover:border-rose-100 hover:shadow-lg transition-all active:scale-90 shadow-sm">
+                                                <i class="fas fa-trash-alt text-[10px]"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             @empty
@@ -167,37 +173,45 @@
 
         <div class="flex flex-col sm:flex-row justify-between items-center gap-6 mt-10 px-4">
             <p class="text-[11px] font-bold text-gray-400 uppercase tracking-[0.2em]">
-                Menampilkan <span class="text-DarkChocolate font-black italic">1 - 10</span> dari <span
-                    class="text-DarkChocolate font-black italic">1.284</span> Ulasan
+                Menampilkan <span class="text-DarkChocolate font-black italic">{{ $ulasan->firstItem() }} - {{ $ulasan->lastItem() }}</span> dari <span
+                    class="text-DarkChocolate font-black italic">{{ number_format($ulasan->total(), 0, ',', '.') }}</span> Ulasan
             </p>
             <div class="flex items-center gap-2">
-                <button
-                    class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 text-gray-300 hover:bg-white transition-all cursor-not-allowed"
-                    disabled>
-                    <i class="fas fa-chevron-left text-xs"></i>
-                </button>
+                @if ($ulasan->onFirstPage())
+                    <button
+                        class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 text-gray-300 cursor-not-allowed"
+                        disabled>
+                        <i class="fas fa-chevron-left text-xs"></i>
+                    </button>
+                @else
+                    <a href="{{ $ulasan->previousPageUrl() }}"
+                        class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 text-Chocolate hover:bg-white transition-all shadow-sm">
+                        <i class="fas fa-chevron-left text-xs"></i>
+                    </a>
+                @endif
+
                 <div class="flex gap-1 px-2">
-                    <button
-                        class="w-10 h-10 rounded-xl bg-Chocolate text-white text-xs font-black shadow-lg shadow-Chocolate/20 transition-all">1</button>
-                    <button
-                        class="w-10 h-10 rounded-xl bg-white text-DarkChocolate text-xs font-bold hover:bg-beige/20 transition-all">2</button>
-                    <button
-                        class="w-10 h-10 rounded-xl bg-white text-DarkChocolate text-xs font-bold hover:bg-beige/20 transition-all">3</button>
+                    @foreach ($ulasan->getUrlRange(max(1, $ulasan->currentPage() - 1), min($ulasan->lastPage(), $ulasan->currentPage() + 1)) as $page => $url)
+                        <a href="{{ $url }}"
+                            class="w-10 h-10 flex items-center justify-center rounded-xl text-xs transition-all {{ $page == $ulasan->currentPage() ? 'bg-Chocolate text-white font-black shadow-lg shadow-Chocolate/20' : 'bg-white text-DarkChocolate font-bold hover:bg-beige/20' }}">
+                            {{ $page }}
+                        </a>
+                    @endforeach
                 </div>
-                <button
-                    class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 text-Chocolate hover:bg-white hover:border-Chocolate transition-all shadow-sm">
-                    <i class="fas fa-chevron-right text-xs"></i>
-                </button>
+
+                @if ($ulasan->hasMorePages())
+                    <a href="{{ $ulasan->nextPageUrl() }}"
+                        class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 text-Chocolate hover:bg-white transition-all shadow-sm">
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </a>
+                @else
+                    <button
+                        class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 text-gray-300 cursor-not-allowed"
+                        disabled>
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </button>
+                @endif
             </div>
         </div>
     </div>
-
-    <script>
-        function confirmDelete() {
-            // Gunakan library SweetAlert2 jika ingin lebih cantik
-            if (confirm('Moderasi Ulasan? Komentar yang dihapus tidak dapat dikembalikan ke halaman buku.')) {
-                alert('Ulasan telah berhasil diarsipkan.');
-            }
-        }
-    </script>
 @endsection

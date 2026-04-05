@@ -85,7 +85,7 @@
                                 @csrf
                                 <button type="submit"
                                     class="w-full text-left flex items-center px-5 py-3 text-sm text-red-500 hover:bg-red-50 font-bold transition-colors">
-                                    <i class="fas fa-power-off mr-3 text-xs"></i> Keluar Akun
+                                    <i class="fas fa-power-off mr-3 text-xs"></i> Logout
                                 </button>
                             </form>
                         </div>
@@ -143,7 +143,6 @@
                                 ->where('updated_at', '>', $item->created_at) 
                                 ->exists();
 
-                            // Ambil status untuk config tampilan
                             $statusConfig = [
                                 'menunggu' => [
                                     'class' => 'bg-amber-50 text-amber-600 border-amber-100',

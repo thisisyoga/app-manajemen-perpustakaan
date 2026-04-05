@@ -86,6 +86,12 @@
                     <i class="fas fa-file-alt w-5 mr-3 {{ request()->routeIs('laporan') ? 'text-white' : 'text-MediumBrown group-hover:text-Chocolate' }}"></i>
                     Laporan
                 </a>
+                <a href="{{ route('admin-riwayat') }}"
+                    class="group flex items-center px-4 py-3 text-sm font-bold rounded-xl transition-all
+                    {{ request()->routeIs('admin-riwayat') ? 'bg-Chocolate text-white shadow-lg shadow-Chocolate/20' : 'text-MediumBrown hover:bg-beige/20 hover:text-Chocolate' }}">
+                    <i class="fas fa-history w-5 mr-3 {{ request()->routeIs('admin-riwayat') ? 'text-white' : 'text-MediumBrown group-hover:text-Chocolate' }}"></i>
+                    Riwayat Peminjaman
+                </a>
             </nav>
         </div>
 

@@ -82,7 +82,7 @@
 
                         <div
                             class="absolute right-0 mt-3 w-52 bg-white rounded-2xl shadow-xl border border-beige/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 z-[60]">
-                            
+
                             <a href="{{ route('user.profile') }}"
                                 class="w-full text-left flex items-center px-5 py-3 text-sm text-MediumBrown/70 hover:bg-beige/30 font-bold transition-colors">
                                 <i class="fas fa-user mr-3 text-xs"></i> Profile
@@ -174,6 +174,17 @@
                         </button>
                     </form>
 
+                    <div class="flex items-center justify-between mb-8 mt-5">
+                        @php $namaKategoriAktif = $kategori->firstWhere('id', request('kategori'))->nama_kategori ?? 'Semua Koleksi'; @endphp
+                        <div class="space-y-1">
+                            <p class="text-[10px] font-black uppercase tracking-[0.2em] text-Chocolate">Menampilkan</p>
+                            <h3 class="text-xl font-bold text-DarkChocolate">{{ $namaKategoriAktif }}</h3>
+                        </div>
+                        <div class="px-4 py-2 bg-white border border-beige rounded-full shadow-sm">
+                            <span class="text-xs font-bold text-MediumBrown/60">{{ count($buku) }} Buku</span>
+                        </div>
+                    </div>
+
                     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
                         @forelse ($buku as $b)
                         @empty
@@ -187,17 +198,6 @@
                                     Koleksi</a>
                             </div>
                         @endforelse
-                    </div>
-                </div>
-
-                <div class="flex items-center justify-between mb-8">
-                    @php $namaKategoriAktif = $kategori->firstWhere('id', request('kategori'))->nama_kategori ?? 'Semua Koleksi'; @endphp
-                    <div class="space-y-1">
-                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-Chocolate">Menampilkan</p>
-                        <h3 class="text-xl font-bold text-DarkChocolate">{{ $namaKategoriAktif }}</h3>
-                    </div>
-                    <div class="px-4 py-2 bg-white border border-beige rounded-full shadow-sm">
-                        <span class="text-xs font-bold text-MediumBrown/60">{{ count($buku) }} Buku</span>
                     </div>
                 </div>
 
@@ -275,8 +275,7 @@
                                             Stok: {{ $b->stok }}
                                         </span>
                                     </div>
-                                    <i
-                                        class="fas fa-arrow-right text-xs text-beige group-hover:text-Chocolate transition-colors"></i>
+                                    
                                 </div>
                             </a>
                         </div>

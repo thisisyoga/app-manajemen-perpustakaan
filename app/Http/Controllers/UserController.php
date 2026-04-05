@@ -100,6 +100,7 @@ public function store(Request $request)
             ->where('user_id', Auth::id())
             ->orderBy('created_at', 'desc')
             ->get();
+            
 
         $totalBuku = $riwayat->count();
 

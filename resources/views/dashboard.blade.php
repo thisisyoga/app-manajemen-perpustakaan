@@ -9,7 +9,6 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Custom Smooth Transitions */
         .nav-link {
             position: relative;
             transition: all 0.3s ease;
@@ -23,7 +22,6 @@
             bottom: -4px;
             left: 0;
             background-color: #C99B66;
-            /* Caramel Hex */
             transition: width 0.3s ease;
         }
 
@@ -210,7 +208,7 @@
         <section id="koleksi" class="py-24 bg-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold text-Chocolate mb-4">Koleksi Terpopuler</h2>
+                    <h2 class="text-4xl md:text-5xl font-bold text-Chocolate mb-4">Koleksi Buku</h2>
                     <p class="text-MediumBrown font-medium max-w-2xl mx-auto">
                         Temukan buku pilihan dengan tampilan yang lebih rapi, elegan, dan nyaman dijelajahi.
                     </p>
@@ -220,7 +218,7 @@
                     @foreach ($buku as $b)
                         <div
                             class="group bg-white rounded-3xl border border-Caramel/20 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
-                            <a href="#" class="block h-full">
+                            <a href="{{ route('login') }}" class="block h-full">
                                 <div
                                     class="relative aspect-[3/4] w-full bg-gradient-to-br from-beige/80 to-beige flex items-center justify-center overflow-hidden rounded-2xl shadow-sm group">
                                     <img src="{{ asset('storage/' . $b->cover) }}" alt="Cover Buku"
@@ -238,10 +236,9 @@
                                         </span>
                                     </div>
                                     <button type="submit"
-                                            class="absolute top-4 right-4 h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110">
-                                            <i
-                                                class="fa-regular fa-bookmark"></i>
-                                        </button>
+                                        class="absolute top-4 right-4 h-10 w-10 bg-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110">
+                                        <i class="fa-regular fa-bookmark"></i>
+                                    </button>
                                 </div>
 
                                 <div class="p-5 flex flex-col min-h-[220px]">
@@ -253,7 +250,7 @@
                                         {{ Str::limit($b->judul_buku, 15, '...') }}
                                     </h3>
                                     @php
-                                        $avgRating = round($b->averageRating()); 
+                                        $avgRating = round($b->averageRating());
                                         $totalUlasan = $b->totalUlasans();
                                     @endphp
 
@@ -358,12 +355,10 @@
                         <h3 class="text-white font-bold mb-6 uppercase tracking-widest text-sm">Jam Buka</h3>
                         <ul class="space-y-3 text-sm">
                             <li class="flex justify-between border-b border-white/5 pb-2"><span>Sen - Jum</span>
-                                <span>08:00 - 20:00</span>
+                                <span>06:30 - 15:00</span>
                             </li>
-                            <li class="flex justify-between border-b border-white/5 pb-2"><span>Sabtu</span>
-                                <span>09:00 - 17:00</span>
-                            </li>
-                            <li class="flex justify-between text-Caramel"><span>Minggu</span> <span>Tutup</span></li>
+                            <li class="flex justify-between text-Caramel"><span>Sabtu - Minggu</span>
+                                <span>Tutup</span></li>
                         </ul>
                     </div>
 

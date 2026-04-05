@@ -93,7 +93,7 @@
                                 @csrf
                                 <button type="submit"
                                     class="w-full text-left flex items-center px-5 py-3 text-sm text-red-500 hover:bg-red-50 font-bold transition-colors">
-                                    <i class="fas fa-sign-out mr-3 text-xs"></i> Keluar Akun
+                                    <i class="fas fa-sign-out mr-3 text-xs"></i> Logout
                                 </button>
                             </form>
                         </div>

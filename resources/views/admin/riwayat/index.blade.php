@@ -5,7 +5,7 @@
 <div class="px-2 space-y-6">
     <div class="bg-white rounded-[32px] border border-beige/40 shadow-sm overflow-hidden">
         <div class="p-6 border-b border-beige/10 flex justify-between items-center bg-beige/5">
-            <h2 class="text-sm font-serif font-bold text-DarkChocolate">Log Aktivitas Peminjaman</h2>
+            <h2 class="text-sm font-serif font-bold text-DarkChocolate">Riwayat Peminjaman</h2>
             <span class="px-3 py-1  text-Chocolate text-[9px] font-black uppercase tracking-widest rounded-full">
                 {{ count($pinjam) }} Peminjaman
             </span>
@@ -66,21 +66,15 @@
                             </td>
                             <td class="p-5 pr-8">
                                 <div class="flex justify-center gap-2">
-                                    @if ($p->status == 'diajukan')
-                                        <a href="{{ route('admin.peminjaman.dikembalikan', $p->id) }}" 
-                                           class="h-8 px-4 flex items-center justify-center bg-emerald-500 text-white rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-500/20 active:scale-95">
-                                            <i class="fas fa-check mr-1.5"></i> Setuju
-                                        </a>
-                                        <a href="{{ route('admin.peminjaman.diajukan', $p->id) }}" 
-                                           class="h-8 px-4 flex items-center justify-center bg-white border border-rose-200 text-rose-500 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-rose-50 transition-all active:scale-95">
-                                            <i class="fas fa-times mr-1.5"></i> Tolak
-                                        </a>
-                                    @else
-                                        <div class="flex items-center gap-1.5 text-MediumBrown/30 italic">
-                                            <i class="fas fa-check-double text-[10px]"></i>
-                                            <span class="text-[10px] font-bold">Terproses</span>
-                                        </div>
-                                    @endif
+                                        <form action="{{ route('admin-riwayat.hapus', $p->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus riwayat ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="id" value="{{ $p->id }}">
+                                            <button type="submit" class="flex items-center gap-1.5 text-red-500 hover:text-red-700 text-[10px] font-bold">
+                                                <i class="fas fa-trash-alt text-[10px]"></i>
+                                                Hapus
+                                            </button>
+                                        </form>
                                 </div>
                             </td>
                         </tr>

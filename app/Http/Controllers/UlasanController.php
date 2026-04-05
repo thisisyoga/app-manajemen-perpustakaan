@@ -81,19 +81,27 @@ public function storeUlasan(Request $request)
         $query->where(function($q) use ($ulasanInput) {
             $q->searchUlasan($ulasanInput);
         });
-    }
-
-    $query->when($ratingInput, function ($q) use ($ratingInput) {
-        if ($ratingInput === 'rendah') {
-            $q->whereBetween('rating', [1, 2]);
-        } elseif ($ratingInput === 'tinggi') {
-            $q->where('rating', 5);
         }
-    });
 
-        $ulasan = $query->latest()->get();
+        $query->when($ratingInput, function ($q) use ($ratingInput) {
+            if ($ratingInput === 'rendah') {
+                $q->whereBetween('rating', [1, 2]);
+            } elseif ($ratingInput === 'tinggi') {
+                $q->where('rating', 5);
+            }
+        });
+
+        $ulasan = $query->latest()->latest()->paginate(10)->withQueryString();
 
         $totalulasan = $ulasan->count();
         return view('admin.ulasan.index', compact('ulasan', 'totalulasan'));
+    }
+
+    public function deleteUlasan($id)
+    {
+        $ulasan = Ulasan::findOrFail($id);
+        $ulasan->delete();
+
+        return redirect()->route('ulasan')->with('success', 'Ulasan berhasil dihapus!');
     }
 }

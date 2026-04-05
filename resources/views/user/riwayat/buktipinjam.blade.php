@@ -65,16 +65,13 @@
         </div>
     </nav>
 
-    <!-- Main Container -->
     <main class="max-w-4xl mx-auto p-0 md:p-8 print-container">
         <div
             class="bg-white shadow-2xl overflow-hidden print-card flex flex-col h-full rounded-2xl border border-beige/50">
 
-            <!-- Header Section -->
             <div class="bg-Chocolate p-10 text-white flex justify-between items-center">
                 <div class="flex items-center gap-6">
                     <div class=" p-2 rounded-xl shadow-inner flex items-center justify-center w-20 h-20">
-                        <!-- Ganti src dengan path logo Anda -->
                         <img src="{{ asset('favicon.png') }}" alt="Logo Aksara" class="w-full h-full object-contain">
                     </div>
                     <div>
@@ -91,7 +88,6 @@
                 </div>
             </div>
 
-            <!-- Status Bar -->
             <div class="bg-beige/30 px-10 py-4 border-b border-beige/40 flex justify-between items-center">
                 {{-- <div class="flex items-center gap-3">
                     <div class="w-2 h-2 rounded-full bg-Caramel animate-pulse"></div>
@@ -101,10 +97,7 @@
                     sah</span>
             </div>
 
-            <!-- Body Section -->
             <div class="flex-grow flex flex-col">
-                <!-- User & Date Info Grid -->
-                <!-- Menggunakan grid-cols-4 dengan padding p-8 agar proporsional di kertas A4 -->
                 <div class="grid grid-cols-4 border-b border-beige/20 bg-white">
                     <div class="p-8 border-r border-beige/20">
                         <span
@@ -140,10 +133,8 @@
                     </div>
                 </div>
 
-                <!-- Book Detail Section -->
                 <div class="p-12 flex-grow bg-white">
                     <div class="flex items-start gap-12">
-                        <!-- Book Cover -->
                         <div
                             class="w-44 h-60 bg-slate-50 rounded-lg shadow-xl flex-shrink-0 flex items-center justify-center border border-beige/50 overflow-hidden relative">
                             @if ($peminjaman->buku->cover)
@@ -158,7 +149,6 @@
                             @endif
                         </div>
 
-                        <!-- Book Info -->
                         <div class="flex-1 pt-2">
                             <div class="mb-8">
                                 <span
@@ -174,14 +164,14 @@
                                 <div class="group">
                                     <p
                                         class="text-MediumBrown/50 text-[10px] font-bold uppercase tracking-widest mb-1.5">
-                                        Penulis / Author</p>
+                                        Penulis</p>
                                     <p class="text-DarkChocolate font-bold text-sm uppercase tracking-tight">
                                         {{ $peminjaman->buku->penulis }}</p>
                                 </div>
                                 <div>
                                     <p
                                         class="text-MediumBrown/50 text-[10px] font-bold uppercase tracking-widest mb-1.5">
-                                        Penerbit / Publisher</p>
+                                        Penerbit</p>
                                     <p class="text-DarkChocolate font-bold text-sm uppercase italic tracking-tight">
                                         {{ $peminjaman->buku->penerbit }}</p>
                                 </div>
@@ -191,7 +181,6 @@
                 </div>
             </div>
 
-            <!-- Footer Section -->
             <div class="mt-auto">
                 <div class="p-10 bg-slate-50 border-t border-beige/30 flex justify-between items-end">
                     <div class="space-y-4">
@@ -206,7 +195,7 @@
                         </ul>
                     </div>
 
-                    {{-- <!-- Signature area -->
+                    {{--
                     <div class="text-center w-48">
                         <p class="text-[9px] text-MediumBrown uppercase font-bold mb-16 tracking-widest">Sistem Digital Aksara</p>
                         <div class="border-b border-Chocolate w-full"></div>
@@ -214,7 +203,6 @@
                     </div> --}}
                 </div>
 
-                <!-- Footer Branding -->
                 <div class="bg-Chocolate py-4 text-center">
                     <p class="text-beige/60 text-[9px] font-black uppercase tracking-[1em]">Literasi Membangun Negeri
                         &bull; Aksara Library</p>

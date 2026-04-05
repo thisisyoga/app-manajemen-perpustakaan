@@ -22,7 +22,7 @@ class BukuController extends Controller
             return $q->searchBuku($bukuInput);
         }); 
         
-        $buku = $query->get();
+        $buku = $query->latest()->paginate(5)->withQueryString();
     
         return view('admin.buku.index', compact('buku'));
     }
