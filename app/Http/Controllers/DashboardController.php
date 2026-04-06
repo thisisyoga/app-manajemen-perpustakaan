@@ -124,8 +124,9 @@ class DashboardController extends Controller
         $data = User::where('role', $role)->get();
 
         $pdf = Pdf::loadView('pdf.laporan', [
-            'users' => $data,
-            'role'  => ucfirst($role)
+            'users'    => $data,
+            'role'     => ucfirst($role),
+            'authUser' => auth()->user(),
         ]);
 
         return $pdf->download("laporan-data-{$role}.pdf");

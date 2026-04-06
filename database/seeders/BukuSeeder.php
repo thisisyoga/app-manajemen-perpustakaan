@@ -11,127 +11,154 @@ class BukuSeeder extends Seeder
     public function run(): void
     {
         // =========================
-        // 1. DATA KATEGORI
+        // 1. DATA KATEGORI (BARU)
         // =========================
-        $sains     = Kategori::create(['nama_kategori' => 'Sains']);
-        $teknologi = Kategori::create(['nama_kategori' => 'Teknologi']);
-        $bisnis    = Kategori::create(['nama_kategori' => 'Bisnis']);
-        $pendidikan= Kategori::create(['nama_kategori' => 'Pendidikan']);
-        $sastra    = Kategori::create(['nama_kategori' => 'Sastra']);
-        $sejarah   = Kategori::create(['nama_kategori' => 'Sejarah']);
-        $agama     = Kategori::create(['nama_kategori' => 'Agama']);
-        $kesehatan = Kategori::create(['nama_kategori' => 'Kesehatan']);
-        $pertanian = Kategori::create(['nama_kategori' => 'Pertanian']);
-        $kuliner   = Kategori::create(['nama_kategori' => 'Kuliner']);
-        $seni      = Kategori::create(['nama_kategori' => 'Seni']);
-        $arsitektur= Kategori::create(['nama_kategori' => 'Arsitektur']);
-        $hukum     = Kategori::create(['nama_kategori' => 'Hukum']);
-        $ekonomi   = Kategori::create(['nama_kategori' => 'Ekonomi']);
-        $motivasi  = Kategori::create(['nama_kategori' => 'Motivasi']);
+        $fiksiSejarah = Kategori::create(['nama_kategori' => 'Fiksi Sejarah']);
+        $realismeMagis= Kategori::create(['nama_kategori' => 'Realisme Magis']);
+        $selfHelp     = Kategori::create(['nama_kategori' => 'Self-Help']);
+        $fantasi      = Kategori::create(['nama_kategori' => 'Fantasi']);
+        $sejarah      = Kategori::create(['nama_kategori' => 'Sejarah']);
+        $filsafat     = Kategori::create(['nama_kategori' => 'Filsafat']);
+        $inspiratif   = Kategori::create(['nama_kategori' => 'Inspiratif']);
+        $fiksi        = Kategori::create(['nama_kategori' => 'Fiksi']);
+        $romance      = Kategori::create(['nama_kategori' => 'Romance']);
+        $puisi        = Kategori::create(['nama_kategori' => 'Puisi']);
 
         // =========================
-        // 2. DATA BUKU (20 DATA)
+        // 2. DATA BUKU
         // =========================
-
         $dataBuku = [
             [
-                'judul_buku' => 'Buah-buahan Langka di Dunia',
-                'isbn' => '978-000-001',
-                'penulis' => 'Ahmad Fauzi',
-                'penerbit' => 'Agro Media',
-                'tahun_terbit' => 2020,
-                'stok' => 5,
-                'kategori' => $pertanian->id
-            ],
-            [
-                'judul_buku' => 'Makanan Khas Cirebon',
-                'isbn' => '978-000-002',
-                'penulis' => 'Siti Aminah',
-                'penerbit' => 'Kuliner Nusantara',
-                'tahun_terbit' => 2019,
-                'stok' => 6,
-                'kategori' => $kuliner->id
-            ],
-            [
-                'judul_buku' => 'Musik Digital',
-                'isbn' => '978-000-003',
-                'penulis' => 'Rizky Pratama',
-                'penerbit' => 'Media Kreatif',
-                'tahun_terbit' => 2021,
-                'stok' => 4,
-                'kategori' => $seni->id
-            ],
-            [
-                'judul_buku' => 'Pengantar Mikrokontroler',
-                'isbn' => '978-000-004',
-                'penulis' => 'Budi Santoso',
-                'penerbit' => 'Informatika',
-                'tahun_terbit' => 2022,
-                'stok' => 8,
-                'kategori' => $teknologi->id
-            ],
-            [
-                'judul_buku' => 'Statistika untuk Penelitian',
-                'isbn' => '978-000-005',
-                'penulis' => 'Sugiyono',
-                'penerbit' => 'Alfabeta',
-                'tahun_terbit' => 2018,
-                'stok' => 7,
-                'kategori' => $pendidikan->id
-            ],
-            [
-                'judul_buku' => 'Manajemen Stratejik',
-                'isbn' => '978-000-006',
-                'penulis' => 'Kotler',
-                'penerbit' => 'Erlangga',
+                'judul_buku' => 'Laut Bercerita',
+                'penulis' => 'Leila S. Chudori',
+                'penerbit' => 'KPG',
                 'tahun_terbit' => 2017,
                 'stok' => 5,
-                'kategori' => $bisnis->id
+                'kategori' => $fiksiSejarah->id
             ],
             [
-                'judul_buku' => 'Hukum Internasional',
-                'isbn' => '978-000-007',
-                'penulis' => 'Prof. Hikmahanto',
-                'penerbit' => 'Rajawali',
-                'tahun_terbit' => 2016,
-                'stok' => 3,
-                'kategori' => $hukum->id
+                'judul_buku' => 'Cantik Itu Luka',
+                'penulis' => 'Eka Kurniawan',
+                'penerbit' => 'Gramedia',
+                'tahun_terbit' => 2002,
+                'stok' => 5,
+                'kategori' => $realismeMagis->id
             ],
             [
-                'judul_buku' => 'Ilmu dan Teknologi Biomaterial',
-                'isbn' => '978-000-008',
-                'penulis' => 'Dr. Andi',
-                'penerbit' => 'Sains Press',
-                'tahun_terbit' => 2021,
-                'stok' => 6,
-                'kategori' => $sains->id
+                'judul_buku' => 'Filosofi Teras',
+                'penulis' => 'Henry Manampiring',
+                'penerbit' => 'Kompas',
+                'tahun_terbit' => 2018,
+                'stok' => 5,
+                'kategori' => $selfHelp->id
             ],
             [
-                'judul_buku' => 'Kumpulan Puisi Senja',
-                'isbn' => '978-000-009',
-                'penulis' => 'Taufik Ismail',
-                'penerbit' => 'Sastra Nusantara',
-                'tahun_terbit' => 2015,
-                'stok' => 4,
-                'kategori' => $sastra->id
-            ],
-            [
-                'judul_buku' => 'Sejarah Peradaban Dunia',
-                'isbn' => '978-000-010',
-                'penulis' => 'Yuval Noah Harari',
+                'judul_buku' => 'Bumi',
+                'penulis' => 'Tere Liye',
                 'penerbit' => 'Gramedia',
                 'tahun_terbit' => 2014,
-                'stok' => 6,
+                'stok' => 5,
+                'kategori' => $fantasi->id
+            ],
+            [
+                'judul_buku' => 'Atomic Habits',
+                'penulis' => 'James Clear',
+                'penerbit' => 'Gramedia',
+                'tahun_terbit' => 2019,
+                'stok' => 5,
+                'kategori' => $selfHelp->id
+            ],
+            [
+                'judul_buku' => 'Sapiens',
+                'penulis' => 'Yuval Noah Harari',
+                'penerbit' => 'KPG',
+                'tahun_terbit' => 2011,
+                'stok' => 5,
                 'kategori' => $sejarah->id
+            ],
+            [
+                'judul_buku' => 'Gadis Kretek',
+                'penulis' => 'Ratih Kumala',
+                'penerbit' => 'Gramedia',
+                'tahun_terbit' => 2012,
+                'stok' => 5,
+                'kategori' => $fiksiSejarah->id
+            ],
+            [
+                'judul_buku' => 'The Midnight Library',
+                'penulis' => 'Matt Haig',
+                'penerbit' => 'Gramedia',
+                'tahun_terbit' => 2020,
+                'stok' => 5,
+                'kategori' => $fantasi->id
+            ],
+            [
+                'judul_buku' => 'Pulang',
+                'penulis' => 'Leila S. Chudori',
+                'penerbit' => 'KPG',
+                'tahun_terbit' => 2012,
+                'stok' => 5,
+                'kategori' => $fiksiSejarah->id
+            ],
+            [
+                'judul_buku' => 'Dunia Sophie',
+                'penulis' => 'Jostein Gaarder',
+                'penerbit' => 'Mizan',
+                'tahun_terbit' => 1991,
+                'stok' => 5,
+                'kategori' => $filsafat->id
+            ],
+            [
+                'judul_buku' => 'Laskar Pelangi',
+                'penulis' => 'Andrea Hirata',
+                'penerbit' => 'Bentang',
+                'tahun_terbit' => 2005,
+                'stok' => 5,
+                'kategori' => $inspiratif->id
+            ],
+            [
+                'judul_buku' => 'Ikigai',
+                'penulis' => 'Héctor García',
+                'penerbit' => 'Gramedia',
+                'tahun_terbit' => 2016,
+                'stok' => 5,
+                'kategori' => $selfHelp->id
+            ],
+            [
+                'judul_buku' => 'Orang-Orang Biasa',
+                'penulis' => 'Andrea Hirata',
+                'penerbit' => 'Bentang',
+                'tahun_terbit' => 2019,
+                'stok' => 5,
+                'kategori' => $fiksi->id
+            ],
+            [
+                'judul_buku' => 'Dikta & Hukum',
+                'penulis' => "Dhia'an Farah",
+                'penerbit' => 'Asoka',
+                'tahun_terbit' => 2021,
+                'stok' => 5,
+                'kategori' => $romance->id
+            ],
+            [
+                'judul_buku' => 'Home Body',
+                'penulis' => 'Rupi Kaur',
+                'penerbit' => 'KPG',
+                'tahun_terbit' => 2020,
+                'stok' => 5,
+                'kategori' => $puisi->id
             ],
         ];
 
         // =========================
-        // 3. INSERT + RELASI
+        // 3. INSERT + ISBN UNIK
         // =========================
-        foreach ($dataBuku as $data) {
+        foreach ($dataBuku as $index => $data) {
             $kategoriId = $data['kategori'];
             unset($data['kategori']);
+
+            // generate ISBN unik otomatis
+            $data['isbn'] = '97860242469' . str_pad($index + 1, 2, '0', STR_PAD_LEFT);
 
             $buku = Buku::create($data);
             $buku->RelasiKategori()->attach($kategoriId);

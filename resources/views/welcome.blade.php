@@ -59,3 +59,5 @@ protected function create(array $data)
 }
 
 $table->string('foto')->nullable(); --}}
+
+

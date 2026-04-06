@@ -376,7 +376,7 @@
                             <div class="w-16 h-16 bg-beige/30 rounded-full flex items-center justify-center mb-4">
                                 <i class="fa-regular fa-comment-dots text-Caramel text-xl"></i>
                             </div>
-                            <p class="text-DarkChocolate font-bold text-sm">Belum ada diskusi.</p>
+                            <p class="text-DarkChocolate font-bold text-sm">Belum ada Ulasan.</p>
                             <p class="text-MediumBrown text-[11px] mt-1">Jadilah yang pertama memberikan ulasan untuk
                                 buku ini.</p>
                         </div>

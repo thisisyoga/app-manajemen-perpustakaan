@@ -218,7 +218,7 @@
                                     class="h-11 rounded-xl border border-beige/50 bg-gray-50/50 flex items-center justify-center text-gray-300 text-[10px] font-bold">
                                     <i class="fas fa-lock mr-2"></i> BUKTI KEMBALI
                                 </div>
-                                <a href="{{ route('cetak.bukti', $item->id) }}"
+                                <a href="{{ route('cetak.bukti', $item->id) }}" target="_blank"
                                     class="bg-white hover:bg-beige/20 text-Chocolate border border-Caramel/20 h-11 rounded-xl text-[10px] font-black tracking-widest transition-all flex items-center justify-center gap-2">
                                     <i class="fas fa-file-download"></i> BUKTI PINJAM
                                 </a>
@@ -232,7 +232,7 @@
                                     </button>
                                 </form>
                             @elseif($item->status == 'dikembalikan')
-                                <a href="{{ route('cetak.bukti.kembali', $item->id) }}"
+                                <a href="{{ route('cetak.bukti.kembali', $item->id) }}" target="_blank"
                                     class="bg-white hover:bg-beige/20 text-Chocolate border border-Caramel/20 h-11 rounded-xl text-[10px] font-black tracking-widest transition-all flex items-center justify-center gap-2">
                                     <i class="fas fa-file-download"></i> BUKTI KEMBALI
                                 </a>
@@ -275,7 +275,7 @@
         </div>
     </main>
 
-    <div id="modalUlasan" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6">
+    {{-- <div id="modalUlasan" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6">
         <div class="absolute inset-0 bg-DarkChocolate/60 backdrop-blur-md transition-opacity duration-500"
             onclick="closeModal()"></div>
         <div
@@ -318,9 +318,9 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> --}}
 
-    <script>
+    {{-- <script>
         function openModal(id, judul) {
             const modal = document.getElementById('modalUlasan');
             modal.classList.remove('hidden');
@@ -333,7 +333,7 @@
         function closeModal() {
             document.getElementById('modalUlasan').classList.add('hidden');
         }
-    </script>
+    </script> --}}
 </body>
 
 </html>

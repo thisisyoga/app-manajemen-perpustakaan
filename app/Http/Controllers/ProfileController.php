@@ -16,7 +16,7 @@ class ProfileController extends Controller
 
 public function index(Request $request)
     {
-        $buku = Buku::with('ulasans',   'RelasiKategori')->paginate(5);
+        $buku = Buku::with('ulasans',   'RelasiKategori')->paginate(10);
         return view('dashboard', compact('buku'));
     }
     /**

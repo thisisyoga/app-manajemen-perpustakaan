@@ -354,11 +354,11 @@
                     <div>
                         <h3 class="text-white font-bold mb-6 uppercase tracking-widest text-sm">Jam Buka</h3>
                         <ul class="space-y-3 text-sm">
-                            <li class="flex justify-between border-b border-white/5 pb-2"><span>Sen - Jum</span>
+                            <li class="flex justify-between border-b border-white/5 pb-2"><span>Setiap Hari</span>
                                 <span>06:30 - 15:00</span>
                             </li>
-                            <li class="flex justify-between text-Caramel"><span>Sabtu - Minggu</span>
-                                <span>Tutup</span></li>
+                            {{-- <li class="flex justify-between text-Caramel"><span>Sabtu - Minggu</span>
+                                <span>Tutup</span></li> --}}
                         </ul>
                     </div>
 

@@ -135,6 +135,12 @@
                 </tr>
             @endforelse
         </tbody>
+
+        <div class="text-center w-48">
+                        <p class="text-[9px] text-MediumBrown uppercase font-bold mb-16 tracking-widest">Petugas Literasi</p>
+                        <div class="border-b border-Chocolate w-full"></div>
+                        <p class="text-[10px] text-Chocolate mt-2 font-black uppercase tracking-tighter">Aksara Digital System</p>
+                    </div>
     </table>
 
 </body>

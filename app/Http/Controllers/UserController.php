@@ -73,9 +73,9 @@ public function create(string $id)
 public function store(Request $request)
     {
 
-        if (auth()->user()->status !== 'active') {
-        return back()->with('error', 'Status akun Anda tidak aktif. Tidak dapat meminjam buku.');
-    }
+    //     if (auth()->user()->status !== 'active') {
+    //     return back()->with('error', 'Status akun Anda tidak aktif. Tidak dapat meminjam buku.');
+    // }
 
         $request->validate([
             'buku_id' => 'required|exists:bukus,id',

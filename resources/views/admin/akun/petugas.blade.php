@@ -28,7 +28,8 @@
                         <tr class="bg-beige/5 text-MediumBrown/50 font-black uppercase tracking-widest text-[10px]">
                             <th class="p-5 pl-8 text-center w-16">No</th>
                             <th class="p-5">Profil Petugas</th>
-                            <th class="p-5">Kontak</th>
+                            <th class="p-5">Email</th>
+                            <th class="p-5">Alamat</th>
                             <th class="p-5">Hak Akses</th>
                             <th class="p-5 pr-8 text-center">Opsi Pengelolaan</th>
                         </tr>
@@ -60,6 +61,12 @@
                                     </div>
                                 </td>
                                 <td class="p-5">
+                                    <div class="flex items-center gap-2 text-MediumBrown/70">
+                                        <i class="fa-solid fa-location-dot text-[10px]"></i>
+                                        <span class="text-xs">{{ $p->alamat }}</span>
+                                    </div>
+                                </td>
+                                <td class="p-5">
                                     <span
                                         class="px-3 py-1 bg-white border border-beige/60 text-DarkChocolate text-[9px] font-black uppercase tracking-widest rounded-lg shadow-sm group-hover:border-Chocolate/30 transition-colors">
                                         {{ $p->role }}
@@ -84,11 +91,11 @@
                                             </button>
                                         </form>
 
-                                        <a href=""
+                                        {{-- <a href=""
                                             class="h-8 w-8 flex items-center justify-center bg-white border border-beige/40 text-emerald-500 rounded-lg hover:bg-emerald-50 transition-all shadow-sm"
                                             title="Detail Profil">
                                             <i class="fas fa-eye text-[9px]"></i>
-                                        </a>
+                                        </a> --}}
                                     </div>
                                 </td>
                             </tr>

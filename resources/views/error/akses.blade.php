@@ -41,7 +41,7 @@
         <!-- Footer Kecil -->
         <div class="mt-12">
             <p class="text-sm text-Caramel">
-                &copy; {{ date('Y') }} - {{ config('app.name') }}
+                &copy; {{ date('Y') }} - Aksara Perpustakaan. Semua hak dilindungi.
             </p>
         </div>
     </div>

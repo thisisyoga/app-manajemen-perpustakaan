@@ -22,4 +22,5 @@ class Peminjaman extends Model
     public function buku() {
         return $this->belongsTo(Buku::class);
     }
+    
 }

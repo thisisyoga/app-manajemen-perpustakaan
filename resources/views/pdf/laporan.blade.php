@@ -78,11 +78,14 @@
         /* Tanda Tangan */
         .signature-wrapper {
             margin-top: 40px;
+            margin-left: 500px;
             width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            text-align: right;
         }
         .signature-box {
-            float: right;
-            width: 200px;
+            width: 220px;
             text-align: center;
         }
         .signature-space {
@@ -90,7 +93,7 @@
         }
         .name-line {
             border-bottom: 1px solid #000;
-            display: inline-block;
+            display: block;
             padding: 0 10px;
             font-weight: bold;
         }
@@ -140,6 +143,19 @@
             @endforelse
         </tbody>
     </table>
+
+    <div class="signature-wrapper">
+        <div class="signature-box">
+            <div class="mengetahui" style="margin-top: 8px; font-size: 11px; color: #475569;">
+                mengetahui,<br>
+                {{ $authUser->role }}
+            </div>
+            <div class="signature-space"></div>
+            <div class="name-line">
+                {{ optional($authUser)->NamaLengkap ?? optional($authUser)->name ?? '__________________' }}
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
