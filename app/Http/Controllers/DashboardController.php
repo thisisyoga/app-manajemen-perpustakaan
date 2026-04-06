@@ -70,15 +70,14 @@ class DashboardController extends Controller
     {
         $peminjaman = Peminjaman::findOrFail($id);
 
-        if ($peminjaman->status !== 'dipinjam') {
-            return redirect()->back()->with('error', 'Buku ini belum bisa diajukan untuk pengembalian.');
-        }
-
+       if ($peminjaman->status === 'diajukan') {
         $peminjaman->update([
-            'status' => 'diajukan'
+            'status' => 'dipinjam'
         ]);
+        return redirect()->back()->with('success', 'Pengembalian ditolak, status kembali menjadi dipinjam.');
+    }
 
-        return redirect()->back()->with('success', 'Pengembalian buku berhasil diajukan.');
+        return redirect()->back()->with('error', 'Status tidak valid untuk aksi ini.');
     }
 
     public function dikembalikan($id)
@@ -158,4 +157,17 @@ class DashboardController extends Controller
 
         return $pdf->download('laporan-peminjaman.pdf');
     }
+    public function exportbuku()
+    {
+        $data = Buku::all();
+
+        $pdf = Pdf::loadView('pdf.laporan_buku', [
+            'bukus' => $data,
+            'judul'   => 'Laporan Inventaris Buku'
+        ]);
+
+        return $pdf->download('laporan-buku.pdf');
+    }
+
+    
 }

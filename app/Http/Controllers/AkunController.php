@@ -21,7 +21,7 @@ class AkunController extends Controller
         return $q->searchUser($userInput);
         });
 
-        $petugas = $query->get();
+        $petugas = $query->latest()->paginate(10)->withQueryString();
         return view('admin.akun.petugas', compact('petugas'));
     }
 
@@ -35,7 +35,7 @@ class AkunController extends Controller
         return $q->searchUser($userInput);
         });
         
-        $user = $query->get();
+        $user = $query->latest()->paginate(10)->withQueryString();
         return view('admin.akun.user', compact('user'));
     }
 
@@ -127,4 +127,6 @@ class AkunController extends Controller
         $petugas->delete();
         return redirect()->route('MDA')->with('success', 'Akun petugas berhasil dihapus.');
     }
+
+    
 }

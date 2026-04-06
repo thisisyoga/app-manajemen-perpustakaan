@@ -4,187 +4,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cetak Bukti Peminjaman - Aksara</title>
+    <link rel="icon" href="{{ asset('favicon.png') }}">
+    <title>Bukti Peminjaman Resmi - Aksara</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @media print {
             @page {
                 size: A4;
-                margin: 8mm;
+                margin: 0;
             }
 
             body {
                 background-color: white !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
+                margin: 0;
+                padding: 0;
             }
 
             .no-print {
                 display: none !important;
             }
 
-            .print-card {
-                box-shadow: none !important;
-                border: 2px solid #0f172a !important;
-                margin: 0 !important;
-                width: 100% !important;
-                border-radius: 0 !important;
+            .print-container {
+                width: 210mm;
+                height: 297mm;
+                padding: 15mm;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
             }
 
-            main {
-                padding: 0 !important;
-                margin: 0 !important;
-                max-width: 100% !important;
+            .print-card {
+                flex-grow: 1;
+                box-shadow: none !important;
+                border: 1px solid #5D3A2E !important;
+                border-radius: 8px !important;
             }
         }
     </style>
 </head>
 
-<body class="bg-slate-100 min-h-screen font-sans antialiased text-slate-900">
+<body class="bg-beige/30 min-h-screen font-sans antialiased text-DarkChocolate">
 
-    <nav class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 no-print">
-        <div class="max-w-3xl mx-auto px-4 h-20 flex items-center justify-between">
-
-            <div class="flex items-center gap-5">
-                <a href="{{ route('riwayat') }}"
-                    class="flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-900 hover:text-white transition-all duration-300 group shadow-sm">
-                    <i class="fas fa-arrow-left text-sm group-hover:-translate-x-1 transition-transform"></i>
+    <!-- Navbar -->
+    <nav class="bg-white/90 backdrop-blur-md border-b border-beige sticky top-0 z-50 no-print">
+        <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="{{ route('riwayat') }}" class="text-MediumBrown hover:text-Chocolate transition-colors">
+                    <i class="fas fa-chevron-left"></i>
+                    <span class="ml-2 font-medium">Kembali</span>
                 </a>
-
-                <div class="flex items-center gap-3">
-                    <div
-                        class="bg-amber-500 w-10 h-10 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/20">
-                        <i class="fas fa-book-open text-white text-lg"></i>
-                    </div>
-                    <div>
-                        <span class="text-xl font-extrabold tracking-tighter uppercase block leading-none">AKSARA<span
-                                class="text-amber-500">.</span></span>
-                    </div>
-                </div>
             </div>
-
             <button onclick="window.print()"
-                class="group bg-slate-900 text-white pl-4 pr-5 py-2.5 rounded-xl font-bold text-[11px] uppercase tracking-widest hover:bg-amber-500 hover:text-slate-900 transition-all duration-300  flex items-center gap-3">
-                <span
-                    class="w-7 h-7 bg-white/10 group-hover:bg-slate-900/10 rounded-lg flex items-center justify-center">
-                    <i class="fas fa-print"></i>
-                </span>
-                Cetak Dokumen
+                class="bg-Chocolate text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-MediumBrown transition-all shadow-md flex items-center gap-2">
+                <i class="fas fa-print"></i>
+                Cetak Bukti Pinjam
             </button>
         </div>
     </nav>
 
-    <main class="max-w-3xl mx-auto px-4">
-        <div class="bg-white shadow-2xl overflow-hidden print-card border border-slate-200 rounded-2xl">
+    <main class="max-w-4xl mx-auto p-0 md:p-8 print-container">
+        <div
+            class="bg-white shadow-2xl overflow-hidden print-card flex flex-col h-full rounded-2xl border border-beige/50">
 
-            <div class="bg-slate-900 p-6 text-white flex justify-between items-center">
-                <div class="flex items-center gap-4">
-                    <div class="bg-amber-500 w-12 h-12 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-book-open text-xl text-white"></i>
+            <div class="bg-Chocolate p-10 text-white flex justify-between items-center">
+                <div class="flex items-center gap-6">
+                    <div class=" p-2 rounded-xl shadow-inner flex items-center justify-center w-20 h-20">
+                        <img src="{{ asset('favicon.png') }}" alt="Logo Aksara" class="w-full h-full object-contain">
                     </div>
                     <div>
-                        <h1 class="text-lg font-black italic uppercase leading-none tracking-tight">Aksara<span
-                                class="text-amber-500">.</span></span></h1>
-                        <p class="text-[9px] text-slate-400 font-bold tracking-[0.2em] mt-1">SISTEM INFORMASI
-                            PERPUSTAKAAN DIGITAL</p>
+                        <h1 class="text-3xl font-black tracking-tighter uppercase leading-none">AKSARA<span
+                                class="text-Caramel">.</span></h1>
+                        {{-- <p class="text-[11px] text-beige/70 font-bold tracking-[0.4em] mt-2 uppercase">Official Borrowing Receipt</p> --}}
                     </div>
                 </div>
-                <div class="text-right">
-                    <p class="text-amber-500 font-bold tracking-[0.2em] text-[8px] uppercase">ID Transaksi</p>
-                    <p class="text-sm font-mono font-bold">
-                        #TRX-{{ $peminjaman->created_at->format('Ymd') }}-{{ $peminjaman->id }}</p>
-                </div>
+                {{-- <div class="text-right border-l-2 border-white/10 pl-8">
+                    <p class="text-beige/50 font-bold text-[10px] uppercase tracking-widest mb-1">ID Transaksi</p>
+                    <p class="text-xl font-mono font-bold tracking-tight">
+                        #TRX-{{ $peminjaman->created_at->format('Ymd') }}-{{ $peminjaman->id }}
+                    </p>
+                </div> --}}
             </div>
 
-            <div class="grid grid-cols-3 border-b border-slate-100">
-                <div class="p-5 border-r border-slate-100">
-                    <span
-                        class="text-slate-400 text-[8px] font-extrabold uppercase tracking-widest block mb-1">Identitas
-                        Peminjam</span>
-                    <p class="font-bold text-sm text-slate-800 uppercase">{{ $peminjaman->user->name }}</p>
-                    <p class="text-[10px] text-slate-500 italic lowercase">{{ $peminjaman->user->email }}</p>
-                </div>
-                <div class="p-5 border-r border-slate-100 bg-slate-50/30">
-                    <span class="text-slate-400 text-[8px] font-extrabold uppercase tracking-widest block mb-1">Tgl
-                        Pinjam</span>
-                    <p class="font-bold text-sm text-slate-800 italic uppercase">
-                        {{ \Carbon\Carbon::parse($peminjaman->tanggal_peminjaman)->format('d M Y') }}
-                    </p>
-                </div>
-                <div class="p-5 bg-red-50/50">
-                    <span class="text-red-500 text-[8px] font-extrabold uppercase tracking-widest block mb-1">Tgl
-                        Pengembalian</span>
-                    <p class="text-red-600 font-black text-sm underline decoration-2 underline-offset-4">
-                        {{ \Carbon\Carbon::parse($peminjaman->tanggal_pengembalian)->format('d M Y') }}
-                    </p>
-                </div>
+            <div class="bg-beige/30 px-10 py-4 border-b border-beige/40 flex justify-between items-center">
+                {{-- <div class="flex items-center gap-3">
+                    <div class="w-2 h-2 rounded-full bg-Caramel animate-pulse"></div>
+                    <span class="text-xs font-bold text-MediumBrown uppercase tracking-widest">Status: Aktif Dipinjam</span>
+                </div> --}}
+                <span class="text-[10px] text-MediumBrown/60 font-medium">Harap simpan dokumen ini sebagai bukti
+                    sah</span>
             </div>
 
-            <div class="p-8">
-                <div class="flex items-start gap-8">
-                    <div
-                        class="w-24 h-32 bg-slate-100 rounded-lg flex-shrink-0 flex items-center justify-center border border-slate-200 overflow-hidden">
-                        @if ($peminjaman->buku->cover)
-                            <img src="{{ asset('storage/' . $peminjaman->buku->cover) }}"
-                                class="w-full h-full object-cover">
-                        @else
-                            <i class="fas fa-book text-slate-300 text-4xl"></i>
-                        @endif
-                    </div>
-                    <div class="flex-1">
+            <div class="flex-grow flex flex-col">
+                <div class="grid grid-cols-4 border-b border-beige/20 bg-white">
+                    <div class="p-8 border-r border-beige/20">
                         <span
-                            class="bg-slate-900 text-white px-2 py-0.5 rounded text-[8px] font-black tracking-widest uppercase">Detail
-                            Buku</span>
-                        <h4
-                            class="text-slate-900 font-black text-xl italic mt-2 mb-4 leading-none uppercase tracking-tighter">
-                            {{ $peminjaman->buku->judul_buku }}
-                        </h4>
+                            class="text-MediumBrown/50 text-[9px] font-black uppercase tracking-widest block mb-2">Identitas
+                            Peminjam</span>
+                        <p class="font-bold text-DarkChocolate text-base uppercase leading-tight">
+                            {{ $peminjaman->user->name }}</p>
+                        <p class="text-[11px] text-MediumBrown mt-1 truncate">{{ $peminjaman->user->email }}</p>
+                    </div>
 
-                        <div class="grid grid-cols-2 gap-x-8 gap-y-3 border-t border-slate-50 pt-4">
-                            <div>
-                                <p class="text-slate-400 text-[8px] font-bold uppercase tracking-widest">Penulis</p>
-                                <p class="text-slate-700 font-bold text-xs uppercase">{{ $peminjaman->buku->penulis }}
-                                </p>
+                    <div class="p-8 border-r border-beige/20">
+                        <span
+                            class="text-MediumBrown/50 text-[9px] font-black uppercase tracking-widest block mb-2">ISBN</span>
+                        <p class="font-mono font-bold text-DarkChocolate text-base tracking-tighter">
+                            {{ $peminjaman->buku->isbn }}</p>
+                    </div>
+
+                    <div class="p-8 border-r border-beige/20 bg-beige/5">
+                        <span class="text-MediumBrown/50 text-[9px] font-black uppercase tracking-widest block mb-2">Tgl
+                            Pinjam</span>
+                        <p class="font-bold text-DarkChocolate text-base uppercase italic">
+                            {{ \Carbon\Carbon::parse($peminjaman->tanggal_peminjaman)->format('d M Y') }}
+                        </p>
+                    </div>
+
+                    <div class="p-8 bg-red-50/30">
+                        <span class="text-red-400 text-[9px] font-black uppercase tracking-widest block mb-2">Batas
+                            Kembali</span>
+                        <p
+                            class="font-bold text-red-600 text-base italic underline decoration-red-200 underline-offset-4">
+                            {{ \Carbon\Carbon::parse($peminjaman->tanggal_pengembalian)->format('d M Y') }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-12 flex-grow bg-white">
+                    <div class="flex items-start gap-12">
+                        <div
+                            class="w-44 h-60 bg-slate-50 rounded-lg shadow-xl flex-shrink-0 flex items-center justify-center border border-beige/50 overflow-hidden relative">
+                            @if ($peminjaman->buku->cover)
+                                <img src="{{ asset('storage/' . $peminjaman->buku->cover) }}"
+                                    class="w-full h-full object-cover">
+                            @else
+                                <div class="text-center p-4">
+                                    <i class="fas fa-book text-beige text-6xl mb-2"></i>
+                                    <p class="text-[8px] text-beige uppercase font-bold tracking-tighter">Cover Tidak
+                                        Tersedia</p>
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="flex-1 pt-2">
+                            <div class="mb-8">
+                                <span
+                                    class="bg-Chocolate text-white px-3 py-1 rounded text-[10px] font-black tracking-widest uppercase italic shadow-sm">Koleksi
+                                    Perpustakaan</span>
+                                <h4
+                                    class="text-Chocolate font-black text-4xl mt-6 leading-[0.95] uppercase tracking-tighter italic">
+                                    {{ $peminjaman->buku->judul_buku }}
+                                </h4>
                             </div>
-                            <div>
-                                <p class="text-slate-400 text-[8px] font-bold uppercase tracking-widest">Penerbit</p>
-                                <p class="text-slate-700 font-bold text-xs uppercase">{{ $peminjaman->buku->penerbit }}
-                                </p>
-                            </div>
-                            <div>
-                                <p class="text-slate-400 text-[8px] font-bold uppercase tracking-widest">Tahun Terbit
-                                </p>
-                                <p class="text-slate-700 font-bold text-[11px]">{{ $peminjaman->buku->tahun_terbit }}
-                                </p>
+
+                            <div class="grid grid-cols-2 gap-x-12 gap-y-8 pt-8 border-t border-beige/40">
+                                <div class="group">
+                                    <p
+                                        class="text-MediumBrown/50 text-[10px] font-bold uppercase tracking-widest mb-1.5">
+                                        Penulis</p>
+                                    <p class="text-DarkChocolate font-bold text-sm uppercase tracking-tight">
+                                        {{ $peminjaman->buku->penulis }}</p>
+                                </div>
+                                <div>
+                                    <p
+                                        class="text-MediumBrown/50 text-[10px] font-bold uppercase tracking-widest mb-1.5">
+                                        Penerbit</p>
+                                    <p class="text-DarkChocolate font-bold text-sm uppercase italic tracking-tight">
+                                        {{ $peminjaman->buku->penerbit }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="p-8 bg-slate-50 border-t border-slate-100 flex justify-between items-end">
-                <div class="space-y-3">
-                    <p class="text-slate-800 font-black uppercase text-[9px] tracking-widest flex items-center gap-2">
-                        <i class="fas fa-info-circle text-amber-500 text-xs"></i> Informasi Penting:
-                    </p>
-                    <ul class="text-slate-500 text-[10px] leading-relaxed list-none space-y-1 font-medium italic">
-                        <li>- Wajib mengembalikan buku tepat waktu sesuai tanggal di atas.</li>
-                        <li>- Keterlambatan dikenakan sanksi sesuai kebijakan perpustakaan.</li>
-                        <li>- Menjaga kebersihan buku adalah tanggung jawab penuh peminjam.</li>
-                    </ul>
-                </div>
-            </div>
+            <div class="mt-auto">
+                <div class="p-10 bg-slate-50 border-t border-beige/30 flex justify-between items-end">
+                    <div class="space-y-4">
+                        <p
+                            class="text-Chocolate font-black uppercase text-[11px] tracking-widest flex items-center gap-2">
+                            <i class="fas fa-info-circle text-Caramel"></i> Ketentuan Peminjaman:
+                        </p>
+                        <ul class="text-MediumBrown text-xs leading-relaxed space-y-2 font-medium italic opacity-80">
+                            <li>• Wajib menjaga kebersihan dan keutuhan fisik buku selama peminjaman.</li>
+                            {{-- <li>• Keterlambatan pengembalian akan dikenakan sanksi sesuai aturan perpustakaan.</li> --}}
+                            <li>• Segera melapor jika terjadi kerusakan atau kehilangan pada buku.</li>
+                        </ul>
+                    </div>
 
-            <div class="bg-slate-900 py-3 text-center">
-                <p class="text-slate-400 text-[8px] font-black uppercase tracking-[0.5em]">Literasi Membangun Negeri
-                    &bull; Aksara Library</p>
+                    {{--
+                    <div class="text-center w-48">
+                        <p class="text-[9px] text-MediumBrown uppercase font-bold mb-16 tracking-widest">Sistem Digital Aksara</p>
+                        <div class="border-b border-Chocolate w-full"></div>
+                        <p class="text-[10px] text-Chocolate mt-2 font-black uppercase tracking-tighter italic">Valid Receipt</p>
+                    </div> --}}
+                </div>
+
+                <div class="bg-Chocolate py-4 text-center">
+                    <p class="text-beige/60 text-[9px] font-black uppercase tracking-[1em]">Literasi Membangun Negeri
+                        &bull; Aksara Library</p>
+                </div>
             </div>
         </div>
 
-        <p class="text-center text-slate-400 text-[9px] mt-6 font-bold uppercase tracking-widest no-print">
-            Dokumen ini dicetak pada: {{ now()->format('d/m/Y H:i') }}
-        </p>
+        {{-- <!-- Timestamp (screen only) -->
+        <div class="flex justify-between items-center mt-6 px-4 no-print">
+             <p class="text-MediumBrown/40 text-[10px] font-bold uppercase tracking-widest">
+                Dokumen Digital Diterbitkan: {{ now()->format('d/m/Y H:i:s') }}
+            </p>
+        </div> --}}
     </main>
 
 </body>

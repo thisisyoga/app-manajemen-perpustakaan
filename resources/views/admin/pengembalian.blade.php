@@ -20,7 +20,7 @@
                         <th class="p-5 text-center">Detail Buku</th>
                         <th class="p-5 text-center">Periode</th>
                         <th class="p-5 text-center">Status</th>
-                        <th class="p-5 pr-8 text-center">Aksi Verifikasi</th>
+                        <th class="p-5 pr-8 text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-beige/10">

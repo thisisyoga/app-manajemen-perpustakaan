@@ -61,7 +61,7 @@
                                 </td>
                                 <td class="p-5 pr-8 text-center">
                                     <form action="{{ route('delete-MDA', $u->id) }}" method="POST"
-                                        onsubmit="return confirm('Hapus data anggota ini secara permanen?');"
+                                        onsubmit="return confirm('Hapus data user ini secara permanen?');"
                                         class="inline">
                                         @csrf
                                         @method('DELETE')
@@ -81,27 +81,44 @@
 
         <div class="flex flex-col sm:flex-row justify-between items-center gap-6 mt-10 px-4">
             <p class="text-[11px] font-bold text-gray-400 uppercase tracking-[0.2em]">
-                Menampilkan <span class="text-DarkChocolate font-black italic">1 - 10</span> dari <span
-                    class="text-DarkChocolate font-black italic">1.284</span> Ulasan
+                Menampilkan <span class="text-DarkChocolate font-black italic">{{$user->firstItem()}} - {{$user->lastItem()}}</span> dari <span
+                    class="text-DarkChocolate font-black italic">{{ $user->total() }}</span> Ulasan
             </p>
             <div class="flex items-center gap-2">
-                <button
-                    class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 text-gray-300 hover:bg-white transition-all cursor-not-allowed"
-                    disabled>
-                    <i class="fas fa-chevron-left text-xs"></i>
-                </button>
+                @if ($user->onFirstPage())
+                    <button
+                        class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 text-gray-300 cursor-not-allowed"
+                        disabled>
+                        <i class="fas fa-chevron-left text-xs"></i>
+                    </button>
+                @else
+                    <a href="{{ $user->previousPageUrl() }}"
+                        class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 text-Chocolate hover:bg-white transition-all shadow-sm">
+                        <i class="fas fa-chevron-left text-xs"></i>
+                    </a>
+                @endif
+
                 <div class="flex gap-1 px-2">
-                    <button
-                        class="w-10 h-10 rounded-xl bg-Chocolate text-white text-xs font-black shadow-lg shadow-Chocolate/20 transition-all">1</button>
-                    <button
-                        class="w-10 h-10 rounded-xl bg-white text-DarkChocolate text-xs font-bold hover:bg-beige/20 transition-all">2</button>
-                    <button
-                        class="w-10 h-10 rounded-xl bg-white text-DarkChocolate text-xs font-bold hover:bg-beige/20 transition-all">3</button>
+                    @foreach ($user->getUrlRange(max(1, $user->currentPage() - 1), min($user->lastPage(), $user->currentPage() + 1)) as $page => $url)
+                        <a href="{{ $url }}"
+                            class="w-10 h-10 flex items-center justify-center rounded-xl text-xs transition-all {{ $page == $user->currentPage() ? 'bg-Chocolate text-white font-black shadow-lg shadow-Chocolate/20' : 'bg-white text-DarkChocolate font-bold hover:bg-beige/20' }}">
+                            {{ $page }}
+                        </a>
+                    @endforeach
                 </div>
-                <button
-                    class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 text-Chocolate hover:bg-white hover:border-Chocolate transition-all shadow-sm">
-                    <i class="fas fa-chevron-right text-xs"></i>
-                </button>
+
+                @if ($user->hasMorePages())
+                    <a href="{{ $user->nextPageUrl() }}"
+                        class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 text-Chocolate hover:bg-white transition-all shadow-sm">
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </a>
+                @else
+                    <button
+                        class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 text-gray-300 cursor-not-allowed"
+                        disabled>
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </button>
+                @endif
             </div>
         </div>
     </div>

@@ -47,9 +47,14 @@ public function detail(string $id)
 {
     $kategori = Kategori::all();
     $kategoriAktif = null;
-    $pinjam = Buku::with('RelasiKategori')->findOrFail($id);
+    $pinjam = Buku::with('ulasans','RelasiKategori')->findOrFail($id);
     $koleksi = Auth::check()? Auth::user()->koleksiPribadi()->pluck('buku_id')->toArray(): [];
-    return view('user.pinjam.detail', compact('pinjam', 'kategori', 'kategoriAktif', 'koleksi'));
+
+    $telat = Peminjaman::where('user_id', auth()->id())
+                ->whereIn('status', ['dipinjam', 'diajukan'])
+                ->where('tanggal_pengembalian', '<', now())
+                ->exists();
+    return view('user.pinjam.detail', compact('pinjam', 'kategori', 'kategoriAktif', 'koleksi', 'telat'));
 }
 
         /**
@@ -67,6 +72,11 @@ public function create(string $id)
      */
 public function store(Request $request)
     {
+
+        if (auth()->user()->status !== 'active') {
+        return back()->with('error', 'Status akun Anda tidak aktif. Tidak dapat meminjam buku.');
+    }
+
         $request->validate([
             'buku_id' => 'required|exists:bukus,id',
             'tanggal_pengembalian' => 'required|date|after:today',
@@ -100,6 +110,7 @@ public function store(Request $request)
             ->where('user_id', Auth::id())
             ->orderBy('created_at', 'desc')
             ->get();
+            
 
         $totalBuku = $riwayat->count();
 
@@ -111,25 +122,20 @@ public function store(Request $request)
     {
     $peminjaman = Peminjaman::findOrFail($id);
 
-    // Pastikan hanya user peminjam yang bisa melakukan ini
     if ($peminjaman->user_id !== Auth::id()) {
         return redirect()->back()->with('error', 'Akses ditolak.');
     }
 
-    // Update status
     $peminjaman->update([
         'status' => 'diajukan',
-        // 'tanggal_pengembalian' => now(), // Opsional jika ingin mencatat tanggal realita kembali
     ]);
 
     return redirect()->back()->with('success', 'Buku berhasil dikembalikan. Terima kasih!');
 }
 
 public function cetakBukti($id) {
-// Ambil data peminjaman beserta relasi user dan bukunya
 $peminjaman = Peminjaman::with(['user', 'buku'])->findOrFail($id);
 
-// Keamanan: Pastikan user hanya bisa cetak miliknya sendiri
 if ($peminjaman->user_id !== Auth::id()) {
     abort(403, 'Akses Tidak Sah');
 }
@@ -140,7 +146,6 @@ return view('user.riwayat.buktipinjam', compact('peminjaman'));
 public function cetakBuktiKembali($id) {
     $peminjaman = Peminjaman::with(['user', 'buku'])->findOrFail($id);
     
-    // Keamanan: Pastikan hanya pemilik dan statusnya memang sudah kembali
     if ($peminjaman->user_id !== Auth::id() || $peminjaman->status !== 'dikembalikan') {
         abort(403, 'Dokumen belum tersedia.');
     }
@@ -180,4 +185,11 @@ public function koleksipribadi(Buku $buku)
 
         return redirect()->back()->with('success', 'Bookmark berhasil ditambahkan')->withFragment('daftar-buku');;
 }
+
+    public function profile(string $id)
+    {
+        return view('user.profile.index');
+    }
+
+
 }
