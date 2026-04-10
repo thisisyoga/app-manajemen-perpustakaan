@@ -25,7 +25,7 @@ Aplikasi ini dibangun menggunakan ekosistem PHP modern:
 
 -   **Framework:** [Laravel 11](https://laravel.com)
 -   **Styling:** [Tailwind CSS](https://tailwindcss.com)
--   **Database:** MySQL / MariaDB
+-   **Database:** MySQL
 
 ## 💻 Cara Instalasi (Lokal)
 
